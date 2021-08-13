@@ -1216,6 +1216,11 @@ ul.linklist:after,
 	border-radius: 9999px;
 }
 
+.pm_avatar {
+	height: 60px;
+	width: 60px;
+}
+
 .sidebarItem.is-selected {
 	font-weight: 700;
 	background: #f2f2f2;

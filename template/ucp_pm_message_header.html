@@ -5,30 +5,27 @@
 		<div class="flex justify-between items-center align-middle">
 			<div>
 				<!-- IF FOLDER_STATUS and FOLDER_MAX_MESSAGES neq 0 -->
-				<p>{FOLDER_STATUS}</p>
+				<p class="mb-1.5">{FOLDER_STATUS}</p>
 				<!-- ENDIF -->
 				<!-- IF TOTAL_MESSAGES or S_VIEW_MESSAGE -->
-				<div class="pagination">
+				<div>
 					<!-- IF S_VIEW_MESSAGE -->
-					<a class="arrow-{S_CONTENT_FLOW_BEGIN}" href="{U_CURRENT_FOLDER}">
-						<i class="icon fa-angle-{S_CONTENT_FLOW_BEGIN} fa-fw icon-black" aria-hidden="true"></i>
-						<span>{L_RETURN_TO_FOLDER}</span>
-					</a>
 					<!-- ELSEIF FOLDER_CUR_MESSAGES neq 0 -->
-					<!-- IF U_MARK_ALL -->
-					<a href="{U_MARK_ALL}" class="mark">{L_PM_MARK_ALL_READ}</a>
-					<!-- ENDIF -->
-					{TOTAL_MESSAGES}
 					<!-- IF .pagination -->
 					<!-- INCLUDE pagination.html -->
 					<!-- ELSE -->
-					{PAGE_NUMBER}
+					<div class="text-sm my-3">
+						{PAGE_NUMBER}
+					</div>
 					<!-- ENDIF -->
 					<!-- ENDIF -->
 				</div>
 				<!-- ENDIF -->
 			</div>
 			<div>
+				<!-- IF U_MARK_ALL -->
+				<a href="{U_MARK_ALL}" class="button button-secondary ml-1">{L_PM_MARK_ALL_READ}</a>
+				<!-- ENDIF -->
 				<!-- IF U_POST_REPLY_PM or U_POST_NEW_TOPIC or U_FORWARD_PM -->
 				<!-- IF U_POST_REPLY_PM -->
 				<a title="{L_POST_REPLY_PM}" href="{U_POST_REPLY_PM}" class="button">

@@ -14,7 +14,7 @@ a {
 
 /* Coloured usernames */
 .username-coloured {
-	font-weight: bold;
+	font-weight: 500;
 	display: inline !important;
 	padding: 0 !important;
 }

@@ -21,180 +21,337 @@
 			</div>
 			<!-- ENDIF -->
 
-					<h3>{L_DEFINED_RULES}</h3>
+			<h4 class="my-1.5 text-lg font-medium text-gray-800">{L_DEFINED_RULES}</h4>
 
-					<ol class="def-rules">
-						<!-- BEGIN rule -->
-						<li>
-							<div class="right-box"><input type="submit" name="delete_rule[{rule.RULE_ID}]"
-														  value="{L_DELETE_RULE}" class="button2"/></div>
-							<strong>{L_IF}</strong> {rule.CHECK} <em>{rule.RULE}</em> <!-- IF rule.STRING --><strong>{rule.STRING}</strong>
-							| <!-- ENDIF -->{rule.ACTION}<!-- IF rule.FOLDER --> {L_COLON} {rule.FOLDER}<!-- ENDIF -->
-							<div style="clear: both;"></div>
-						</li>
-						<!-- BEGINELSE -->
-						<li><strong>{L_NO_RULES_DEFINED}</strong></li>
-						<!-- END rule -->
-					</ol>
+			<div>
 
-					<h3>{L_ADD_NEW_RULE}</h3>
+				<!-- BEGIN rule -->
 
-					<fieldset class="fields2">
+				<div class="flex justify-between items-center max-w-md mx-auto border-b border-gray-200 pb-2">
+					<div>
+						<span class="font-medium">{L_IF}</span>
+						{rule.CHECK}
+						<span class>{rule.RULE}</span>
+						<!-- IF rule.STRING -->
+						<span class="font-medium">{rule.STRING}</span>
+						| <!-- ENDIF -->
+						{rule.ACTION}<!-- IF rule.FOLDER -->{L_COLON} {rule.FOLDER}<!-- ENDIF -->
+					</div>
 
-						<!-- IF S_CHECK_DEFINED -->
-						<dl>
-							<dt><label<!-- IF S_CHECK_SELECT --> for="check_option"<!-- ENDIF -->
-								>{L_IF}{L_COLON}</label></dt>
-							<dd>
-								<!-- IF S_CHECK_SELECT --><select name="check_option" id="check_option">{S_CHECK_OPTIONS}</select>
-								<input type="submit" name="next" value="{L_NEXT_STEP}" class="button2"/><!-- ELSE -->
-								{CHECK_CURRENT}<input type="hidden" name="check_option" value="{CHECK_OPTION}"/>
+					<div>
+						<input type="submit" name="delete_rule[{rule.RULE_ID}]" value="{L_DELETE_RULE}" class="button"/>
+					</div>
+				</div>
+
+				<!-- BEGINELSE -->
+				<div class="text-center my-4 text-gray-600">
+					<svg class="h-14 w-14 inline" xmlns="http://www.w3.org/2000/svg" width="24" height="24"
+						 viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round"
+						 stroke-linejoin="round">
+						<circle cx="12" cy="12" r="10"/>
+						<path d="M5 19L19 5"/>
+					</svg>
+					<p class="my-2 font-bold text-center text-lg">{L_NO_RULES_DEFINED}</p>
+				</div>
+				<!-- END rule -->
+			</div>
+			<div class="border-b border-gray-100 my-2 max-w-xl mx-auto"></div>
+
+			<h4 class="my-1.5 text-lg font-medium text-gray-800">{L_ADD_NEW_RULE}</h4>
+
+			<fieldset class="fields2">
+
+				<!-- IF S_CHECK_DEFINED -->
+				<div class="grid-cols-6 gap-2 md:grid mt-4 w-full flex items-center">
+					<div class="py-1 px-2 md:hidden">
+						<label <!-- IF S_CHECK_SELECT --> for="check_option"<!-- ENDIF -->
+						class="text-base font-medium text-left text-gray-800">{L_IF}{L_COLON}</label>
+					</div>
+					<div class="hidden md:block col-span-2 text-right py-1.5">
+						<label <!-- IF S_CHECK_SELECT --> for="check_option"<!-- ENDIF -->
+						class="text-base text-right text-gray-700 font-medium">{L_IF}{L_COLON}</label>
+					</div>
+					<div class="col-span-3 px-2 md:px-4 flex items-center">
+						<div class="flex space-x-2 items-center align-middle">
+							<div class="flex-auto">
+								<!-- IF S_CHECK_SELECT -->
+								<select name="check_option" id="check_option"
+										class="input w-full">{S_CHECK_OPTIONS}</select>
+								<!-- ELSE -->
+								{CHECK_CURRENT}
+								<input type="hidden" name="check_option" value="{CHECK_OPTION}"/>
 								<!-- ENDIF -->
-							</dd>
-						</dl>
-						<!-- ENDIF -->
+							</div>
+							<div class="flex-1">
+								<!-- IF S_CHECK_SELECT -->
+								<input type="submit" name="next" value="{L_NEXT_STEP}" class="button"/>
+								<!-- ENDIF -->
+							</div>
+						</div>
+					</div>
+				</div>
+				<!-- ENDIF -->
 
-						<!-- IF S_RULE_DEFINED -->
-						<dl>
-							<dt><!-- IF S_RULE_SELECT --><input type="submit" name="back[rule]"
-																value="{L_PREVIOUS_STEP}" class="button2"/><!-- ELSE --><label>&nbsp;</label>
-								<!-- ENDIF --></dt>
-							<dd><!-- IF S_RULE_SELECT --><select name="rule_option"
-																 id="rule_option">{S_RULE_OPTIONS}</select> <input
-									type="submit" name="next" value="{L_NEXT_STEP}" class="button2"/><!-- ELSE --><em>{RULE_CURRENT}</em><input
-									type="hidden" name="rule_option" value="{RULE_OPTION}"/><!-- ENDIF --></dd>
-						</dl>
+				<!-- IF S_RULE_DEFINED -->
+				<div class="grid-cols-6 gap-2 md:grid mt-4 flex items-center">
+					<div class="py-1 px-2 md:hidden">
+						<!-- IF S_RULE_SELECT -->
+						<input type="submit" name="back[rule]" value="{L_PREVIOUS_STEP}"
+							   class="button button-secondary"/>
+						<!-- ELSE -->
+						<label class="text-base text-right text-gray-700 font-medium">{L_RULE}{L_COLON}</label>
 						<!-- ENDIF -->
+					</div>
+					<div class="hidden md:block col-span-2 text-right py-1.5">
+						<!-- IF S_RULE_SELECT -->
+						<input type="submit" name="back[rule]" value="{L_PREVIOUS_STEP}"
+							   class="button button-secondary"/>
+						<!-- ELSE -->
+						<label class="text-base text-right text-gray-700 font-medium">{L_RULE}{L_COLON}</label>
+						<!-- ENDIF -->
+					</div>
+					<div class="col-span-3">
+						<!-- IF S_RULE_SELECT -->
+						<div class="flex space-x-2 items-center">
+							<div class="flex-auto">
+								<select name="rule_option" id="rule_option" class="input">{S_RULE_OPTIONS}</select>
+							</div>
+							<div class="flex-1">
+								<input type="submit" name="next" value="{L_NEXT_STEP}" class="button"/>
+							</div>
+						</div>
+						<!-- ELSE -->
+						<span>{RULE_CURRENT}</span>
+						<input type="hidden" name="rule_option" value="{RULE_OPTION}"/>
+						<!-- ENDIF -->
+					</div>
+				</div>
+				<!-- ENDIF -->
 
-						<!-- IF S_COND_DEFINED -->
-						<!-- IF S_COND_SELECT or COND_CURRENT -->
-						<dl>
-							<dt><!-- IF S_COND_SELECT --><input type="submit" name="back[cond]"
-																value="{L_PREVIOUS_STEP}" class="button2"/><!-- ELSE --><label>&nbsp;</label>
-								<!-- ENDIF --></dt>
-							<dd>
-								<!-- IF S_COND_SELECT -->
-								<!-- IF S_TEXT_CONDITION -->
-								<input type="text" name="rule_string" value="{CURRENT_STRING}" class="inputbox medium"
+				<!-- IF S_COND_DEFINED -->
+				<!-- IF S_COND_SELECT or COND_CURRENT -->
+				<div class="grid-cols-6 gap-2 md:grid mt-4 flex items-center">
+					<div class="py-1 px-2 md:hidden">
+						<!-- IF S_COND_SELECT -->
+						<input type="submit" name="back[cond]" value="{L_PREVIOUS_STEP}" class="button"/>
+						<!-- ELSE -->
+						<label class="text-base text-right text-gray-700 font-medium">{L_CONDITION}{L_COLON}</label>
+						<!-- ENDIF -->
+					</div>
+					<div class="hidden md:block col-span-2 text-right py-1.5">
+						<!-- IF S_COND_SELECT -->
+						<input type="submit" name="back[cond]" value="{L_PREVIOUS_STEP}"
+							   class="button button-secondary"/>
+						<!-- ELSE -->
+						<label class="text-base text-right text-gray-700 font-medium">{L_CONDITION}{L_COLON}</label>
+						<!-- ENDIF -->
+					</div>
+					<div class="col-span-3">
+						<!-- IF S_COND_SELECT -->
+						<!-- IF S_TEXT_CONDITION -->
+						<div class="flex space-x-2 items-center">
+							<div class="flex-auto">
+								<input type="text" name="rule_string" value="{CURRENT_STRING}" class="input"
 									   maxlength="250"/>
 								<!-- ELSEIF S_USER_CONDITION -->
-								<input type="text" name="rule_string" value="{CURRENT_STRING}" class="inputbox tiny"/>&nbsp;<span>[ <a
-									href="{U_FIND_USERNAME}" onclick="find_username(this.href); return false;">{L_FIND_USERNAME}</a> ]</span>
+								<input type="text" name="rule_string" value="{CURRENT_STRING}"
+									   class="input"/>&nbsp;<span>[ <a href="{U_FIND_USERNAME}"
+																	   onclick="find_username(this.href); return false;">{L_FIND_USERNAME}</a> ]</span>
 								<!-- ELSEIF S_GROUP_CONDITION -->
 								<input type="hidden" name="rule_string" value="{CURRENT_STRING}"/>
-								<!-- IF S_GROUP_OPTIONS --><select name="rule_group_id">{S_GROUP_OPTIONS}</select>
-								<!-- ELSE -->{L_NO_GROUPS}<!-- ENDIF -->
-								<!-- ENDIF -->
-								<input type="submit" name="next" value="{L_NEXT_STEP}" class="button2"/>
+								<!-- IF S_GROUP_OPTIONS -->
+								<select name="rule_group_id" class="input">{S_GROUP_OPTIONS}</select>
 								<!-- ELSE -->
-								<strong>{COND_CURRENT}</strong><input type="hidden" name="rule_string"
-																	  value="{CURRENT_STRING}"/><input type="hidden"
-																									   name="rule_user_id"
-																									   value="{CURRENT_USER_ID}"/><input
-									type="hidden" name="rule_group_id" value="{CURRENT_GROUP_ID}"/>
+								<span class="font-medium">{L_NO_GROUPS}</span>
 								<!-- ENDIF -->
-							</dd>
-						</dl>
+								<!-- ENDIF -->
+							</div>
+							<div class="flex-1">
+								<input type="submit" name="next" value="{L_NEXT_STEP}" class="button"/>
+							</div>
+						</div>
+						<!-- ELSE -->
+						<span class="font-medium">{COND_CURRENT}</span>
+						<input type="hidden" name="rule_string" value="{CURRENT_STRING}"/>
+						<input type="hidden" name="rule_user_id" value="{CURRENT_USER_ID}"/><input type="hidden"
+																								   name="rule_group_id"
+																								   value="{CURRENT_GROUP_ID}"/>
 						<!-- ENDIF -->
-						<input type="hidden" name="cond_option" value="{COND_OPTION}"/>
+					</div>
+				</div>
+				<!-- ENDIF -->
+				<input type="hidden" name="cond_option" value="{COND_OPTION}"/>
+				<!-- ENDIF -->
+
+				<!-- IF NONE_CONDITION -->
+				<input type="hidden" name="cond_option" value="none"/>
+				<!-- ENDIF -->
+
+				<!-- IF S_ACTION_DEFINED -->
+				<div class="grid-cols-6 gap-2 md:grid mt-4 flex items-center">
+					<div class="py-1 px-2 md:hidden">
+						<!-- IF S_ACTION_SELECT -->
+						<input type="submit" name="back[action]" value="{L_PREVIOUS_STEP}"
+							   class="button button-secondary"/>
+						<!-- ELSE -->
+						<label class="text-base text-right text-gray-700 font-medium">{L_ACTION}{L_COLON}</label>
 						<!-- ENDIF -->
-
-
-						<!-- IF NONE_CONDITION --><input type="hidden" name="cond_option" value="none"/><!-- ENDIF -->
-
-						<!-- IF S_ACTION_DEFINED -->
-						<dl>
-							<dt><!-- IF S_ACTION_SELECT --><input type="submit" name="back[action]"
-																  value="{L_PREVIOUS_STEP}" class="button2"/>
-								<!-- ELSE --><label>&nbsp;</label><!-- ENDIF --></dt>
-							<dd><!-- IF S_ACTION_SELECT --> <select name="action_option">{S_ACTION_OPTIONS}</select>
-								<input type="submit" name="add_rule" value="{L_ADD_RULE}" class="button1"/><!-- ELSE -->
-								{ACTION_CURRENT}<input type="hidden" name="action_option" value="{ACTION_OPTION}"/>
-								<!-- ENDIF --></dd>
-						</dl>
+					</div>
+					<div class="hidden md:block col-span-2 text-right py-1.5">
+						<!-- IF S_ACTION_SELECT -->
+						<input type="submit" name="back[action]" value="{L_PREVIOUS_STEP}"
+							   class="button button-secondary"/>
+						<!-- ELSE -->
+						<label class="text-base text-right text-gray-700 font-medium">{L_ACTION}{L_COLON}</label>
 						<!-- ENDIF -->
-
-					</fieldset>
-
-					<h3>{L_FOLDER_OPTIONS}</h3>
-
-					<fieldset class="fields2">
-
-						<!-- IF not S_MAX_FOLDER_ZERO -->
-						<dl>
-							<dt><label for="foldername">{L_ADD_FOLDER}{L_COLON}</label></dt>
-							<dd><!-- IF S_MAX_FOLDER_REACHED -->{L_MAX_FOLDER_REACHED}<!-- ELSE --><input type="text"
-																										  class="inputbox medium"
-																										  name="foldername"
-																										  id="foldername"
-																										  size="30"
-																										  maxlength="30"/>
-								<input class="button2" type="submit" name="addfolder" value="{L_ADD}"/><!-- ENDIF -->
-							</dd>
-						</dl>
-						<!-- IF S_FOLDER_OPTIONS -->
-						<hr class="dashed"/><!-- ENDIF -->
+					</div>
+					<div class="col-span-3">
+						<!-- IF S_ACTION_SELECT -->
+						<div class="flex space-x-2 items-center">
+							<div class="flex-auto">
+								<select name="action_option" class="input">{S_ACTION_OPTIONS}</select>
+							</div>
+							<div class="flex-1">
+								<input type="submit" name="add_rule" value="{L_ADD_RULE}" class="button"/>
+							</div>
+						</div>
+						<!-- ELSE -->
+						<span>{ACTION_CURRENT}</span>
+						<input type="hidden" name="action_option" value="{ACTION_OPTION}"/>
 						<!-- ENDIF -->
+					</div>
+				</div>
+				<!-- ENDIF -->
 
+			</fieldset>
+			<div class="border-b border-gray-100 my-2 max-w-xl mx-auto"></div>
 
-						<!-- IF S_FOLDER_OPTIONS -->
-						<dl>
-							<dt><label for="rename_folder_id">{L_RENAME_FOLDER}{L_COLON}</label></dt>
-							<dd><select name="rename_folder_id" id="rename_folder_id">{S_FOLDER_OPTIONS}</select></dd>
-							<dt><label for="new_folder_name">{L_NEW_FOLDER_NAME}{L_COLON}</label></dt>
-							<dd><input type="text" class="inputbox tiny" name="new_folder_name" id="new_folder_name"
-									   maxlength="30"/> <input class="button2" type="submit" name="rename_folder"
-															   value="{L_RENAME}"/></dd>
-						</dl>
-						<hr class="dashed"/>
-						<dl>
-							<dt><label for="remove_folder_id">{L_REMOVE_FOLDER}{L_COLON}</label></dt>
-							<dd><select name="remove_folder_id" id="remove_folder_id">{S_FOLDER_OPTIONS}</select></dd>
-							<dd style="margin-top: 3px;"><label for="remove_action1"><input type="radio"
-																							name="remove_action"
-																							id="remove_action1"
-																							value="1"
-																							checked="checked"/>
-								{L_MOVE_DELETED_MESSAGES_TO}{L_COLON}</label> <select name="move_to">{S_TO_FOLDER_OPTIONS}</select>
-							</dd>
-							<dd style="margin-top: 3px;"><label for="remove_action2"><input type="radio"
-																							name="remove_action"
-																							id="remove_action2"
-																							value="2"/>
-								{L_DELETE_MESSAGES_IN_FOLDER}</label></dd>
-							<dd style="margin-top: 3px;"><input class="button2" type="submit" name="remove_folder"
-																value="{L_REMOVE}"/></dd>
-						</dl>
-						<!-- ENDIF -->
+			<h4 class="my-1.5 text-lg font-medium text-gray-800">{L_FOLDER_OPTIONS}</h4>
 
-						<hr class="dashed"/>
+			<fieldset class="fields2">
 
-						<dl>
-							<dt><label for="full_action1">{L_IF_FOLDER_FULL}{L_COLON}</label></dt>
-							<dd style="margin-top: 3px;"><label for="full_action1"><input type="radio"
-																						  name="full_action"
-																						  id="full_action1" value="1"
-																						  {S_DELETE_CHECKED}/>
-								{L_DELETE_OLDEST_MESSAGES}</label></dd>
-							<dd style="margin-top: 3px;"><label for="full_action2"><input type="radio"
-																						  name="full_action"
-																						  id="full_action2" value="2"
-																						  {S_MOVE_CHECKED}/>
-								{L_MOVE_TO_FOLDER}{L_COLON}</label> <select
-									name="full_move_to">{S_FULL_FOLDER_OPTIONS}</select></dd>
-							<dd style="margin-top: 3px;"><label for="full_action3" style="white-space:normal;"><input
-									type="radio" name="full_action" id="full_action3" value="3" {S_HOLD_CHECKED}/>
-								{L_HOLD_NEW_MESSAGES}</label></dd>
-						</dl>
+				<!-- IF not S_MAX_FOLDER_ZERO -->
+				<div class="grid-cols-6 gap-2 md:grid my-4">
+					<div class="py-1 px-2 md:hidden">
+						<label for="foldername"
+							   class="text-base font-medium text-left text-gray-800">{L_ADD_FOLDER}{L_COLON}</label>
+					</div>
+					<div class="hidden md:block col-span-2 text-right py-1.5">
+						<label for="foldername"
+							   class="text-base text-right text-gray-700 font-medium">{L_ADD_FOLDER}{L_COLON}</label>
+					</div>
+					<div class="col-span-3 px-2 md:px-4">
+						<div class="flex space-x-2 items-center align-middle">
+							<div class="flex-auto">
+								<!-- IF S_MAX_FOLDER_REACHED -->
+								{L_MAX_FOLDER_REACHED}
+								<!-- ELSE -->
+								<input type="text" class="input" name="foldername" id="foldername" size="30"
+									   maxlength="30"/>
+								<!-- ENDIF -->
+							</div>
+							<div class="flex-1">
+								<!-- IF !S_MAX_FOLDER_REACHED -->
+								<input class="button" type="submit" name="addfolder" value="{L_ADD}"/>
+								<!-- ENDIF -->
+							</div>
+						</div>
+					</div>
+				</div>
 
+				<!-- IF S_FOLDER_OPTIONS -->
+				<div class="border-b border-gray-100 my-2 max-w-xl mx-auto"></div>
+				<!-- ENDIF -->
 
-						<dl>
-							<dt><label>{L_DEFAULT_ACTION}{L_COLON}</label><br/><span>{L_DEFAULT_ACTION_EXPLAIN}</span>
-							</dt>
-							<dd>{DEFAULT_ACTION}</dd>
-							<dd><input class="button2" type="submit" name="fullfolder" value="{L_CHANGE}"/></dd>
-						</dl>
-					</fieldset>
+				<!-- ENDIF -->
+
+				<!-- IF S_FOLDER_OPTIONS -->
+				<dl>
+					<dt><label for="rename_folder_id">{L_RENAME_FOLDER}{L_COLON}</label></dt>
+					<dd><select name="rename_folder_id" id="rename_folder_id">{S_FOLDER_OPTIONS}</select></dd>
+					<dt><label for="new_folder_name">{L_NEW_FOLDER_NAME}{L_COLON}</label></dt>
+					<dd><input type="text" class="inputbox tiny" name="new_folder_name" id="new_folder_name"
+							   maxlength="30"/> <input class="button2" type="submit" name="rename_folder"
+													   value="{L_RENAME}"/></dd>
+				</dl>
+				<div class="border-b border-gray-100 my-2 max-w-xl mx-auto"></div>
+				<dl>
+					<dt><label for="remove_folder_id">{L_REMOVE_FOLDER}{L_COLON}</label></dt>
+					<dd><select name="remove_folder_id" id="remove_folder_id">{S_FOLDER_OPTIONS}</select></dd>
+					<dd style="margin-top: 3px;"><label for="remove_action1"><input type="radio"
+																					name="remove_action"
+																					id="remove_action1"
+																					value="1"
+																					checked="checked"/>
+						{L_MOVE_DELETED_MESSAGES_TO}{L_COLON}</label> <select
+							name="move_to">{S_TO_FOLDER_OPTIONS}</select>
+					</dd>
+					<dd style="margin-top: 3px;"><label for="remove_action2"><input type="radio"
+																					name="remove_action"
+																					id="remove_action2"
+																					value="2"/>
+						{L_DELETE_MESSAGES_IN_FOLDER}</label></dd>
+					<dd style="margin-top: 3px;"><input class="button2" type="submit" name="remove_folder"
+														value="{L_REMOVE}"/></dd>
+				</dl>
+				<!-- ENDIF -->
+
+				<div class="border-b border-gray-100 my-2 max-w-xl mx-auto"></div>
+
+				<h4 class="my-1.5 text-lg font-medium text-gray-800">{L_FOLDER_OPTIONS}</h4>
+
+				<div class="grid-cols-6 gap-2 md:grid mt-4">
+					<div class="py-1 px-2 md:hidden">
+						<label for="full_action"
+							   class="text-base font-medium text-left text-gray-800">{L_IF_FOLDER_FULL}{L_COLON}</label>
+					</div>
+					<div class="hidden md:block col-span-2 text-right py-1.5">
+						<label for="full_action" class="text-base text-right text-gray-700 font-medium">{L_IF_FOLDER_FULL}{L_COLON}</label>
+					</div>
+					<div class="col-span-3 px-2 md:px-4">
+						<div class="mt-2 space-y-3">
+							<label class="inline-flex items-center">
+								<input type="radio" name="full_action" id="full_action1" value="1" class="radio-input"
+									   {S_DELETE_CHECKED}/>
+								<span class="ml-2">{L_DELETE_OLDEST_MESSAGES}</span>
+							</label>
+							<label class="inline-flex items-center mr-3">
+								<input type="radio" name="full_action" id="full_action2" value="2" class="radio-input"
+									   {S_MOVE_CHECKED}/>
+								<span class="ml-2">{L_MOVE_TO_FOLDER}</span>
+								<select name="full_move_to" class="input">{S_FULL_FOLDER_OPTIONS}</select>
+							</label>
+							<label class="inline-flex items-center mr-3">
+								<input type="radio" name="full_action" id="full_action3" value="3" class="radio-input"
+									   {S_HOLD_CHECKED}/>
+								<span class="ml-2">{L_HOLD_NEW_MESSAGES}</span>
+							</label>
+						</div>
+					</div>
+				</div>
+
+				<div class="grid-cols-6 gap-2 md:grid mt-4">
+					<div class="py-1 px-2 md:hidden">
+						<label for="jabber"
+							   class="text-base font-medium text-left text-gray-800">{L_DEFAULT_ACTION}{L_COLON}</label>
+					</div>
+					<div class="hidden md:block col-span-2 text-right py-1.5">
+						<label for="jabber"
+							   class="text-base text-right text-gray-700 font-medium">{L_DEFAULT_ACTION}{L_COLON}</label>
+					</div>
+					<div class="col-span-3 px-2 md:px-4">
+						{DEFAULT_ACTION}
+					</div>
+				</div>
+
+				<div class="mx-auto my-4 text-center">
+					<div class="space-x-1">
+						<input class="button" type="submit" name="fullfolder" value="{L_CHANGE}"/>
+						{S_FORM_TOKEN}
+					</div>
+				</div>
+
+			</fieldset>
 			{S_FORM_TOKEN}
 		</form>
 	</div>
