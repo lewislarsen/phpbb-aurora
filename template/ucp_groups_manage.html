@@ -1,0 +1,427 @@
+<!-- INCLUDE ucp_header.html -->
+<div class="flex-grow w-full md:w-4/5">
+	<div class="px-6 py-3 mb-3 ml-5 bg-white rounded-md border border-gray-200 shadow">
+
+		<!-- IF GROUP_NAME -->
+		<h3 class="my-3 text-xl font-medium text-gray-800">
+			<!-- IF not GROUP_COLOR -->
+			{L_USERGROUPS} - <span style="color:#{GROUP_COLOUR};">{GROUP_NAME}</span>
+			<!-- ELSE -->
+			{L_USERGROUPS} - {GROUP_NAME}
+			<!-- ENDIF -->
+		</h3>
+		<!-- ELSE -->
+		<h3 class="my-3 text-xl font-medium text-gray-800">
+			{L_USERGROUPS}
+		</h3>
+		<!-- ENDIF -->
+
+		<form id="ucp" method="post" action="{S_UCP_ACTION}" {S_FORM_ENCTYPE}>
+
+			<!-- IF ERROR -->
+			<div class="max-w-3xl mx-auto my-3">
+				<div class="rounded-lg bg-red-50 text-red-600 border border-red-100 font-medium py-2 px-3 text-center">
+					{ERROR}
+				</div>
+			</div>
+			<!-- ENDIF -->
+
+			<p class="text-sm text-gray-700 max-w-3xl mx-auto text-left pb-2.5 border-b border-gray-100">
+				{L_GROUPS_EXPLAIN}</p>
+
+			<!-- IF S_EDIT -->
+			<h4 class="my-1.5 text-lg font-medium text-gray-800">{L_GROUP_DETAILS}</h4>
+
+			<div class="grid-cols-6 gap-2 md:grid mt-4">
+				<div class="py-1 px-2 md:hidden">
+					<label for="group_name"
+						   class="text-base font-medium text-left text-gray-800">{L_GROUP_NAME}{L_COLON}</label>
+				</div>
+				<div class="hidden md:block col-span-2 text-right py-1.5">
+					<label for="group_name"
+						   class="text-base text-right text-gray-700 font-medium">{L_GROUP_NAME}{L_COLON}</label>
+				</div>
+				<div class="col-span-3 px-2 md:px-4 flex items-center">
+					<div class="w-full">
+						<!-- IF S_SPECIAL_GROUP -->
+						<p class="font-medium" <!-- IF GROUP_COLOUR --> style="color: #{GROUP_COLOUR};" <!-- ENDIF -->
+						>{GROUP_NAME}</p>
+						<input name="group_name" type="hidden" value="{GROUP_INTERNAL_NAME}"/>
+						<!-- ELSE -->
+						<input name="group_name" type="text" id="group_name" value="{GROUP_INTERNAL_NAME}"
+							   class="input my-1"/>
+						<!-- ENDIF -->
+					</div>
+				</div>
+			</div>
+			<div class="grid-cols-6 gap-2 md:grid mt-4">
+				<div class="py-1 px-2 md:hidden">
+					<label for="group_desc"
+						   class="text-base font-medium text-left text-gray-800">{L_GROUP_DESC}{L_COLON}</label>
+				</div>
+				<div class="hidden md:block col-span-2 text-right py-1.5">
+					<label for="group_desc"
+						   class="text-base text-right text-gray-700 font-medium">{L_GROUP_DESC}{L_COLON}</label>
+				</div>
+				<div class="col-span-3 px-2 md:px-4">
+						<textarea id="group_desc" name="group_desc" rows="3" cols="30"
+								  class="input my-1">{GROUP_DESC}</textarea>
+					<div class="my-1 space-y-1">
+						<label for="desc_parse_bbcode"><input type="checkbox" class="checkbox-input"
+															  name="desc_parse_bbcode" id="desc_parse_bbcode"
+							<!-- IF S_DESC_BBCODE_CHECKED -->checked="checked"<!-- ENDIF --> /> {L_PARSE_BBCODE}</label>&nbsp;
+						<label for="desc_parse_smilies"><input type="checkbox" class="checkbox-input"
+															   name="desc_parse_smilies" id="desc_parse_smilies"
+							<!-- IF S_DESC_SMILIES_CHECKED -->checked="checked"<!-- ENDIF --> />
+							{L_PARSE_SMILIES}</label>
+						<label for="desc_parse_urls"><input type="checkbox" class="checkbox-input"
+															name="desc_parse_urls" id="desc_parse_urls"
+							<!-- IF S_DESC_URLS_CHECKED -->checked="checked"<!-- ENDIF --> /> {L_PARSE_URLS}</label>
+					</div>
+				</div>
+			</div>
+			<!-- IF not S_SPECIAL_GROUP -->
+			<div class="grid-cols-6 gap-2 md:grid mt-4">
+				<div class="py-1 px-2 md:hidden">
+					<label for="group_type1"
+						   class="text-base font-medium text-left text-gray-800">{L_GROUP_TYPE}{L_COLON}</label>
+				</div>
+				<div class="hidden md:block col-span-2 text-right py-1.5">
+					<label for="group_type1" class="text-base text-right text-gray-700 font-medium">{L_GROUP_TYPE}{L_COLON}</label>
+				</div>
+				<div class="col-span-3 px-2 md:px-4">
+					<div class="mt-2">
+						<label class="inline-flex items-center">
+							<input class="radio-input" type="radio" name="group_type" id="group_type1"
+								   value="{GROUP_TYPE_FREE}" {GROUP_FREE}/>
+							<span class="ml-2">{L_GROUP_OPEN}</span>
+						</label>
+						<label class="inline-flex items-center ml-3">
+							<input class="radio-input" type="radio" name="group_type" id="group_type2"
+								   value="{GROUP_TYPE_OPEN}" {GROUP_OPEN}/>
+							<span class="ml-2">{L_GROUP_REQUEST}</span>
+						</label>
+						<label class="inline-flex items-center ml-3">
+							<input class="radio-input" type="radio" name="group_type" id="group_type3"
+								   value="{GROUP_TYPE_CLOSED}" {GROUP_CLOSED}/>
+							<span class="ml-2">{L_GROUP_CLOSED}</span>
+						</label>
+						<label class="inline-flex items-center ml-3">
+							<input class="radio-input" type="radio" name="group_type" id="group_type4"
+								   value="{GROUP_TYPE_HIDDEN}" {GROUP_HIDDEN}/>
+							<span class="ml-2">{L_GROUP_HIDDEN}</span>
+						</label>
+					</div>
+					<p class="text-sm text-gray-600 my-1">{L_GROUP_TYPE_EXPLAIN}</p>
+				</div>
+			</div>
+			<!-- ELSE -->
+			<input name="group_type" type="hidden" value="{GROUP_TYPE_SPECIAL}"/>
+			<!-- ENDIF -->
+
+			<div class="border-b border-gray-100 my-2 max-w-xl mx-auto"></div>
+
+			<h4 class="my-1.5 text-lg font-medium text-gray-800">{L_GROUP_SETTINGS_SAVE}</h4>
+
+			<div class="grid-cols-6 gap-2 md:grid mt-4">
+				<div class="py-1 px-2 md:hidden">
+					<label for="group_colour"
+						   class="text-base font-medium text-left text-gray-800">{L_GROUP_COLOR}{L_COLON}</label>
+				</div>
+				<div class="hidden md:block col-span-2 text-right py-1.5">
+					<label for="group_colour"
+						   class="text-base text-right text-gray-700 font-medium">{L_GROUP_COLOR}{L_COLON}</label>
+				</div>
+				<div class="col-span-3 px-2 md:px-4">
+					<input name="group_colour" type="text" id="group_colour" value="{GROUP_COLOUR}" size="6"
+						   maxlength="6" class="input"/>
+					<p class="text-sm text-gray-600 my-1">
+						<span style="background-color: #{GROUP_COLOUR};">&nbsp;&nbsp;&nbsp;</span>
+						{L_GROUP_COLOR_EXPLAIN}</p>
+				</div>
+			</div>
+
+			<div class="grid-cols-6 gap-2 md:grid my-4">
+				<div class="py-1 px-2 md:hidden">
+					<label for="group_rank"
+						   class="text-base font-medium text-left text-gray-800">{L_GROUP_RANK}{L_COLON}</label>
+				</div>
+				<div class="hidden md:block col-span-2 text-right py-1.5">
+					<label for="group_rank"
+						   class="text-base text-right text-gray-700 font-medium">{L_GROUP_RANK}{L_COLON}</label>
+				</div>
+				<div class="col-span-3 px-2 md:px-4">
+					<select name="group_rank" id="group_rank" class="input">{S_RANK_OPTIONS}</select>
+				</div>
+			</div>
+
+			<div class="border-b border-gray-100 my-2 max-w-xl mx-auto"></div>
+
+
+			<h4 class="my-1.5 text-lg font-medium text-gray-800">{L_UCP_PROFILE_AVATAR}</h4>
+
+			<!-- INCLUDE ucp_avatar_options.html -->
+
+			<div class="mx-auto my-4 text-center">
+				<div class="space-x-1">
+					{S_HIDDEN_FIELDS}
+					<input type="submit" name="update" value="{L_SUBMIT}" class="button"/>
+					{S_FORM_TOKEN}
+				</div>
+			</div>
+
+			<!-- ELSEIF S_LIST -->
+
+			<!-- IF .leader -->
+			<div class="my-4 rounded border border-gray-200 shadow-sm">
+				<div class="grid overflow-hidden grid-cols-4 gap-4 px-3 py-2 text-sm text-gray-800 bg-gray-50 border-b border-gray-100 md:grid-cols-12">
+					<div class="col-span-3 md:col-span-12">
+						{L_USERGROUPS}
+					</div>
+				</div>
+				<div class="grid grid-cols-4 border-t border-gray-100 transition duration-200 ease-in-out md:grid-cols-12 hover:bg-gray-50 text-gray-600">
+					<div class="col-span-3 px-3 py-1 text-left bg-gray-100 border-t border-b border-gray-200 md:col-span-3">
+						{L_GROUP_LEAD}
+					</div>
+					<div class="hidden md:block col-span-3 py-1 text-left bg-gray-100 border-t border-b border-gray-200 md:col-span-4">
+						{L_GROUP_DEFAULT}
+					</div>
+					<div class="hidden md:block col-span-3 py-1 text-left bg-gray-100 border-t border-b border-gray-200 md:col-span-1">
+						{L_POSTS}
+					</div>
+					<div class="hidden md:block col-span-3 py-1 text-left bg-gray-100 border-t border-b border-gray-200 md:col-span-3">
+						{L_JOINED}
+					</div>
+					<div class="col-span-1 items-center py-1 bg-gray-100 border-t border-b border-gray-200 md:col-span-1">
+						{L_MARK}
+					</div>
+				</div>
+				<!-- BEGIN leader -->
+				<div class="grid grid-cols-4 px-3 py-3 border-t border-gray-100 transition duration-200 ease-in-out md:grid-cols-12 hover:bg-gray-50 text-base">
+					<div class="col-span-3 md:col-span-3">
+						{leader.USERNAME_FULL}
+					</div>
+					<div class="col-span-3 md:col-span-4 hidden md:block">
+						<!-- IF leader.S_GROUP_DEFAULT -->{L_YES}<!-- ELSE --> {L_NO}<!-- ENDIF -->
+					</div>
+					<div class="col-span-3  md:col-span-1 hidden md:block">
+						{leader.USER_POSTS}
+					</div>
+					<div class="col-span-3  md:col-span-3 hidden md:block">
+						{leader.JOINED}
+					</div>
+					<div class="col-span-1">
+						-
+					</div>
+				</div>
+				<!-- END leader -->
+			</div>
+			<!-- ENDIF -->
+
+			<!-- BEGIN member -->
+			<!-- IF member.S_PENDING -->
+			<div class="my-4 rounded border border-gray-200 shadow-sm">
+				<div class="grid overflow-hidden grid-cols-4 gap-4 px-3 py-2 text-sm text-gray-800 bg-gray-50 border-b border-gray-100 md:grid-cols-12">
+					<div class="col-span-3 md:col-span-12">
+						{L_USERGROUPS}
+					</div>
+				</div>
+				<div class="grid grid-cols-4 border-t border-gray-100 transition duration-200 ease-in-out md:grid-cols-12 hover:bg-gray-50 text-gray-600">
+					<div class="col-span-3 text-left bg-gray-100 border-t border-b border-gray-200 md:col-span-3">
+						{L_GROUP_PENDING}
+					</div>
+					<div class="hidden md:block col-span-3 py-1 text-left bg-gray-100 border-t border-b border-gray-200 md:col-span-4">
+						{L_GROUP_DEFAULT}
+					</div>
+					<div class="hidden md:block col-span-3 py-1 text-left bg-gray-100 border-t border-b border-gray-200 md:col-span-1">
+						{L_POSTS}
+					</div>
+					<div class="hidden md:block col-span-3 py-1 text-left bg-gray-100 border-t border-b border-gray-200 md:col-span-3">
+						{L_JOINED}
+					</div>
+					<div class="col-span-1 items-center py-1 bg-gray-100 border-t border-b border-gray-200 md:col-span-1">
+						{L_MARK}
+					</div>
+					<!-- ELSEIF member.S_APPROVED -->
+					<!-- IF S_PENDING_SET -->
+				</div>
+				<!-- ENDIF -->
+
+				<div class="my-4 rounded border border-gray-200 shadow-sm">
+					<div class="grid grid-cols-4 px-3 py-3 border-t border-gray-100 transition duration-200 ease-in-out md:grid-cols-12 hover:bg-gray-50 text-base">
+						<div class="col-span-3 md:col-span-12">
+							{L_USERGROUPS}
+						</div>
+					</div>
+					<div class="grid grid-cols-4 border-t border-gray-100 transition duration-200 ease-in-out md:grid-cols-12 hover:bg-gray-50 text-gray-600">
+						<div class="col-span-3 px-3 py-1 text-left bg-gray-100 border-t border-b border-gray-200 md:col-span-3">
+							{L_GROUP_APPROVED}
+						</div>
+						<div class="hidden md:block col-span-3 py-1 text-left bg-gray-100 border-t border-b border-gray-200 md:col-span-4">
+							{L_GROUP_DEFAULT}
+						</div>
+						<div class="hidden md:block col-span-3 py-1 text-left bg-gray-100 border-t border-b border-gray-200 md:col-span-1">
+							{L_POSTS}
+						</div>
+						<div class="hidden md:block col-span-3 py-1 text-left bg-gray-100 border-t border-b border-gray-200 md:col-span-3">
+							{L_JOINED}
+						</div>
+						<div class="col-span-1 items-center py-1 bg-gray-100 border-t border-b border-gray-200 md:col-span-1">
+							{L_MARK}
+						</div>
+					</div>
+					<!-- ELSE -->
+					<div class="grid grid-cols-4 px-3 py-3 border-t border-gray-100 transition duration-200 ease-in-out md:grid-cols-12 hover:bg-gray-50 text-base">
+						<div class="col-span-3 md:col-span-3">
+							{member.USERNAME_FULL}
+						</div>
+						<div class="col-span-3 md:col-span-4 hidden md:block">
+							<!-- IF member.S_GROUP_DEFAULT -->{L_YES}<!-- ELSE --> {L_NO}<!-- ENDIF -->
+						</div>
+						<div class="col-span-3  md:col-span-1 hidden md:flex">
+							{member.USER_POSTS}
+						</div>
+						<div class="col-span-3  md:col-span-3 hidden md:block">
+							{member.JOINED}
+						</div>
+						<div class="flex items-center col-span-1 md:col-span-1">
+							<input type="checkbox" name="mark[]" value="{member.USER_ID}" class="checkbox-input"/>
+						</div>
+					</div>
+				</div>
+				<!-- ENDIF -->
+
+				<!-- BEGINELSE -->
+				{L_MEMBERS}
+				{L_GROUPS_NO_MEMBERS}
+				<!-- END member -->
+
+				<!-- IF .pagination -->
+				<div class="flex justify-start">
+					<div class="pagination">
+						<!-- INCLUDE pagination.html -->
+					</div>
+				</div>
+				<!-- ENDIF -->
+
+				<div class="my-4">
+					<div class="flex justify-end">
+						<div class="flex items-center space-x-1">
+							<select name="action" class="input">
+								<option value="">{L_SELECT_OPTION}</option>
+								{S_ACTION_OPTIONS}</select>
+							<input class="button ml-1" type="submit" name="update" value="{L_SUBMIT}"/>
+							<a href="#" onclick="marklist('ucp', 'mark', true); return false;"
+							   class="button button-secondary">{L_MARK_ALL}</a>
+							<a href="#" onclick="marklist('ucp', 'mark', false); return false;"
+							   class="button button-secondary">{L_UNMARK_ALL}</a>
+						</div>
+					</div>
+				</div>
+
+				<div class="border-b border-gray-100 my-2 max-w-xl mx-auto"></div>
+
+				<h4 class="my-1.5 text-lg font-medium text-gray-800">{L_ADD_USERS}</h4>
+
+				<p class="text-sm text-gray-700 max-w-3xl mx-auto text-left pb-2.5 border-b border-gray-100">
+					{L_ADD_USERS_UCP_EXPLAIN}</p>
+
+
+				<div class="grid-cols-6 gap-2 md:grid mt-4">
+					<div class="py-1 px-2 md:hidden">
+						<label for="default0"
+							   class="text-base font-medium text-left text-gray-800">{L_USER_GROUP_DEFAULT}{L_COLON}</label>
+					</div>
+					<div class="hidden md:block col-span-2 text-right py-1.5">
+						<label for="default0" class="text-base text-right text-gray-700 font-medium">{L_USER_GROUP_DEFAULT}{L_COLON}</label>
+					</div>
+					<div class="col-span-3 px-2 md:px-4">
+						<div class="mt-2">
+							<label class="inline-flex items-center">
+								<input class="radio-input" type="radio" name="notify" id="default1" value="1"/>
+								<span class="ml-2">{L_YES}</span>
+							</label>
+							<label class="inline-flex items-center ml-3">
+								<input class="radio-input" type="radio" name="notify" id="default0" value="0"
+									   checked="checked"/>
+								<span class="ml-2">{L_NO}</span>
+							</label>
+							<p class="text-sm text-gray-600 my-1">{L_USER_GROUP_DEFAULT_EXPLAIN}</p>
+						</div>
+					</div>
+				</div>
+
+				<div class="grid-cols-6 gap-2 md:grid mt-4">
+					<div class="py-1 px-2 md:hidden">
+						<label for="usernames"
+							   class="text-base font-medium text-left text-gray-800">{L_USERNAMES}{L_COLON}</label>
+					</div>
+					<div class="hidden md:block col-span-2 text-right py-1.5">
+						<label for="usernames"
+							   class="text-base text-right text-gray-700 font-medium">{L_USERNAMES}{L_COLON}</label>
+					</div>
+					<div class="col-span-3 px-2 md:px-4">
+						<textarea name="usernames" id="usernames" rows="3" cols="30" class="input"></textarea>
+						<p class="text-sm text-gray-600 my-1">
+							{L_USERNAMES_EXPLAIN}
+							<a class="text-sm" href="{U_FIND_USERNAME}"
+							   onclick="find_username(this.href); return false;">{L_FIND_USERNAME}</a>
+						</p>
+					</div>
+				</div>
+
+				<div class="mx-auto my-4 text-center">
+					<div class="space-x-1">
+						<input class="button" type="submit" name="addusers" value="{L_SUBMIT}"/>
+						{S_FORM_TOKEN}
+					</div>
+				</div>
+
+				<!-- ELSE -->
+
+				<!-- IF .leader -->
+				<div class="my-2 rounded border border-gray-200 shadow-sm">
+					<div class="grid overflow-hidden grid-cols-4 gap-4 px-3 py-2 text-sm text-gray-800 bg-gray-50 border-b border-gray-100 md:grid-cols-12">
+						<div class="col-span-3 md:col-span-8">
+							{L_USERGROUPS}
+						</div>
+					</div>
+					<div class="grid grid-cols-4 border-t border-gray-100 transition duration-200 ease-in-out md:grid-cols-12 hover:bg-gray-50 text-gray-600">
+						<div class="col-span-4 px-3 py-1 text-left bg-gray-100 border-t border-b border-gray-200 md:col-span-9">
+							{L_GROUP_LEADER}
+						</div>
+						<div class="md:flex hidden items-center px-3 py-1 bg-gray-100 border-t border-b border-gray-200 md:col-span-3">
+							<div>{L_OPTIONS}</div>
+						</div>
+					</div>
+					<!-- BEGIN leader -->
+
+					<div class="grid grid-cols-4 px-3 py-2 border-t border-gray-100 transition duration-200 ease-in-out md:grid-cols-12 hover:bg-gray-50">
+						<div class="col-span-3 md:col-span-9 flex items-center">
+							<a href="{leader.U_VIEW_GROUP}"
+							   class="text-lg font-medium transition duration-200 ease-in-out hover:opacity-75"
+							<!-- IF leader.GROUP_COLOUR -->style="color:#{leader.GROUP_COLOUR}"<!-- ENDIF -->
+							>{leader.GROUP_NAME}</a>
+						</div>
+						<div class="col-span-3 flex items-center py-2 md:py-0">
+							<div class="space-x-1">
+								<a class="button" href="{leader.U_EDIT}" title="{L_EDIT}">{L_EDIT}</a>
+								<a class="button" href="{leader.U_LIST}" title="{L_GROUP_LIST}">{L_GROUP_LIST}</a>
+							</div>
+						</div>
+					</div>
+					<!-- END leader -->
+					<!-- ELSE -->
+					<div class="text-center my-4 text-gray-600">
+						<svg class="h-14 w-14 inline" xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" display="block" id="PeopleGroup"><path d="M16.719 19.752l-.64-5.124A3 3 0 0 0 13.101 12h-2.204a3 3 0 0 0-2.976 2.628l-.641 5.124A2 2 0 0 0 9.266 22h5.468a2 2 0 0 0 1.985-2.248z"></path><circle cx="12" cy="5" r="3"></circle><circle cx="4" cy="9" r="2"></circle><circle cx="20" cy="9" r="2"></circle><path d="M4 14h-.306a2 2 0 0 0-1.973 1.671l-.333 2A2 2 0 0 0 3.361 20H7"></path><path d="M20 14h.306a2 2 0 0 1 1.973 1.671l.333 2A2 2 0 0 1 20.639 20H17"></path></svg>
+						<p class="my-2 font-bold text-center text-lg">{L_NO_LEADERS}</p>
+					</div>
+					<!-- ENDIF -->
+				</div>
+
+				<!-- ENDIF -->
+		</form>
+	</div>
+</div>
+
+<!-- INCLUDE ucp_footer.html -->

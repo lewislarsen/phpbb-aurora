@@ -1,0 +1,17 @@
+<!-- INCLUDE ucp_header.html -->
+<div class="flex-grow w-full md:w-4/5">
+	<div class="px-6 py-3 mb-3 ml-5 bg-white rounded-md border border-gray-200 shadow">
+		<form id="ucp" method="post" action="{S_UCP_ACTION}" {S_FORM_ENCTYPE}>
+
+			<h3 class="my-3 text-xl font-medium text-gray-800">{L_TITLE}</h3>
+
+			<!-- INCLUDE ucp_avatar_options.html -->
+
+			{S_HIDDEN_FIELDS}
+			{S_FORM_TOKEN}
+		</form>
+
+	</div>
+</div>
+
+<!-- INCLUDE ucp_footer.html -->

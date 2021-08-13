@@ -1,0 +1,118 @@
+<!-- INCLUDE ucp_header.html -->
+<div class="flex-grow w-full md:w-4/5">
+	<div class="px-6 py-3 mb-3 ml-5 bg-white rounded-md border border-gray-200 shadow">
+		<form id="ucp" method="post" action="{S_UCP_ACTION}" {S_FORM_ENCTYPE}>
+
+			<h3 class="my-3 text-xl font-medium text-gray-800">{L_TITLE}</h3>
+
+			<p class="text-sm text-gray-700 max-w-3xl mx-auto text-left pb-2.5 border-b border-gray-100">
+				{L_ATTACHMENTS_EXPLAIN}</p>
+
+			<!-- IF .attachrow -->
+
+			<div class="my-2 rounded border border-gray-200 shadow-sm">
+				<div class="grid overflow-hidden grid-cols-4 gap-4 px-3 py-2 text-sm text-gray-800 bg-gray-100 border-b border-gray-100 md:grid-cols-12">
+					<div class="col-span-3 md:col-span-4">
+						{L_FILENAME}
+					</div>
+					<div class="hidden col-span-2 md:block">
+						{L_POST_TIME}
+					</div>
+					<div class="hidden col-span-2 md:block">
+						{L_PLUPLOAD_SIZE}
+					</div>
+					<div class="hidden col-span-2 md:block">
+						{L_DOWNLOADS}
+					</div>
+					<div class="col-span-1">
+						{L_MARK}
+					</div>
+				</div>
+				<!-- BEGIN attachrow -->
+				<div class="grid grid-cols-4 gap-4 py-3 px-3 border-t border-gray-100 transition duration-200 ease-in-out md:grid-cols-12 hover:bg-gray-50">
+					<div class="col-span-3 md:col-span-4">
+						<div class="flex justify-between items-center align-middle">
+							<div class="flex-none hidden md:flex">
+								<div class="p-0.5 border border-gray-200 mx-1">
+									<a href="{attachrow.U_VIEW_ATTACHMENT}" title="{attachrow.FILENAME}" target="_blank">
+										<img alt="{attachrow.FILENAME}" src="{attachrow.U_VIEW_ATTACHMENT}" class="inline object-cover w-10 h-10" />
+									</a>
+								</div>
+							</div>
+							<div class="flex-1 min-w-0 text-left px-2 md:px-0">
+								<div>
+									<a target="_blank" href="{attachrow.U_VIEW_ATTACHMENT}" class="block text-sm truncate" title="{attachrow.FILENAME}">{attachrow.FILENAME}</a>
+								</div>
+								<div class="text-sm">
+									<!-- IF attachrow.S_IN_MESSAGE -->
+									{L_PM}{L_COLON}
+									<!-- ELSE -->
+									{L_TOPIC}{L_COLON}
+									<!-- ENDIF -->
+									<a href="{attachrow.U_VIEW_TOPIC}">{attachrow.TOPIC_TITLE}</a>
+								</div>
+								<div class="text-sm md:hidden">
+									<div class="text-sm">{attachrow.SIZE} - {attachrow.DOWNLOAD_COUNT} {L_DOWNLOADS}</div>
+									<div class="text-xs text-gray-600">{attachrow.POST_TIME}</div>
+								</div>
+							</div>
+						</div>
+					</div>
+					<div class="flex hidden col-span-2 items-center md:flex">
+						<span class="text-sm">{attachrow.POST_TIME}</span>
+					</div>
+					<div class="flex hidden col-span-2 items-center md:flex">
+						<span class="text-sm">{attachrow.SIZE}</span>
+					</div>
+					<div class="flex hidden col-span-2 items-center md:flex">
+						{attachrow.DOWNLOAD_COUNT}
+					</div>
+					<div class="flex col-span-1 items-center">
+						<div>
+							<input class="checkbox-input" type="checkbox" name="attachment[{attachrow.ATTACH_ID}]" value="1" {% if
+								   attachrow.S_LOCKED %} disabled title="{{ lang('ATTACHMENT_LOCKED') }}"
+								   {% endif %}/>
+						</div>
+					</div>
+				</div>
+				<!-- END attachrow -->
+			</div>
+			<div class="flex justify-between items-center my-2 align-middle">
+				<div>
+					<span class="text-sm">{TOTAL_ATTACHMENTS} {L_TITLE}</span>
+					<!-- IF .pagination -->
+					<!-- INCLUDE pagination.html -->
+					<!-- ELSE -->
+					<p class="text-sm">{PAGE_NUMBER}</p>
+					<!-- ENDIF -->
+				</div>
+				<div>
+					<!-- INCLUDE display_options.html -->
+					{S_FORM_TOKEN}
+				</div>
+			</div>
+
+			<!-- ELSE -->
+			<div class="text-center my-4 text-gray-600">
+				<svg class="h-14 w-14 inline" xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" display="block" id="Attach"><path d="M6 7.91V16a6 6 0 0 0 6 6v0a6 6 0 0 0 6-6V6a4 4 0 0 0-4-4v0a4 4 0 0 0-4 4v9.182a2 2 0 0 0 2 2v0a2 2 0 0 0 2-2V8"></path></svg>
+				<p class="my-2 font-bold text-center text-lg">{L_UCP_NO_ATTACHMENTS}</p>
+			</div>
+			<!-- ENDIF -->
+
+			<!-- IF S_ATTACHMENT_ROWS -->
+			<div class="mx-auto my-4 text-center">
+				<div class="space-x-1">
+					<input type="submit" name="delete" value="{L_DELETE_MARKED}" class="button"/>
+					<a class="button button-secondary" href="#"
+					   onclick="marklist('ucp', 'attachment', true); return false;">{L_MARK_ALL}</a>
+					<a class="button button-secondary" href="#"
+					   onclick="marklist('ucp', 'attachment', false); return false;">{L_UNMARK_ALL}</a>
+					{S_FORM_TOKEN}
+				</div>
+			</div>
+			<!-- ENDIF -->
+		</form>
+	</div>
+</div>
+
+<!-- INCLUDE ucp_footer.html -->

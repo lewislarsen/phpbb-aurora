@@ -1,0 +1,201 @@
+<!-- INCLUDE ucp_header.html -->
+<div class="flex-grow w-full md:w-4/5">
+	<div class="px-6 py-3 mb-3 ml-5 bg-white rounded-md border border-gray-200 shadow">
+		<form id="ucp" method="post" action="{S_UCP_ACTION}" {S_FORM_ENCTYPE}>
+
+			<h3 class="my-3 text-xl font-medium text-gray-800">{L_TITLE}</h3>
+
+			<p class="text-sm text-gray-700 max-w-3xl mx-auto text-left pb-2.5 border-b border-gray-100">
+				{L_WATCHED_EXPLAIN}</p>
+
+			<!-- IF .forumrow -->
+			<div class="my-2 rounded border border-gray-200 shadow-sm">
+				<div class="grid overflow-hidden grid-cols-3 gap-4 px-3 py-2 text-sm text-gray-800 bg-gray-100 border-b border-gray-100 md:grid-cols-5">
+					<div class="col-span-2">
+						{L_WATCHED_FORUMS}
+					</div>
+					<div class="col-span-2 hidden md:block">
+						{L_LAST_POST}
+					</div>
+					<div class="col-span-1">
+						{L_MARK}
+					</div>
+				</div>
+				<!-- BEGIN forumrow -->
+				<div class="grid grid-cols-3 gap-4 px-3 py-3 border-t border-gray-100 transition duration-200 ease-in-out md:grid-cols-5 hover:bg-gray-50">
+					<div class="col-span-2">
+						<div class="flex justify-between items-center align-middle">
+							<div class="flex justify-center items-center items-stretch align-middle">
+								<div class="flex-none p-2 ml-2">
+									<!-- IF forumrow.FORUM_IMAGE -->
+									<!-- EVENT forumlist_body_forum_image_before -->
+									<!-- EVENT forumlist_body_forum_image_prepend -->
+									{forumrow.FORUM_IMAGE}
+									<!-- EVENT forumlist_body_forum_image_append -->
+									<!-- EVENT forumlist_body_forum_image_after -->
+									<!-- ELSE -->
+									<!-- IF forumrow.S_UNREAD_FORUM -->
+									<div class="px-3 py-3 text-white rounded-md brand">
+										<svg class="h-5 w-5 text-white inline" xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" display="block" id="ChatDots"><path d="M14 19c3.771 0 5.657 0 6.828-1.172C22 16.657 22 14.771 22 11c0-3.771 0-5.657-1.172-6.828C19.657 3 17.771 3 14 3h-4C6.229 3 4.343 3 3.172 4.172 2 5.343 2 7.229 2 11c0 3.771 0 5.657 1.172 6.828.653.654 1.528.943 2.828 1.07"/><path d="M12 11v.01"/><path d="M7 11v.01"/><path d="M17 11v.01"/><path d="M14 19c-1.236 0-2.598.5-3.841 1.145-1.998 1.037-2.997 1.556-3.489 1.225-.492-.33-.399-1.355-.212-3.404L6.5 17.5"/></svg>
+									</div>
+									<!-- ELSE -->
+									<div class="px-3 py-3 bg-gray-300 rounded-md">
+										<svg class="text-gray-700 h-5 w-5 inline" xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" display="block" id="ChatBubble"><path d="M14 19c3.771 0 5.657 0 6.828-1.172C22 16.657 22 14.771 22 11c0-3.771 0-5.657-1.172-6.828C19.657 3 17.771 3 14 3h-4C6.229 3 4.343 3 3.172 4.172 2 5.343 2 7.229 2 11c0 3.771 0 5.657 1.172 6.828.653.654 1.528.943 2.828 1.07"/><path d="M14 19c-1.236 0-2.598.5-3.841 1.145-1.998 1.037-2.997 1.556-3.489 1.225-.492-.33-.399-1.355-.212-3.404L6.5 17.5"/></svg>
+									</div>
+									<!-- ENDIF -->
+									<!-- ENDIF -->
+								</div>
+								<div class="flex-1 mt-1 text-left">
+									<div class="flex-none align-left">
+										<!-- IF forumrow.FORUM_DESC -->
+										<a title="{forumrow.FORUM_NAME}" href="{forumrow.U_VIEWFORUM}"
+										   class="flex items-center text-sm md:text-base font-bold text-gray-800 align-middle hover:text-gray-600">{forumrow.FORUM_NAME}</a>
+										<div class="text-xs font-medium text-gray-600">{forumrow.FORUM_DESC}</div>
+										<!-- ELSE -->
+										<a title="{forumrow.FORUM_NAME}" href="{forumrow.U_VIEWFORUM}"
+										   class="text-base font-bold text-gray-800 hover:text-gray-600 md:mt-4">{forumrow.FORUM_NAME}</a>
+										<!-- ENDIF -->
+									</div>
+								</div>
+							</div>
+						</div>
+					</div>
+					<div class="flex col-span-2 items-center text-sm hidden md:flex">
+						<div class="flex hidden justify-between items-center align-middle md:flex">
+							<div class="flex-none">
+							</div>
+							<div class="flex-1 text-left">
+								<!-- IF forumrow.LAST_POST_TIME -->
+								<!-- IF forumrow.S_DISPLAY_SUBJECT -->
+								<a href="{forumrow.U_LAST_POST}" title="{forumrow.LAST_POST_SUBJECT}"
+								   class="text-sm font-bold text-gray-800 hover:text-gray-600">{forumrow.LAST_POST_SUBJECT_TRUNCATED}</a>
+								<br/>
+								<!-- ENDIF -->
+								<div class="text-sm">
+									<span class="font-medium text-gray-600"><date
+											datetime="{forumrow.LAST_POST_TIME_RFC3339}">{forumrow.LAST_POST_TIME}</date></span>
+									<p>{L_POST_BY_AUTHOR} {forumrow.LAST_POST_AUTHOR_FULL}</p>
+								</div>
+								<!-- ELSE -->
+								{L_NO_POSTS}
+								<!-- ENDIF -->
+							</div>
+						</div>
+					</div>
+					<div class="flex col-span-1 items-center">
+						<div>
+							<input class="checkbox-input" type="checkbox" name="f[{forumrow.FORUM_ID}]" id="f{forumrow.FORUM_ID}"/>
+						</div>
+					</div>
+				</div>
+				<!-- END forumrow -->
+			</div>
+			<!-- ENDIF -->
+
+			<!-- IF .topicrow -->
+			<div class="my-2 rounded border border-gray-200 shadow-sm">
+				<div class="grid overflow-hidden grid-cols-3 gap-4 px-3 py-2 text-sm text-gray-800 bg-gray-100 border-b border-gray-100 md:grid-cols-5">
+					<div class="col-span-2">
+						{L_WATCHED_TOPICS}
+					</div>
+					<div class="col-span-2 hidden md:block">
+						{L_LAST_POST}
+					</div>
+					<div class="col-span-1">
+						{L_MARK}
+					</div>
+				</div>
+				<!-- BEGIN topicrow -->
+				<div class="grid grid-cols-3 gap-4 px-3 py-3 border-t border-gray-100 transition duration-200 ease-in-out md:grid-cols-5 hover:bg-gray-50">
+					<div class="col-span-2 pl-2 md:pl-4">
+						<!-- IF topicrow.U_VIEW_TOPIC -->
+
+						<!-- IF topicrow.S_UNREAD_TOPIC -->
+						<a href="{topicrow.U_VIEW_TOPIC}"
+						   class="block text-base font-medium" title="{topicrow.TOPIC_TITLE}">{topicrow.TOPIC_TITLE}</a>
+						<!-- ELSE -->
+						<a href="{topicrow.U_VIEW_TOPIC}"
+						   class="block text-base font-medium" title="{topicrow.TOPIC_TITLE}">{topicrow.TOPIC_TITLE}</a>
+						<!-- ENDIF -->
+						<!-- ELSE -->
+						{topicrow.TOPIC_TITLE}
+						<!-- ENDIF -->
+						<div class="text-sm">
+							{L_POST_BY_AUTHOR}
+							{topicrow.TOPIC_AUTHOR_FULL}
+							<time datetime="{topicrow.FIRST_POST_TIME_RFC3339}">{topicrow.FIRST_POST_TIME}</time>
+							<!-- IF topicrow.S_POST_GLOBAL and FORUM_ID != topicrow.FORUM_ID -->
+							{L_IN}
+							<a href="{topicrow.U_VIEW_FORUM}" title="{topicrow.FORUM_NAME}">{topicrow.FORUM_NAME}</a>
+							<!-- ENDIF -->
+						</div>
+					</div>
+					<div class="flex col-span-2 items-center text-sm hidden md:block">
+						<div class="flex hidden justify-between items-center align-middle md:flex">
+							<div class="flex-none">
+							</div>
+							<div class="flex-1 text-left">
+								<!-- IF topicrow.LAST_POST_TIME -->
+								<!-- IF topicrow.S_DISPLAY_SUBJECT -->
+								<a href="{forumrow.U_LAST_POST}" title="{forumrow.LAST_POST_SUBJECT}"
+								   class="text-sm font-bold text-gray-800 hover:text-gray-600">{topicrow.LAST_POST_SUBJECT_TRUNCATED}</a>
+								<br/>
+								<!-- ENDIF -->
+								<div class="text-sm">
+									<span class="font-medium text-gray-600"><date
+											datetime="{forumrow.LAST_POST_TIME_RFC3339}">{topicrow.LAST_POST_TIME}</date></span>
+									<p>{L_POST_BY_AUTHOR} {topicrow.LAST_POST_AUTHOR_FULL}</p>
+								</div>
+								<!-- ELSE -->
+								{L_NO_POSTS}
+								<!-- ENDIF -->
+							</div>
+						</div>
+					</div>
+					<div class="flex col-span-1 items-center">
+						<div>
+							<input class="checkbox-input" type="checkbox" name="t[{topicrow.TOPIC_ID}]" id="t{topicrow.TOPIC_ID}"/>
+						</div>
+					</div>
+				</div>
+				<!-- END topicrow -->
+			</div>
+			<!-- ELSEIF S_TOPIC_NOTIFY -->
+			<div class="flex justify-end my-2">
+				{TOTAL_TOPICS}
+				<!-- IF .pagination -->
+				<!-- INCLUDE pagination.html -->
+				<!-- ELSE -->
+				{PAGE_NUMBER}
+				<!-- ENDIF -->
+			</div>
+			<!-- ENDIF -->
+
+			<!-- IF !.topicrow || !.forumrow -->
+			<div class="text-center my-4 text-gray-600">
+				<svg class="h-14 w-14 inline" xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" display="block" id="EyeOpen"><path d="M21.257 10.962c.474.62.474 1.457 0 2.076C19.764 14.987 16.182 19 12 19c-4.182 0-7.764-4.013-9.257-5.962a1.692 1.692 0 0 1 0-2.076C4.236 9.013 7.818 5 12 5c4.182 0 7.764 4.013 9.257 5.962z"></path><circle cx="12" cy="12" r="3"></circle></svg>
+
+				<!-- IF !.topicrow -->
+				<p class="my-2 font-bold text-center text-lg">{L_NO_WATCHED_TOPICS}</p>
+				<!-- ENDIF -->
+
+				<!-- IF !.forumrow -->
+				<p class="my-2 font-bold text-center text-lg">{L_NO_WATCHED_FORUMS}</p>
+				<!-- ENDIF -->
+			</div>
+			<!-- ENDIF -->
+
+			<!-- IF .topicrow or .forumrow -->
+			<div class="mx-auto my-4 text-center">
+				<div class="space-x-1">
+					<input type="submit" name="unwatch" value="{L_UNWATCH_MARKED}" class="button"/>
+					<a class="button button-secondary" href="#" onclick="marklist('ucp', 't', true); marklist('ucp', 'f', true); return false;">{L_MARK_ALL}</a>
+					<a class="button button-secondary" href="#" onclick="marklist('ucp', 't', false); marklist('ucp', 'f', false); return false;">{L_UNMARK_ALL}</a>
+					{S_FORM_TOKEN}
+				</div>
+			</div>
+			<!-- ENDIF -->
+		</form>
+	</div>
+</div>
+<!-- INCLUDE ucp_footer.html -->

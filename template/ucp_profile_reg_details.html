@@ -1,0 +1,135 @@
+<!-- INCLUDE ucp_header.html -->
+<div class="flex-grow w-full md:w-4/5">
+	<div class="px-6 py-3 mb-3 ml-5 bg-white rounded-md border border-gray-200 shadow">
+		<form id="ucp" method="post" action="{S_UCP_ACTION}" {S_FORM_ENCTYPE}>
+
+			<h3 class="my-3 text-xl font-medium text-gray-800">{L_TITLE}</h3>
+
+			<!-- IF S_FORCE_PASSWORD -->
+			<div class="max-w-3xl mx-auto my-3">
+				<div class="rounded-lg bg-red-50 text-red-600 border border-red-100 font-medium py-2 px-3 text-center">
+					{L_FORCE_PASSWORD_EXPLAIN}
+				</div>
+			</div>
+			<!-- ENDIF -->
+
+			<!-- IF ERROR -->
+			<div class="max-w-3xl mx-auto my-3">
+				<div class="rounded-lg bg-red-50 text-red-600 border border-red-100 font-medium py-2 px-3 text-center">
+					{ERROR}
+				</div>
+			</div>
+			<!-- ENDIF -->
+
+
+			<!-- EVENT ucp_profile_register_details_before -->
+
+
+			<div class="grid-cols-6 gap-2 md:grid mt-4">
+				<div class="py-1 px-2 md:hidden">
+					<label <!-- IF S_CHANGE_USERNAME -->for="username"<!-- ENDIF -->
+					class="text-base font-medium text-left text-gray-800">{L_USERNAME}{L_COLON}</label>
+				</div>
+				<div class="hidden md:block col-span-2 text-right py-1.5">
+					<label <!-- IF S_CHANGE_USERNAME -->for="username"<!-- ENDIF -->
+					class="text-base text-right text-gray-700 font-medium">{L_USERNAME}{L_COLON}</label>
+				</div>
+				<div class="col-span-3 px-2 md:px-4 flex items-center">
+					<div>
+						<!-- IF S_CHANGE_USERNAME -->
+						<input type="text" name="username" id="username" value="{USERNAME}" class="input"
+							   title="{L_USERNAME}"/>
+						<p class="text-sm text-gray-600 my-1 flex-0">
+							{L_USERNAME_EXPLAIN}
+						</p>
+						<!-- ELSE -->
+						<p class="font-medium text-base">{CURRENT_USERNAME_SIMPLE}</p>
+						<!-- ENDIF -->
+					</div>
+				</div>
+			</div>
+
+			<div class="grid-cols-6 gap-2 md:grid mt-4">
+				<div class="py-1 px-2 md:hidden">
+					<label for="email"
+						   class="text-base font-medium text-left text-gray-800">{L_EMAIL_ADDRESS}{L_COLON}</label>
+				</div>
+				<div class="hidden md:block col-span-2 text-right py-1.5">
+					<label for="email"
+						   class="text-base text-right text-gray-700 font-medium">{L_EMAIL_ADDRESS}{L_COLON}</label>
+				</div>
+				<div class="col-span-3 px-2 md:px-4 flex items-center">
+					<!-- IF S_CHANGE_EMAIL -->
+					<input type="email" name="email" id="email" value="{EMAIL}" class="input block" maxlength="100"
+						   title="{L_EMAIL_ADDRESS}"/>
+					<!-- ELSE -->
+					<p class="font-medium text-base">{EMAIL}</p>
+					<!-- ENDIF -->
+				</div>
+			</div>
+
+			<!-- IF S_CHANGE_PASSWORD -->
+			<div class="grid-cols-6 gap-2 md:grid mt-4">
+				<div class="py-1 px-2 md:hidden">
+					<label for="new_password" class="text-base font-medium text-left text-gray-800">{L_NEW_PASSWORD}{L_COLON}</label>
+				</div>
+				<div class="hidden md:block col-span-2 text-right py-1.5">
+					<label for="new_password" class="text-base text-right text-gray-700 font-medium">{L_NEW_PASSWORD}{L_COLON}</label>
+				</div>
+				<div class="col-span-3 px-2 md:px-4">
+					<input type="password" name="new_password" id="new_password" value="{PASSWORD}" class="input block"
+						   maxlength="255" title="{L_CHANGE_PASSWORD}" autocomplete="off"/>
+					<div class="my-1 text-sm text-gray-600">{L_CHANGE_PASSWORD_EXPLAIN}</div>
+				</div>
+			</div>
+
+			<div class="grid-cols-6 gap-2 md:grid mt-4">
+				<div class="py-1 px-2 md:hidden">
+					<label for="password_confirm" class="text-base font-medium text-left text-gray-800">{L_CONFIRM_PASSWORD}{L_COLON}</label>
+				</div>
+				<div class="hidden md:block col-span-2 text-right py-1.5">
+					<label for="password_confirm" class="text-base text-right text-gray-700 font-medium">{L_CONFIRM_PASSWORD}{L_COLON}</label>
+				</div>
+				<div class="col-span-3 px-2 md:px-4">
+					<input type="password" name="new_password" id="password_confirm" value="{PASSWORD_CONFIRM}"
+						   class="input block" maxlength="255" title="{L_CONFIRM_PASSWORD}" autocomplete="off"/>
+					<div class="my-1 text-sm text-gray-600">{L_CONFIRM_PASSWORD_EXPLAIN}</div>
+				</div>
+			</div>
+			<!-- ENDIF -->
+
+			<!-- EVENT ucp_profile_register_details_after -->
+
+			<div class="border-b border-gray-100 my-2 max-w-xl mx-auto"></div>
+
+			<div class="grid-cols-6 gap-2 md:grid mt-4">
+				<div class="py-1 px-2 md:hidden">
+					<label for="cur_password" class="text-base font-medium text-left text-gray-800">{L_CURRENT_PASSWORD}{L_COLON}</label>
+				</div>
+				<div class="hidden md:block col-span-2 text-right py-1.5">
+					<label for="cur_password" class="text-base text-right text-gray-700 font-medium">{L_CURRENT_PASSWORD}{L_COLON}</label>
+				</div>
+				<div class="col-span-3 px-2 md:px-4">
+					<input type="password" name="cur_password" id="cur_password" value="{CUR_PASSWORD}"
+						   class="input" maxlength="255" title="{L_CURRENT_PASSWORD}" autocomplete="off"/>
+					<div class="my-1 text-sm text-gray-600">
+						<!-- IF S_CHANGE_PASSWORD -->
+						{L_CURRENT_CHANGE_PASSWORD_EXPLAIN}
+						<!-- ELSE -->
+						{L_CURRENT_PASSWORD_EXPLAIN}
+						<!-- ENDIF -->
+					</div>
+				</div>
+			</div>
+
+			<div class="mx-auto my-4 text-center">
+				<div class="space-x-1">
+					{S_HIDDEN_FIELDS}
+					<input type="submit" name="submit" value="{L_SUBMIT}" class="button"/>
+					{S_FORM_TOKEN}
+				</div>
+			</div>
+		</form>
+	</div>
+</div>
+<!-- INCLUDE ucp_footer.html -->

@@ -1,0 +1,37 @@
+<!-- INCLUDE ucp_pm_header.html -->
+<div class="flex-grow w-full md:w-4/5">
+	<div class="px-6 py-3 mb-3 ml-5 bg-white rounded-md border border-gray-200 shadow">
+		<!-- IF S_DRAFT_LOADED -->
+		<h3>{L_INFORMATION}</h3>
+		<p>{L_DRAFT_LOADED_PM}</p>
+		<!-- ENDIF -->
+
+		<!-- IF S_SHOW_DRAFTS --><!-- INCLUDE drafts.html --><!-- ENDIF -->
+
+		<!-- IF S_DISPLAY_PREVIEW --><!-- INCLUDE posting_preview.html --><!-- ENDIF -->
+
+		<h3 class="my-3 text-xl font-medium text-gray-800">{L_TITLE}</h3>
+
+		<div id="pmheader-postingbox">
+			<div>
+				<!-- EVENT posting_pm_layout_include_pm_header_before -->
+				<!-- INCLUDE posting_pm_header.html -->
+				<!-- EVENT posting_pm_layout_include_pm_header_after -->
+			</div>
+		</div>
+
+		<div>
+			<div>
+				<!-- DEFINE $EXTRA_POSTING_OPTIONS = 1 -->
+				<!-- INCLUDE posting_editor.html -->
+			</div>
+
+			<!-- IF S_SHOW_ATTACH_BOX and FILTERS --><!-- INCLUDE posting_attach_body.html --><!-- ENDIF -->
+
+			<!-- IF S_DISPLAY_REVIEW --><!-- INCLUDE posting_topic_review.html --><!-- ENDIF -->
+
+			<!-- IF S_DISPLAY_HISTORY --><!-- INCLUDE ucp_pm_history.html --><!-- ENDIF -->
+
+		</div>
+	</div>
+	<!-- INCLUDE ucp_pm_footer.html -->

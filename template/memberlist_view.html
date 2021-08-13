@@ -1,0 +1,277 @@
+<!-- INCLUDE overall_header.html -->
+
+<h2 class="mb-1 text-2xl font-medium">{PAGE_TITLE}</h2>
+
+<!-- EVENT memberlist_view_content_prepend -->
+
+<form method="post" action="{S_PROFILE_ACTION}" id="viewprofile">
+
+	<div class="py-6 mx-auto">
+		<div class="flex flex-row-reverse flex-wrap">
+			<!-- Begin Content -->
+			<div class="flex-grow w-full md:w-4/5">
+				<div class="overflow-hidden overflow-x-auto px-4 w-full h-full">
+					<div class="flex justify-between items-center">
+						<div>
+							<!-- EVENT memberlist_view_username_prepend -->
+							<!-- IF USER_COLOR -->
+							<span
+									class="text-3xl font-medium" style="color: {USER_COLOR};">
+								{USERNAME}
+							</span>
+							<!-- ELSE -->
+							<span
+									class="text-3xl font-medium">
+								{USERNAME}
+								<!-- ENDIF -->
+						</span>
+							<!-- EVENT memberlist_view_username_append -->
+
+							<!-- EVENT memberlist_view_rank_avatar_before -->
+							<!-- IF RANK_TITLE -->
+							<div style="text-align: left" class="text-sm font-medium text-gray-800">{RANK_TITLE}</div><!-- ENDIF -->
+							<!-- IF RANK_IMG -->
+							<div style="text-align: left;">{RANK_IMG}</div><!-- ENDIF -->
+							<!-- EVENT memberlist_view_rank_avatar_after -->
+							<div class="mt-3 space-x-2 text-sm text-gray-800">
+								<!-- IF U_EDIT_SELF --><a href="{U_EDIT_SELF}">{L_EDIT_PROFILE}</a><!-- ENDIF -->
+								<!-- IF U_USER_ADMIN --><a href="{U_USER_ADMIN}">{L_USER_ADMIN}</a><!-- ENDIF -->
+								<!-- IF U_USER_BAN --><a href="{U_USER_BAN}">{L_USER_BAN}</a><!-- ENDIF -->
+								<!-- IF U_SWITCH_PERMISSIONS --><a href="{U_SWITCH_PERMISSIONS}">{L_USE_PERMISSIONS}</a>
+								<!-- ENDIF -->
+							</div>
+						</div>
+
+						<div class="-mt-12">
+							<div class="space-x-2 text-xs font-bold">
+								<!-- EVENT memberlist_view_zebra_before -->
+								<!-- IF S_USER_LOGGED_IN and S_ZEBRA -->
+								<!-- IF U_REMOVE_FRIEND -->
+								<a href="{U_REMOVE_FRIEND}" data-ajax="zebra">{L_REMOVE_FRIEND}</a>
+								<!-- ELSEIF U_REMOVE_FOE -->
+								<a href="{U_REMOVE_FOE}" data-ajax="zebra">{L_REMOVE_FOE}</a>
+								<!-- ELSE -->
+								<!-- IF U_ADD_FRIEND -->
+								<a href="{U_ADD_FRIEND}" data-ajax="zebra">{L_ADD_FRIEND}</a>
+								<!-- ENDIF -->
+								<!-- IF U_ADD_FOE -->
+								<a href="{U_ADD_FOE}" data-ajax="zebra">{L_ADD_FOE}</a>
+								<!-- ENDIF -->
+								<!-- ENDIF -->
+								<!-- ENDIF -->
+								<!-- EVENT memberlist_view_zebra_after -->
+							</div>
+						</div>
+					</div>
+
+					<div class="overflow-hidden mt-4 text-base text-gray-800">
+						<div class="w-full border-gray-200">
+							<!-- Tabs -->
+							<ul id="profile-tabs" class="inline-flex px-1 pt-2 w-full border-b">
+								<li class="px-4 py-2 -mb-px font-semibold bg-white rounded-t border-t border-r border-l">
+									<a id="default-tab" href="#first" class="text-sm text-gray-800 transition duration-200 ease-in-out hover:text-gray-700 hover:no-underline active:no-underline active:text-gray-700">{L_Details}</a></li>
+<!--								<li class="px-4 py-2 font-semibold text-gray-800 rounded-t"><a href="#second">{L_Posts}</a></li>-->
+							</ul>
+
+							<!-- Tab Contents -->
+							<div id="profile-tab-contents" class="overflow-hidden">
+								<div id="first" class="p-4">
+									<div class="space-y-3">
+										<!-- IF custom_fields -->
+										<div class="font-medium text-gray-700 border-b border-gray-100">
+											{L_About}
+										</div>
+										<div class="pb-2 my-3 border-b border-gray-200">
+											<!-- BEGIN custom_fields -->
+											<!-- IF not custom_fields.S_PROFILE_CONTACT -->
+											<dl>
+												<dt class="text-xs font-medium text-gray-500">
+													{custom_fields.PROFILE_FIELD_NAME}{L_COLON}
+												</dt>
+												<dd class="mt-1 text-xs text-gray-900 sm:mt-0 sm:col-span-2">
+													{custom_fields.PROFILE_FIELD_VALUE}
+												</dd>
+											</dl>
+											<!-- ENDIF -->
+											<!-- END custom_fields -->
+										</div>
+										<!-- ENDIF -->
+										<div class="font-medium text-gray-700 border-b border-gray-100">
+											{USERNAME}'s {L_Content}
+										</div>
+										<div class="pb-2 my-3 border-b border-gray-200">
+											<dl>
+												<dt class="text-xs font-medium text-gray-500">
+													{L_Posts}{L_COLON}
+												</dt>
+												<dd class="mt-1 text-xs text-gray-900 sm:mt-0 sm:col-span-2">
+													<!-- IF S_DISPLAY_SEARCH -->
+													<a class="font-bold"
+													   href="{U_SEARCH_USER}">{L_SEARCH_USER_POSTS}</a>
+													<!-- ENDIF -->
+												</dd>
+											</dl>
+											<dl class="mt-1">
+												<dt class="text-xs font-medium text-gray-500">
+													{L_Threads}{L_COLON}
+												</dt>
+												<dd class="mt-1 text-xs text-gray-900 sm:mt-0 sm:col-span-2">
+													<!-- IF S_DISPLAY_SEARCH -->
+													<a class="font-bold"
+													   href="{U_SEARCH_USER}">{L_SEARCH_USER_THREADS}</a>
+													<!-- ENDIF -->
+												</dd>
+											</dl>
+											<!-- IF U_PM -->
+											<dl class="mt-1">
+												<dt class="text-xs font-medium text-gray-500">
+													{L_PM}{L_COLON}
+												</dt>
+												<dd class="mt-1 text-xs text-gray-900 sm:mt-0 sm:col-span-2">
+													<a class="font-bold" href="{U_PM}">{L_SEND_PRIVATE_MESSAGE}</a>
+												</dd>
+											</dl>
+											<!-- ENDIF -->
+										</div>
+										<div class="font-medium text-gray-700 border-b border-gray-100">
+											{L_Groups}
+										</div>
+										<div class="pb-2 my-3 border-b border-gray-200">
+											<dl>
+												<dt class="text-xs font-medium text-gray-500">
+													{L_Groups}{L_COLON}
+												</dt>
+												<dd class="mt-1 text-xs font-medium text-gray-800 sm:mt-0 sm:col-span-2">
+													{S_GROUP_OPTIONS}
+												</dd>
+											</dl>
+										</div>
+										<!-- IF SIGNATURE -->
+										<div class="font-medium text-gray-700 border-b border-gray-100">
+											{USERNAME}'s {L_Signature}
+										</div>
+										<div class="pb-2 my-3 border-b border-gray-200">
+											{SIGNATURE}
+										</div>
+										<!-- ENDIF -->
+									</div>
+								</div>
+<!--								<div id="second" class="hidden p-4">-->
+<!--								</div>-->
+							</div>
+						</div>
+					</div>
+
+				</div>
+			</div>
+			<!-- End Content -->
+			<!-- Begin Sidebar -->
+			<div class="px-5 my-3 w-full md:my-0 md:w-1/5 md:px-0">
+				<div class="hidden md:block">
+					<!-- IF AVATAR_IMG -->
+					<div class="text-center">
+						{AVATAR_IMG}
+					</div>
+					<!-- ELSE -->
+					<img src="{T_THEME_PATH}/images/no_avatar.gif" alt="" class="w-full avatar"/>
+					<!-- ENDIF -->
+				</div>
+				<div class="px-4 py-3 mt-3 text-xs text-gray-600 rounded-md border border-gray-200">
+					<dl>
+						<dt class="text-xs font-bold text-gray-800">
+							{L_LAST_ACTIVE}{L_COLON}
+						</dt>
+						<dd class="mt-1 text-xs text-gray-900 sm:mt-0 sm:col-span-2">
+							{LAST_ACTIVE}
+						</dd>
+					</dl>
+					<dl>
+						<dt class="mt-1 text-xs font-bold text-gray-800">
+							{L_JOINED}{L_COLON}
+						</dt>
+						<dd class="mt-1 text-xs text-gray-900 sm:mt-0 sm:col-span-2">
+							{JOINED}
+						</dd>
+					</dl>
+					<dl>
+						<dt class="mt-1 text-xs font-bold text-gray-800">
+							{L_POSTS}{L_COLON}
+						</dt>
+						<dd class="mt-1 text-xs text-gray-900 sm:mt-0 sm:col-span-2">
+							{POSTS}
+						</dd>
+					</dl>
+					<!-- IF S_SHOW_ACTIVITY and POSTS -->
+					<dl>
+						<dt class="mt-1 text-xs font-bold text-gray-800">
+							{L_ACTIVE_IN_FORUM}{L_COLON}
+						</dt>
+						<dd class="mt-1 text-xs text-gray-800 sm:mt-0 sm:col-span-2">
+							<!-- IF ACTIVE_FORUM != '' --><strong><a
+								href="{U_ACTIVE_FORUM}">{ACTIVE_FORUM}</a></strong><br/><!-- ELSE --> - <!-- ENDIF -->
+						</dd>
+						<dt class="mt-1 text-xs font-bold text-gray-800">
+							{L_ACTIVE_IN_TOPIC}{L_COLON}
+						</dt>
+						<dd class="mt-1 text-xs text-gray-800 sm:mt-0 sm:col-span-2">
+							<!-- IF ACTIVE_TOPIC != '' --><strong><a
+								href="{U_ACTIVE_TOPIC}">{ACTIVE_TOPIC}</a></strong><br/><!-- ELSE --> - <!-- ENDIF -->
+						</dd>
+					</dl>
+					<!-- ENDIF -->
+				</div>
+
+				<!-- EVENT memberlist_view_non_contact_custom_fields_before -->
+				<!-- BEGIN custom_fields -->
+				<!-- IF not custom_fields.S_PROFILE_CONTACT -->
+				<div class="px-4 py-3 mt-3 text-xs text-gray-600 rounded-md border border-gray-200">
+					<dt class="text-xs font-bold text-gray-800">
+						{custom_fields.PROFILE_FIELD_NAME}{L_COLON}
+					</dt>
+					<dd class="mt-1 text-xs text-gray-800 sm:mt-0 sm:col-span-2">
+						{custom_fields.PROFILE_FIELD_VALUE}
+					</dd>
+				</div>
+				<!-- ENDIF -->
+				<!-- END custom_fields -->
+				<!-- EVENT memberlist_view_non_contact_custom_fields_after -->
+			</div>
+			<!-- End Sidebar -->
+		</div>
+	</div>
+</form>
+
+<!-- EVENT memberlist_view_content_append -->
+
+<script>
+	let tabsContainer = document.querySelector("#profile-tabs");
+
+	let tabTogglers = tabsContainer.querySelectorAll("#profile-tabs a");
+
+	console.log(tabTogglers);
+
+	tabTogglers.forEach(function(toggler) {
+		toggler.addEventListener("click", function(e) {
+			e.preventDefault();
+
+			let tabName = this.getAttribute("href");
+
+			let tabContents = document.querySelector("#profile-tab-contents");
+
+			for (let i = 0; i < tabContents.children.length; i++) {
+
+				tabTogglers[i].parentElement.classList.remove("border-t", "border-r", "border-l", "-mb-px", "bg-white");
+				tabContents.children[i].classList.remove("hidden");
+				if ("#" + tabContents.children[i].id === tabName) {
+					continue;
+				}
+				tabContents.children[i].classList.add("hidden");
+
+			}
+			e.target.parentElement.classList.add("border-t", "border-r", "border-l", "-mb-px", "bg-white");
+		});
+	});
+
+</script>
+
+<!-- INCLUDE overall_footer.html -->

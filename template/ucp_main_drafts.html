@@ -1,0 +1,108 @@
+<!-- INCLUDE ucp_header.html -->
+<div class="flex-grow w-full md:w-4/5">
+	<div class="px-6 py-3 mb-3 ml-5 bg-white rounded-md border border-gray-200 shadow">
+		<form id="postform" method="post" action="{S_UCP_ACTION}" {S_FORM_ENCTYPE}>
+
+			<h3 class="my-3 text-xl font-medium text-gray-800">{L_TITLE}</h3>
+
+			<p class="text-sm text-gray-700 max-w-3xl mx-auto text-left pb-2.5 border-b border-gray-100">
+				{L_DRAFTS_EXPLAIN}</p>
+
+			<!-- IF S_EDIT_DRAFT -->
+
+			<!-- INCLUDE posting_editor.html -->
+			<div class="mx-auto mt-4 text-center">
+				<div class="space-x-1">
+					<input type="submit" name="submit" value="{L_SAVE}" class="button"/>
+					<a href="{S_UCP_ACTION}" class="button button-secondary" title="{L_BACK_TO_DRAFTS}"
+					   onclick="return confirm('Are you sure you want to leave this draft without saving?')">{L_BACK_TO_DRAFTS}</a>
+					{S_HIDDEN_FIELDS}
+					{S_FORM_TOKEN}
+				</div>
+			</div>
+			<!-- ELSE -->
+
+			<!-- IF .draftrow -->
+			<div class="my-2 rounded border border-gray-200 shadow-sm">
+				<div class="grid overflow-hidden grid-cols-3 gap-4 px-3 py-2 text-sm text-gray-800 bg-gray-100 border-b border-gray-100 md:grid-cols-5">
+					<div class="col-span-2 md:col-span-2">
+						{L_DRAFT_TITLE}
+					</div>
+					<div class="hidden col-span-2 md:col-span-2 md:block">
+						{L_SAVE_DATE}
+					</div>
+					<div class="col-span-1">
+						{L_MARK}
+					</div>
+				</div>
+				<!-- BEGIN draftrow -->
+				<div class="grid grid-cols-3 gap-4 px-3 py-3 text-sm border-t border-gray-100 transition duration-200 ease-in-out md:grid-cols-5 hover:bg-gray-50">
+					<div class="col-span-2 pl-2 md:col-span-2 md:pl-4">
+						<a class="block text-base font-medium"
+						   href="{draftrow.U_VIEW_EDIT}" title="{draftrow.DRAFT_SUBJECT}">{draftrow.DRAFT_SUBJECT}</a>
+						<!-- IF draftrow.S_LINK_TOPIC -->
+						{L_TOPIC}{L_COLON} <a href="{draftrow.U_VIEW}" title="{draftrow.TITLE}">{draftrow.TITLE}</a>
+						<!-- ELSEIF draftrow.S_LINK_FORUM -->
+						{L_FORUM}{L_COLON} <a href="{draftrow.U_VIEW}" title="{draftrow.TITLE}">{draftrow.TITLE}</a>
+						<!-- ELSEIF S_PRIVMSGS -->
+						<!-- ELSE -->
+						{L_NO_TOPIC_FORUM}
+						<!-- ENDIF -->
+						<div class="text-sm md:hidden">
+							<p class="my-1">{draftrow.DATE}</p>
+							<div>
+								<!-- IF draftrow.U_INSERT -->
+								<a href="{draftrow.U_INSERT}" title="{L_LOAD_DRAFT}">{L_LOAD_DRAFT}</a>
+								<!-- ENDIF -->
+								<a href="{draftrow.U_VIEW_EDIT}" title="{L_VIEW_EDIT}">{L_VIEW_EDIT}</a>
+							</div>
+						</div>
+					</div>
+					<div class="hidden col-span-2 md:block">
+						<div class="font-medium text-gray-600">
+							{draftrow.DATE}
+						</div>
+						<div>
+							<!-- IF draftrow.U_INSERT -->
+							<a href="{draftrow.U_INSERT}" title="{L_LOAD_DRAFT}">{L_LOAD_DRAFT}</a>
+							<!-- ENDIF -->
+							<a href="{draftrow.U_VIEW_EDIT}" title="{L_VIEW_EDIT}">{L_VIEW_EDIT}</a>
+						</div>
+					</div>
+					<div class="flex col-span-1 items-center">
+						<div>
+							<input class="checkbox-input" type="checkbox" name="d[{draftrow.DRAFT_ID}]"
+								   id="d{draftrow.DRAFT_ID}"/>
+						</div>
+					</div>
+				</div>
+				<!-- END draftrow -->
+			</div>
+			<!-- ELSE -->
+			<div class="my-4 text-center text-gray-600">
+				<svg class="inline w-14 h-14" xmlns="http://www.w3.org/2000/svg" width="24" height="24"
+					 viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round"
+					 stroke-linejoin="round" display="block" id="Draft">
+					<path d="M13.5 6v4H16m-1.315-8H10a2 2 0 0 0-2 2v12a2 2 0 0 0 2 2h8a2 2 0 0 0 2-2V7.242a2 2 0 0 0-.602-1.43L16.083 2.57A2 2 0 0 0 14.685 2z"></path>
+					<path d="M16 18v2a2 2 0 0 1-2 2H6a2 2 0 0 1-2-2V9a2 2 0 0 1 2-2h2"></path>
+				</svg>
+				<p class="my-2 text-lg font-bold text-center">{L_NO_SAVED_DRAFTS}</p>
+			</div>
+			<!-- ENDIF -->
+			<!-- IF .draftrow -->
+			<div class="mx-auto my-4 text-center">
+				<div class="space-x-1">
+					<input class="button" type="submit" name="delete" value="{L_DELETE_MARKED}" />
+					<a class="button button-secondary" href="#" onclick="marklist('postform', '', true); return false;">{L_MARK_ALL}</a>
+					<a class="button button-secondary" href="#"
+					   onclick="marklist('postform', '', false); return false;">{L_UNMARK_ALL}</a>
+					{S_FORM_TOKEN}
+				</div>
+			</div>
+			<!-- ENDIF -->
+			<!-- ENDIF -->
+		</form>
+	</div>
+</div>
+
+<!-- INCLUDE ucp_footer.html -->

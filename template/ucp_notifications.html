@@ -1,0 +1,196 @@
+<!-- INCLUDE ucp_header.html -->
+<div class="flex-grow w-full md:w-4/5">
+	<div class="px-6 py-3 mb-3 ml-5 bg-white rounded-md border border-gray-200 shadow">
+		<form id="ucp" method="post" action="{S_UCP_ACTION}" {S_FORM_ENCTYPE}>
+
+			<div class="flex justify-between items-center">
+				<div>
+					<h3 class="my-3 text-xl font-medium text-gray-800">{TITLE}</h3>
+				</div>
+				<div>
+					<!-- IF MODE == 'notification_options' -->
+					<a class="button button-secondary" href="ucp.php?i=ucp_notifications&mode=notification_list">
+						{L_UCP_NOTIFICATION_LIST}
+					</a>
+					<!-- ELSE -->
+					<a class="button button-secondary" href="ucp.php?i=ucp_notifications&mode=notification_options">
+						{L_UCP_NOTIFICATION_OPTIONS}
+					</a>
+					<!-- ENDIF -->
+				</div>
+			</div>
+
+			<p class="text-sm text-gray-700 max-w-3xl mx-auto text-left pb-2.5 border-b border-gray-100">
+				{TITLE_EXPLAIN}</p>
+
+			<!-- IF MODE == 'notification_options' -->
+			<div class="my-2 rounded border border-gray-100 shadow-sm">
+				<div class="grid overflow-hidden grid-cols-4 gap-4 px-3 py-2 text-sm text-gray-800 bg-gray-50 border-b border-gray-100 md:grid-cols-12">
+					<div class="col-span-3 md:col-span-8">
+						{L_NOTIFICATION_TYPE}
+					</div>
+					<!-- BEGIN notification_methods -->
+					<div class="col-span-3 md:col-span-2">
+						{notification_methods.NAME}
+					</div>
+					<!-- END notification_methods -->
+				</div>
+				<!-- BEGIN notification_types -->
+				<div class="grid grid-cols-4 gap-4 border-t border-gray-100 transition duration-200 ease-in-out md:grid-cols-12 hover:bg-gray-50 text-gray-600">
+					<!-- IF notification_types.GROUP_NAME -->
+					<div class="col-span-12 text-left bg-gray-100 border-t border-b border-gray-200 py-1 px-3">
+						{notification_types.GROUP_NAME}
+					</div>
+					<!-- ELSE -->
+					<div class="col-span-3 md:col-span-8 py-2 px-3">
+						{notification_types.NAME}
+						<p class="text-gray-600 my-1 text-sm">{notification_types.EXPLAIN}</p>
+					</div>
+					<!-- BEGIN notification_methods -->
+					<div class="col-span-3 md:col-span-2 flex items-center py-2 px-3">
+						<input type="checkbox" class="checkbox-input"
+							   name="{notification_types.TYPE}_{notification_types.notification_methods.METHOD}"
+						<!-- IF notification_types.notification_methods.SUBSCRIBED --> checked="checked"<!-- ENDIF -->
+						<!-- IF not notification_types.notification_methods.AVAILABLE --> disabled="disabled"
+						<!-- ENDIF --> />
+					</div>
+					<!-- END notification_methods -->
+					<!-- ENDIF -->
+				</div>
+				<!-- END notification_types -->
+			</div>
+			<!-- ELSE -->
+			<!-- IF .notification_list -->
+
+			<div class="flex justify-between items-center my-2">
+				<div class="text-sm">
+					<!-- IF .pagination -->
+					<!-- INCLUDE pagination.html -->
+					<!-- ELSE -->
+					{PAGE_NUMBER}
+					<!-- ENDIF -->
+				</div>
+				<div>
+					<!-- IF U_MARK_ALL -->
+					<a href="{U_MARK_ALL}" class="button">{L_NOTIFICATIONS_MARK_ALL_READ}</a>
+					<!-- ENDIF -->
+				</div>
+			</div>
+
+			<div class="my-2 rounded border border-gray-200 shadow-sm">
+				<div class="grid overflow-hidden grid-cols-4 gap-4 px-3 py-2 text-sm text-gray-800 bg-gray-100 border-b border-gray-100 md:grid-cols-8">
+					<div class="col-span-3 md:col-span-7">
+						{L_NOTIFICATIONS}
+					</div>
+					<div class="col-span-1">
+						{L_MARK_READ}
+					</div>
+				</div>
+				<!-- BEGIN notification_list -->
+				<div class="grid grid-cols-4 gap-4 px-3 py-3 border-t border-gray-100 transition duration-200 ease-in-out md:grid-cols-8 <!-- IF notification_list.UNREAD --> bg-blue-100 hover:bg-blue-50 <!-- ELSE --> hover:bg-gray-50 <!-- ENDIF -->">
+					<div class="flex col-span-3 items-center md:col-span-7">
+						<div class="flex justify-between items-center align-middle">
+							<div class="flex-none p-2 ml-2 w-20 h-20">
+								<!-- IF notification_list.AVATAR -->
+								<div class="avatar">{notification_list.AVATAR}</div>
+								<!-- ELSE -->
+									<img src="{T_THEME_PATH}/images/no_avatar.gif" alt="" class="avatar"/>
+								<!-- ENDIF -->
+							</div>
+							<div class="flex-1 text-left">
+								<div>
+									<!-- IF notification_list.URL -->
+									<a class="text-sm md:text-base font-medium"
+									   href="<!-- IF notification_list.UNREAD -->{notification_list.U_MARK_READ}<!-- ELSE -->{notification_list.URL}<!-- ENDIF -->">
+										<!-- ENDIF -->
+										<p>
+											{notification_list.FORMATTED_TITLE}
+											<!-- IF notification_list.REFERENCE -->
+											{notification_list.REFERENCE}
+											<!-- ENDIF -->
+										</p>
+										<!-- IF notification_list.URL -->
+									</a>
+									<!-- ENDIF -->
+									<!-- IF notification_list.FORUM -->
+									<p class="text-sm text-gray-700">
+										{notification_list.FORUM}
+									</p>
+									<!-- ENDIF -->
+									<!-- IF notification_list.REASON -->
+									<p class="text-sm text-gray-700">
+										{notification_list.REASON}
+									</p>
+									<!-- ENDIF -->
+								</div>
+								<div>
+									<span class="text-sm font-medium text-gray-600">
+										{notification_list.TIME}
+									</span>
+								</div>
+							</div>
+						</div>
+					</div>
+					<div class="flex col-span-1 items-center">
+						<div>
+							<input type="checkbox" name="mark[]" class="checkbox-input"
+								   value="{notification_list.NOTIFICATION_ID}"
+							<!-- IF not notification_list.UNREAD --> disabled="disabled"<!-- ENDIF --> />
+						</div>
+					</div>
+				</div>
+				<!-- END notification_list -->
+			</div>
+
+			<div class="flex justify-between items-center my-2">
+				<div class="text-sm">
+					<!-- IF .pagination -->
+					<!-- INCLUDE pagination.html -->
+					<!-- ELSE -->
+					{PAGE_NUMBER}
+					<!-- ENDIF -->
+				</div>
+				<div class="text-sm">
+					<span class="px-2 py-1 text-xs font-medium text-gray-800 uppercase bg-gray-50 rounded-md border border-gray-200 text-wide">{TOTAL_COUNT} {L_NOTIFICATIONS}</span>
+				</div>
+			</div>
+
+			<!-- ELSE -->
+			<div class="text-center my-4 text-gray-600">
+				<svg class="h-14 w-14 inline" xmlns="http://www.w3.org/2000/svg" width="24" height="24"
+					 viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round"
+					 stroke-linejoin="round" display="block" id="Bell" data-darkreader-inline-fill=""
+					 data-darkreader-inline-stroke=""
+					 style="--darkreader-inline-fill:none; --darkreader-inline-stroke:currentColor;">
+					<path d="M12.721 5.003L11.255 5c-3.344-.008-6.247 2.709-6.27 6v3.79c0 .79-.1 1.561-.531 2.218l-.287.438C3.73 18.11 4.2 19 4.985 19h14.03c.785 0 1.254-.89.818-1.554l-.287-.438c-.43-.657-.531-1.429-.531-2.219v-3.788c-.04-3.292-2.95-5.99-6.294-5.998z"></path>
+					<path d="M15 19a3 3 0 1 1-6 0"></path>
+					<path d="M12 2a2 2 0 0 1 2 2v1h-4V4a2 2 0 0 1 2-2z"></path>
+				</svg>
+				<p class="my-2 font-bold text-center text-lg">{L_NO_NOTIFICATIONS}.</p>
+			</div>
+
+			<!-- ENDIF -->
+
+			<!-- ENDIF -->
+
+			<!-- IF .notification_types or .notification_list -->
+			<div class="mx-auto my-4 text-center">
+				<div class="space-x-1">
+					<input type="hidden" name="form_time" value="{FORM_TIME}"/>
+					{S_HIDDEN_FIELDS}
+					<input type="submit" name="submit"
+						   value="<!-- IF MODE == 'notification_options' -->{L_SUBMIT}<!-- ELSE -->{L_MARK_READ}<!-- ENDIF -->"
+						   class="button"/>
+					<a class="button button-secondary" href="#"
+					   onclick="$('#ucp input:checkbox').prop('checked', true); return false;">{L_MARK_ALL}</a>
+					<a class="button button-secondary" href="#"
+					   onclick="$('#ucp input:checkbox').prop('checked', false); return false;">{L_UNMARK_ALL}</a>
+					{S_FORM_TOKEN}
+				</div>
+			</div>
+			<!-- ENDIF -->
+		</form>
+	</div>
+</div>
+
+<!-- INCLUDE ucp_footer.html -->

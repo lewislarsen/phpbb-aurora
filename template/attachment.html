@@ -1,0 +1,87 @@
+<!-- EVENT attachment_file_before -->
+
+<!-- BEGIN _file -->
+<!-- IF _file.S_DENIED -->
+<p>[{_file.DENIED_MESSAGE}]</p>
+<!-- ELSE -->
+<!-- EVENT attachment_file_prepend -->
+
+<!-- IF _file.S_THUMBNAIL -->
+<div class="col-span-1">
+	<a href="{_file.U_DOWNLOAD_LINK}" target="_blank" class="hover:no-underline hover:opacity-90">
+		<div class="rounded border border-gray-200">
+			<div style="background-image: url({_file.THUMB_IMAGE})"
+				 class="object-cover w-48 h-48 bg-cover"
+				 title="{_file.DOWNLOAD_NAME} ({_file.FILESIZE} {_file.SIZE_LANG}) {_file.L_DOWNLOAD_COUNT}">
+			</div>
+			<div class="relative w-full h-full py-2 px-2.5 text-xs font-medium text-gray-600 bg-gray-50 whitespace-nowrap">
+				<!-- IF _file.COMMENT -->
+				<p class="my-1 text-sm font-bold">{_file.COMMENT}</p>
+				<!-- ELSE -->
+				<p class="my-1 text-sm font-bold">-</p>
+				<!-- ENDIF -->
+				<p>{_file.L_DOWNLOAD_COUNT}</p>
+				<p class="uppercase">{_file.FILESIZE} {_file.SIZE_LANG}</p>
+				<p class="truncate"></p>
+				<!-- {_file.DOWNLOAD_NAME} -->
+			</div>
+		</div>
+	</a>
+</div>
+<!-- ENDIF -->
+
+<!-- IF _file.S_IMAGE -->
+<div class="col-span-1">
+	<a href="{_file.U_DOWNLOAD_LINK}" target="_blank" class="hover:no-underline hover:opacity-90">
+		<div class="rounded border border-gray-200">
+			<div style="background-image: url({_file.U_INLINE_LINK})"
+				 class="object-cover w-48 h-48 bg-cover"
+				 title="{_file.DOWNLOAD_NAME} ({_file.FILESIZE} {_file.SIZE_LANG}) {_file.L_DOWNLOAD_COUNT}">
+			</div>
+			<div class="relative w-full h-full py-2 px-2.5 text-xs font-medium text-gray-600 bg-gray-50 whitespace-nowrap">
+				<!-- IF _file.COMMENT -->
+				<p class="my-1 text-sm font-bold">{_file.COMMENT}</p>
+				<!-- ELSE -->
+				<p class="my-1 text-sm font-bold">-</p>
+				<!-- ENDIF -->
+				<p>{_file.L_DOWNLOAD_COUNT}</p>
+				<p class="uppercase">{_file.FILESIZE} {_file.SIZE_LANG}</p>
+				<p class="truncate"></p>
+				<!-- {_file.DOWNLOAD_NAME} -->
+			</div>
+		</div>
+	</a>
+</div>
+<!-- ENDIF -->
+
+<!-- IF _file.S_FILE -->
+	<div class="col-span-1">
+		<a href="{_file.U_DOWNLOAD_LINK}" target="_blank" class="hover:no-underline hover:opacity-90">
+			<div class="rounded border border-gray-200">
+				<div class="object-cover w-48 h-48 bg-cover"
+					 title="{_file.DOWNLOAD_NAME} ({_file.FILESIZE} {_file.SIZE_LANG}) {_file.L_DOWNLOAD_COUNT}">
+					test
+					<!-- IF _file.UPLOAD_ICON -->
+					{_file.UPLOAD_ICON}
+					<!-- ENDIF -->
+				</div>
+				<div class="relative w-full h-full py-2 px-2.5 text-xs font-medium text-gray-600 bg-gray-50 whitespace-nowrap">
+					<!-- IF _file.COMMENT -->
+					<p class="my-1 text-sm font-bold">{_file.COMMENT}</p>
+					<!-- ELSE -->
+					<p class="my-1 text-sm font-bold">-</p>
+					<!-- ENDIF -->
+					<p>{_file.L_DOWNLOAD_COUNT}</p>
+					<p class="uppercase">{_file.FILESIZE} {_file.SIZE_LANG}</p>
+					<p class="truncate"></p>
+					<!-- {_file.DOWNLOAD_NAME} -->
+				</div>
+			</div>
+		</a>
+</div>
+<!-- ENDIF -->
+
+<!-- EVENT attachment_file_append -->
+<!-- ENDIF -->
+<!-- END _file -->
+<!-- EVENT attachment_file_after -->

@@ -1,0 +1,191 @@
+<!-- INCLUDE overall_header.html -->
+
+<!-- EVENT memberlist_email_before -->
+
+<!-- IF S_CONTACT_ADMIN-->
+<h2 class="mb-1 text-2xl font-medium">{L_CONTACT_ADMIN}</h2>
+<!-- ELSEIF S_SEND_USER -->
+<h2 class="mb-1 text-2xl font-medium">{L_SEND_EMAIL_USER}</h2>
+<!-- ELSE -->
+<h2 class="mb-1 text-2xl font-medium">{L_EMAIL_TOPIC}</h2>
+<!-- ENDIF -->
+
+<form method="post" action="{S_POST_ACTION}" id="post">
+	<!-- IF CONTACT_INFO -->
+	{CONTACT_INFO}
+	<!-- ENDIF -->
+
+	<!-- IF ERROR_MESSAGE -->
+	<div class="max-w-3xl mx-auto my-3">
+		<div class="rounded-lg bg-red-50 text-red-600 border border-red-100 font-medium py-4 px-3 text-center">
+			{ERROR_MESSAGE}
+		</div>
+	</div>
+	<!-- ENDIF -->
+	<fieldset class="fields2">
+		<!-- IF S_SEND_USER -->
+		<div class="grid-cols-6 gap-2 md:grid mt-4">
+			<div class="py-1 px-2 md:hidden">
+				<label class="text-base font-medium text-left text-gray-800">{L_RECIPIENT}{L_COLON}</label>
+			</div>
+			<div class="hidden md:block col-span-2 text-right py-1.5">
+				<label class="text-base text-right text-gray-700 font-medium">{L_RECIPIENT}{L_COLON}</label>
+			</div>
+			<div class="col-span-3 px-2 md:px-4 mt-2 text-gray-800 font-medium">
+				{USERNAME_FULL}
+			</div>
+		</div>
+
+		<div class="grid-cols-6 gap-2 md:grid mt-4">
+			<div class="py-1 px-2 md:hidden">
+				<label for="subject"
+					   class="text-base font-medium text-left text-gray-800">{L_SUBJECT}{L_COLON}</label>
+			</div>
+			<div class="hidden md:block col-span-2 text-right py-1.5">
+				<label for="subject" class="text-base text-right text-gray-700 font-medium">{L_SUBJECT}{L_COLON}</label>
+			</div>
+			<div class="col-span-3 px-2 md:px-4">
+				<input class="input" type="text" name="name" id="name" size="50" tabindex="3"
+					   value="{SUBJECT}"/>
+			</div>
+		</div>
+
+		<!-- ELSEIF S_CONTACT_ADMIN-->
+		<div class="grid-cols-6 gap-2 md:grid mt-4">
+			<div class="py-1 px-2 md:hidden">
+				<label class="text-base font-medium text-left text-gray-800">{L_RECIPIENT}{L_COLON}</label>
+			</div>
+			<div class="hidden md:block col-span-2 text-right py-1.5">
+				<label class="text-base text-right text-gray-700 font-medium">{L_RECIPIENT}{L_COLON}</label>
+			</div>
+			<div class="col-span-3 px-2 md:px-4 mt-2 text-gray-800 font-medium">
+				{L_ADMINISTRATOR}
+			</div>
+		</div>
+		<!-- IF not S_IS_REGISTERED -->
+		<div class="grid-cols-6 gap-2 md:grid mt-4">
+			<div class="py-1 px-2 md:hidden">
+				<label for="email"
+					   class="text-base font-medium text-left text-gray-800">{L_SENDER_EMAIL_ADDRESS}{L_COLON}</label>
+			</div>
+			<div class="hidden md:block col-span-2 text-right py-1.5">
+				<label for="email" class="text-base text-right text-gray-700 font-medium">{L_SENDER_EMAIL_ADDRESS}{L_COLON}</label>
+			</div>
+			<div class="col-span-3 px-2 md:px-4">
+				<input class="input" type="email" name="email" id="email" size="50" tabindex="3"
+					   value="{EMAIL}"/>
+			</div>
+		</div>
+
+		<div class="grid-cols-6 gap-2 md:grid mt-4">
+			<div class="py-1 px-2 md:hidden">
+				<label for="name"
+					   class="text-base font-medium text-left text-gray-800">{L_SENDER_NAME}{L_COLON}</label>
+			</div>
+			<div class="hidden md:block col-span-2 text-right py-1.5">
+				<label for="name" class="text-base text-right text-gray-700 font-medium">{L_SENDER_NAME}{L_COLON}</label>
+			</div>
+			<div class="col-span-3 px-2 md:px-4">
+				<input class="input" type="email" name="name" id="name" size="50" tabindex="3"
+					   value="{NAME}"/>
+			</div>
+		</div>
+		<!-- ENDIF -->
+		<div class="grid-cols-6 gap-2 md:grid mt-4">
+			<div class="py-1 px-2 md:hidden">
+				<label for="subject"
+					   class="text-base font-medium text-left text-gray-800">{L_SUBJECT}{L_COLON}</label>
+			</div>
+			<div class="hidden md:block col-span-2 text-right py-1.5">
+				<label for="subject" class="text-base text-right text-gray-700 font-medium">{L_SUBJECT}{L_COLON}</label>
+			</div>
+			<div class="col-span-3 px-2 md:px-4">
+				<input class="input" type="text" name="subject" id="subject" size="50" tabindex="3"
+					   value="{SUBJECT}"/>
+			</div>
+		</div>
+
+		<!-- ELSE -->
+		<div class="grid-cols-6 gap-2 md:grid mt-4">
+			<div class="py-1 px-2 md:hidden">
+				<label for="email"
+					   class="text-base font-medium text-left text-gray-800">{L_EMAIL_ADDRESS}{L_COLON}</label>
+			</div>
+			<div class="hidden md:block col-span-2 text-right py-1.5">
+				<label for="email" class="text-base text-right text-gray-700 font-medium">{L_EMAIL_ADDRESS}{L_COLON}</label>
+			</div>
+			<div class="col-span-3 px-2 md:px-4">
+				<input class="input" type="email" name="email" id="email" size="50" tabindex="3"
+					   value="{EMAIL}"/>
+			</div>
+		</div>
+
+		<div class="grid-cols-6 gap-2 md:grid mt-4">
+			<div class="py-1 px-2 md:hidden">
+				<label for="name"
+					   class="text-base font-medium text-left text-gray-800">{L_REAL_NAME}{L_COLON}</label>
+			</div>
+			<div class="hidden md:block col-span-2 text-right py-1.5">
+				<label for="name" class="text-base text-right text-gray-700 font-medium">{L_REAL_NAME}{L_COLON}</label>
+			</div>
+			<div class="col-span-3 px-2 md:px-4">
+				<input class="input" type="text" name="name" id="name" size="50" tabindex="3"
+					   value="{NAME}"/>
+			</div>
+		</div>
+
+		<div class="grid-cols-6 gap-2 md:grid mt-4">
+			<div class="py-1 px-2 md:hidden">
+				<label for="lang"
+					   class="text-base font-medium text-left text-gray-800">{L_DEST_LANG}{L_COLON}</label>
+			</div>
+			<div class="hidden md:block col-span-2 text-right py-1.5">
+				<label for="lang" class="text-base text-right text-gray-700 font-medium">{L_DEST_LANG}{L_COLON}</label>
+			</div>
+			<div class="col-span-3 px-2 md:px-4">
+				<select id="lang" name="lang" class="input">
+					{S_LANG_OPTIONS}
+				</select>
+				<p class="text-sm text-gray-600 my-1">{L_DEST_LANG_EXPLAIN}</p>
+			</div>
+		</div>
+
+		<!-- ENDIF -->
+
+		<div class="grid-cols-6 gap-2 md:grid mt-4">
+			<div class="py-1 px-2 md:hidden">
+				<label for="message"
+					   class="text-base font-medium text-left text-gray-800">{L_MESSAGE_BODY}{L_COLON}</label>
+			</div>
+			<div class="hidden md:block col-span-2 text-right py-1.5">
+				<label for="message" class="text-base text-right text-gray-700 font-medium">{L_MESSAGE_BODY}{L_COLON}</label>
+			</div>
+			<div class="col-span-3 px-2 md:px-4">
+				<textarea name="message" id="message" rows="6" cols="40" class="input">{MESSAGE}</textarea>
+			</div>
+		</div>
+
+		<!-- IF S_REGISTERED_USER -->
+		<div class="grid-cols-6 gap-2 md:grid mt-4">
+			<div class="py-1 px-2 md:hidden">
+				<label for="cc_sender"
+					   class="text-base font-medium text-left text-gray-800">{L_CC_SENDER}{L_COLON}</label>
+			</div>
+			<div class="hidden md:block col-span-2 text-right py-1.5">
+				<label for="cc_sender" class="text-base text-right text-gray-700 font-medium">{L_CC_SENDER}{L_COLON}</label>
+			</div>
+			<div class="col-span-3 px-2 md:px-4">
+				<input type="checkbox" name="cc_sender" id="cc_sender" value="1"
+					   checked="checked" tabindex="5"/>
+			</div>
+		</div>
+		<!-- ENDIF -->
+	</fieldset>
+
+	<div class="space-x-1 mx-auto text-center my-4">
+		<input type="submit" name="submit" class="button" value="{L_SEND_EMAIL}"/>
+		{S_FORM_TOKEN}
+	</div>
+</form>
+
+<!-- INCLUDE overall_footer.html -->

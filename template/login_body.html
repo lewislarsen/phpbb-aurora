@@ -1,0 +1,101 @@
+<!-- INCLUDE overall_header.html -->
+
+<form action="{S_LOGIN_ACTION}" method="post" id="login" data-focus="<!-- IF S_ADMIN_AUTH -->{PASSWORD_CREDENTIAL}<!-- ELSE -->{USERNAME_CREDENTIAL}<!-- ENDIF -->">
+		<h2 class="mb-1 text-2xl font-medium">
+			<!-- IF LOGIN_EXPLAIN -->
+			{LOGIN_EXPLAIN}
+			<!-- ELSE -->
+			{L_LOGIN}
+			<!-- ENDIF -->
+		</h2>
+
+		<fieldset <!-- IF not S_CONFIRM_CODE -->class="fields1"<!-- ELSE -->class="fields2"<!-- ENDIF -->>
+
+		<!-- IF LOGIN_ERROR -->
+	<div class="max-w-3xl mx-auto mt-3">
+		<div class="rounded-lg bg-red-50 text-red-600 border border-red-100 font-medium py-2 px-3 text-center">
+			{LOGIN_ERROR}
+		</div>
+	</div>
+	<!-- ENDIF -->
+		<div class="mt-8">
+			<div class="grid-cols-6 gap-2 md:grid">
+				<div class="py-1 px-2 md:hidden">
+					<label for="{USERNAME_CREDENTIAL}"
+						   class="text-base font-medium text-left text-gray-800">{L_USERNAME}{L_COLON}</label>
+				</div>
+				<div class="hidden md:block col-span-2 text-right py-1.5">
+					<label for="{USERNAME_CREDENTIAL}" class="text-base text-right text-gray-700 font-medium">{L_USERNAME}{L_COLON}</label>
+				</div>
+				<div class="col-span-3 px-2 md:px-4">
+					<input type="text" name="{USERNAME_CREDENTIAL}" id="{USERNAME_CREDENTIAL}" value="{USERNAME}" class="input">{REPORT_TEXT}</input>
+				</div>
+			</div>
+			<div class="grid-cols-6 gap-2 md:grid mt-4">
+				<div class="py-1 px-2 md:hidden">
+					<label for="{PASSWORD_CREDENTIAL}"
+						   class="text-base font-medium text-left text-gray-800">{L_PASSWORD}{L_COLON}</label>
+				</div>
+				<div class="hidden md:block col-span-2 text-right py-1.5">
+					<label for="{PASSWORD_CREDENTIAL}" class="text-base text-right text-gray-700 font-medium">{L_PASSWORD}{L_COLON}</label>
+				</div>
+				<div class="col-span-3 px-2 md:px-4">
+					<input type="password" name="{PASSWORD_CREDENTIAL}" id="{PASSWORD_CREDENTIAL}" class="input" autocomplete="off">{REPORT_TEXT}</input>
+					<!-- IF S_DISPLAY_FULL_LOGIN and (U_SEND_PASSWORD or U_RESEND_ACTIVATION) -->
+					<!-- IF U_SEND_PASSWORD --><a class="text-sm block" href="{U_SEND_PASSWORD}">{L_FORGOT_PASS}</a><!-- ENDIF -->
+					<!-- IF U_RESEND_ACTIVATION --><a class="text-sm block" href="{U_RESEND_ACTIVATION}">{L_RESEND_ACTIVATION}</a><!-- ENDIF -->
+					<!-- ENDIF -->
+				</div>
+			</div>
+		</div>
+		<!-- IF CAPTCHA_TEMPLATE and S_CONFIRM_CODE -->
+			<!-- DEFINE $CAPTCHA_TAB_INDEX = 3 -->
+			<!-- INCLUDE {CAPTCHA_TEMPLATE} -->
+		<!-- ENDIF -->
+		<!-- IF S_DISPLAY_FULL_LOGIN -->
+		<div>
+			<!-- IF S_AUTOLOGIN_ENABLED -->
+			<div class="grid-cols-6 gap-2 md:grid">
+				<div class="py-1 px-2 md:hidden">
+					<label for="autologin"
+						   class="text-base font-medium text-left text-gray-800">{L_LOG_ME_IN}{L_COLON}</label>
+				</div>
+				<div class="hidden md:block col-span-2 text-right py-1.5">
+					<label for="autologin" class="text-base text-right text-gray-700 font-medium">{L_LOG_ME_IN}{L_COLON}</label>
+				</div>
+				<div class="col-span-3 px-2 md:px-4 flex align-middle items-center">
+					<input type="checkbox" name="autologin" id="autologin" class="checkbox-input" tabindex="4" />
+				</div>
+			</div>
+			<!-- ENDIF -->
+			<div class="grid-cols-6 gap-2 md:grid">
+				<div class="py-1 px-2 md:hidden">
+					<label for="viewonline"
+						   class="text-base font-medium text-left text-gray-800">{L_HIDE_ME}{L_COLON}</label>
+				</div>
+				<div class="hidden md:block col-span-2 text-right py-1.5">
+					<label for="viewonline" class="text-base text-right text-gray-700 font-medium">{L_HIDE_ME}{L_COLON}</label>
+				</div>
+				<div class="col-span-3 px-2 md:px-4 flex align-middle items-center">
+					<input type="checkbox" class="checkbox-input" name="viewonline" id="viewonline" tabindex="4" />
+				</div>
+			</div>
+		</div>
+		<!-- ENDIF -->
+
+		{S_LOGIN_REDIRECT}
+		{S_FORM_TOKEN_LOGIN}
+	<div class="space-x-1 mx-auto text-center my-4">
+		{S_HIDDEN_FIELDS}
+		<input type="submit" name="login" class="button" value="{L_LOGIN}" />
+	</div>
+
+		</fieldset>
+
+
+	<!-- IF not S_ADMIN_AUTH and PROVIDER_TEMPLATE_FILE -->
+		<!-- INCLUDE {PROVIDER_TEMPLATE_FILE} -->
+	<!-- ENDIF -->
+</form>
+
+<!-- INCLUDE overall_footer.html -->

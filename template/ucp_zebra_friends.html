@@ -1,0 +1,82 @@
+<!-- INCLUDE ucp_header.html -->
+<div class="flex-grow w-full md:w-4/5">
+	<div class="px-6 py-3 mb-3 ml-5 bg-white rounded-md border border-gray-200 shadow">
+		<form id="ucp" method="post" action="{S_UCP_ACTION}" {S_FORM_ENCTYPE}>
+
+			<h3 class="my-3 text-xl font-medium text-gray-800">{L_TITLE}</h3>
+
+			<p class="text-sm text-gray-700 max-w-3xl mx-auto text-left pb-2.5 border-b border-gray-100">
+				{L_FRIENDS_EXPLAIN}</p>
+
+			<!-- IF ERROR -->
+			<div class="mx-auto my-3 max-w-3xl">
+				<div class="px-3 py-2 font-medium text-center text-red-600 bg-red-50 rounded-lg border border-red-100">
+					{ERROR}
+				</div>
+			</div>
+			<!-- ENDIF -->
+
+			<!-- EVENT ucp_friend_list_before -->
+
+			<!-- IF S_USERNAME_OPTIONS -->
+			<div class="grid-cols-6 gap-2 mt-4 md:grid">
+				<div class="px-2 py-1 md:hidden">
+					<label <!-- IF S_USERNAME_OPTIONS -->for="usernames"<!-- ENDIF -->
+					class="text-base font-medium text-left text-gray-800">{L_YOUR_FRIENDS}{L_COLON}</label>
+				</div>
+				<div class="hidden md:block col-span-2 text-right py-1.5">
+					<label <!-- IF S_USERNAME_OPTIONS -->for="usernames"<!-- ENDIF -->
+					class="text-base font-medium text-right text-gray-700">{L_YOUR_FRIENDS}{L_COLON}</label>
+				</div>
+				<div class="col-span-3 px-2 md:px-4">
+					<select name="usernames[]" id="usernames" multiple="multiple" class="overflow-scroll input"
+							size="5">{S_USERNAME_OPTIONS}</select>
+					<p class="my-1 text-sm text-gray-600">{L_YOUR_FRIENDS_EXPLAIN}</p>
+				</div>
+			</div>
+			<!-- ELSE -->
+			<div class="my-4 text-center text-gray-600">
+				<svg class="inline w-14 h-14" xmlns="http://www.w3.org/2000/svg" width="24" height="24"
+					 viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round"
+					 stroke-linejoin="round" display="block" id="PeopleMultiple">
+					<circle cx="7" cy="5" r="3"></circle>
+					<path d="M10 12H5.898a3 3 0 0 0-2.976 2.628l-.641 5.124A2 2 0 0 0 4.266 22H9"></path>
+					<path d="M21.719 19.752l-.64-5.124A3 3 0 0 0 18.101 12h-2.204a3 3 0 0 0-2.976 2.628l-.641 5.124A2 2 0 0 0 14.266 22h5.468a2 2 0 0 0 1.985-2.248z"></path>
+					<circle cx="17" cy="5" r="3"></circle>
+				</svg>
+				<p class="my-2 text-lg font-bold text-center">{L_NO_FRIENDS}.</p>
+			</div>
+			<!-- ENDIF -->
+
+			<div class="mx-auto my-2 max-w-xl border-b border-gray-100"></div>
+
+			<!-- EVENT ucp_friend_list_after -->
+			<div class="grid-cols-6 gap-2 mt-4 md:grid">
+				<div class="px-2 py-1 md:hidden">
+					<label for="add"
+						   class="text-base font-medium text-left text-gray-800">{L_ADD_FRIENDS}{L_COLON}</label>
+				</div>
+				<div class="hidden md:block col-span-2 text-right py-1.5">
+					<label for="add"
+						   class="text-base font-medium text-right text-gray-700">{L_ADD_FRIENDS}{L_COLON}</label>
+				</div>
+				<div class="col-span-3 px-2 md:px-4">
+					<textarea name="add" id="add" rows="3" cols="30" class="input">{USERNAMES}</textarea>
+					<p class="my-1 text-sm text-gray-600">{L_ADD_FRIENDS_EXPLAIN}</p>
+					<a class="block my-1 text-sm" href="{U_FIND_USERNAME}"
+					   onclick="find_username(this.href); return false;">{L_FIND_USERNAME}</a>
+				</div>
+			</div>
+
+			<div class="mx-auto my-4 text-center">
+				<div class="space-x-1">
+					{S_HIDDEN_FIELDS}
+					<input type="submit" name="submit" value="{L_SUBMIT}" class="button"/>
+					{S_FORM_TOKEN}
+				</div>
+			</div>
+		</form>
+	</div>
+</div>
+
+<!-- INCLUDE ucp_footer.html -->

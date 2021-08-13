@@ -1,0 +1,184 @@
+<!-- IF S_IN_SEARCH_POPUP -->
+<!-- INCLUDE simple_header.html -->
+<!-- INCLUDE memberlist_search.html -->
+<form method="post" id="results" action="{S_MODE_ACTION}"
+	  onsubmit="insert_marked_users('#results', this.user); return false;" data-form-name="{S_FORM_NAME}"
+	  data-field-name="{S_FIELD_NAME}">
+
+	<!-- ELSE -->
+	<!-- INCLUDE overall_header.html -->
+	<div class="px-4 py-3 my-4 bg-gray-50 rounded-md border border-gray-200 shadow-sm" id="memberlist_search"
+	<!-- IF not S_SEARCH_USER --> style="display: none;"<!-- ENDIF --> >
+	<!-- INCLUDE memberlist_search.html -->
+	</div>
+	<form method="post" action="{S_MODE_ACTION}">
+
+		<!-- ENDIF -->
+
+		{% EVENT memberlist_body_page_header_after %}
+
+		<!-- IF S_SHOW_GROUP -->
+		{% EVENT memberlist_body_group_name_before %}
+		<h2 class="mb-1 text-2xl font-medium" title="{GROUP_NAME}"<!-- IF GROUP_COLOR --> style="color:#{GROUP_COLOR};"<!-- ENDIF --> >{GROUP_NAME}</h2>
+		{% EVENT memberlist_body_group_name_after %}
+		<!-- IF U_MANAGE -->
+		<p class="right responsive-center manage rightside"><a class="button" href="{U_MANAGE}" title="{L_MANAGE_GROUP}">{L_MANAGE_GROUP}</a></p>
+		<!-- ENDIF -->
+		<p class="font-medium">{GROUP_DESC}</p>
+
+		{% EVENT memberlist_body_group_desc_after %}
+
+		<p>
+			<!-- IF AVATAR_IMG -->
+			{AVATAR_IMG}
+			<!-- ENDIF -->
+			{% EVENT memberlist_body_group_rank_before %}
+			{% if RANK_IMG %}{{ RANK_IMG }}{% endif %}
+			{% if GROUP_RANK %}
+			{% if not RANK_IMG %}
+			<span class="text-sm">{{ lang('GROUP_RANK') ~ lang('COLON') }}</span>
+			{% endif %}
+			<span class="text-sm">{{ GROUP_RANK }}</span>
+			{% endif %}
+			{% EVENT memberlist_body_group_rank_after %}
+		</p>
+		<p class="text-xs my-1">{GROUP_TYPE}</p>
+		<!-- ELSE -->
+		{% EVENT memberlist_body_page_title_before %}
+		<h2 class="mb-1 text-2xl font-medium">
+			{PAGE_TITLE}
+			<!-- IF SEARCH_WORDS -->
+			{L_COLON}
+			<a href="{U_SEARCH_WORDS}">{SEARCH_WORDS}</a>
+			<!-- ENDIF -->
+		</h2>
+
+		<div class="flex justify-between items-center text-xs align-middle">
+			<div class="space-x-1">
+				<div class="inline px-2 py-1 text-xs font-medium text-gray-800 uppercase bg-gray-50 rounded-md border border-gray-200 text-wide">
+					{TOTAL_USERS}
+				</div>
+				<!-- IF .pagination -->
+				<!-- INCLUDE pagination.html -->
+				<!-- ELSE -->
+				<div class="inline px-2 py-1 text-xs font-medium text-gray-800 uppercase bg-gray-50 rounded-md border border-gray-200 text-wide">
+					{PAGE_NUMBER}
+				</div>
+				<!-- ENDIF -->
+			</div>
+			<div>
+				<div>
+					<!-- IF U_FIND_MEMBER and not S_SEARCH_USER -->
+					<a href="{U_FIND_MEMBER}" id="member_search" data-alt-text="{L_HIDE_MEMBER_SEARCH}"
+					   class="button button-secondary" title="{L_SEARCH}">
+						<svg class="inline -mt-1 w-4 h-4" xmlns="http://www.w3.org/2000/svg" width="24" height="24"
+							 viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"
+							 stroke-linecap="round" stroke-linejoin="round" display="block" id="Search">
+							<path d="M21 21l-4.486-4.494M19 10.5a8.5 8.5 0 1 1-17 0 8.5 8.5 0 0 1 17 0z"></path>
+						</svg>
+					</a>
+					<!-- ELSEIF S_SEARCH_USER and U_HIDE_FIND_MEMBER and not S_IN_SEARCH_POPUP -->
+					<a href="{U_HIDE_FIND_MEMBER}" id="member_search" data-alt-text="{L_FIND_USERNAME}"
+					   class="button button-secondary">{L_HIDE_MEMBER_SEARCH}</a>
+					<!-- ENDIF -->
+					<span class="font-bold">
+				</span>
+				</div>
+			</div>
+		</div>
+		<!-- ENDIF -->
+
+				<!-- IF S_LEADERS_SET or not S_SHOW_GROUP -->
+				<div class="my-2 rounded border border-gray-200 shadow-sm">
+					<div class="grid overflow-hidden grid-cols-2 gap-4 px-3 py-2 text-sm text-gray-800 bg-gray-100 border-b border-gray-100 md:grid-cols-4">
+						{% EVENT memberlist_body_memberlist_after %}
+						<div>
+							<a href="{U_SORT_USERNAME}" class="text-gray-800 hover:text-gray-600" title="{L_USERNAME}">
+								{L_USERNAME}
+							</a>
+						</div>
+						<div class="hidden md:block">
+							<a href="{U_SORT_POSTS}#memberlist" class="text-gray-800 hover:text-gray-600"
+							   title="{L_POSTS}">{L_POSTS}</a>
+						</div>
+						<div>
+							<a href="{U_SORT_JOINED}#memberlist" class="text-gray-800 hover:text-gray-600"
+							   title="{L_JOINED}">{L_JOINED}</a>
+						</div>
+						<div class="hidden md:block">
+							<a href="{U_SORT_ACTIVE}#memberlist" class="text-gray-800 hover:text-gray-600"
+							   title="{L_LAST_ACTIVE}">{L_LAST_ACTIVE}</a>
+						</div>
+					</div>
+
+					<div class="grid grid-cols-2 gap-4 px-3 py-3 border-t border-gray-100 transition duration-200 ease-in-out md:grid-cols-4 hover:bg-gray-50">
+
+						<!-- BEGIN memberrow -->
+						<!-- IF S_SHOW_GROUP -->
+						<!-- IF not memberrow.S_GROUP_LEADER and not $S_MEMBER_HEADER -->
+
+						<!-- DEFINE $S_MEMBER_HEADER = 1 -->
+						<!-- ENDIF -->
+						<!-- ENDIF -->
+
+						<div class="col-span-1 flex items-center">
+							<!-- EVENT memberlist_body_username_prepend -->
+							{memberrow.USERNAME_FULL}
+							<!-- EVENT memberlist_body_username_append -->
+							<!-- IF S_IN_SEARCH_POPUP --><br/>[&nbsp;<a
+									href="#"
+									onclick="insert_single_user('#results', '{memberrow.A_USERNAME}'); return false;">{L_SELECT}</a>&nbsp;]
+							<!-- ENDIF -->
+						</div>
+
+						<div class="hidden col-span-1 md:flex items-center">
+							<!-- IF memberrow.POSTS and S_DISPLAY_SEARCH --><a
+								href="{memberrow.U_SEARCH_USER}" title="{L_SEARCH_USER_POSTS}">{memberrow.POSTS}</a>
+							<!-- ELSE -->{memberrow.POSTS}<!-- ENDIF --></div>
+
+						<div class="flex col-span-1 items-center">{memberrow.JOINED}</div>
+
+						<!-- IF S_VIEWONLINE -->
+						<div class="hidden col-span-1 md:flex items-center">{memberrow.LAST_ACTIVE}&nbsp;</div><!-- ENDIF -->
+
+						{% EVENT memberlist_body_memberrow_after %}
+
+						<!-- BEGINELSE -->
+						test
+							<div class="col-span-4 text-center">{L_NO_MEMBERS}</div>
+						<!-- END memberrow -->
+					</div>
+				</div>
+				<!-- ENDIF -->
+
+		<!-- IF S_IN_SEARCH_POPUP and not S_SELECT_SINGLE -->
+		<fieldset class="display-actions">
+			<input type="submit" name="submit" value="{L_SELECT_MARKED}" class="button2"/>
+			<div><a href="#" onclick="marklist('results', 'user', true); return false;">{L_MARK_ALL}</a> &bull; <a
+					href="#" onclick="marklist('results', 'user', false); return false;">{L_UNMARK_ALL}</a></div>
+		</fieldset>
+		<!-- ENDIF -->
+
+		<!-- IF S_IN_SEARCH_POPUP -->
+	</form>
+	<form method="post" id="sort-results" action="{S_MODE_ACTION}">
+		<!-- ENDIF -->
+
+		<!-- IF S_IN_SEARCH_POPUP and not S_SEARCH_USER -->
+		<fieldset class="display-options">
+			<label for="sk">{L_SELECT_SORT_METHOD}{L_COLON} <select name="sk" id="sk">{S_MODE_SELECT}</select></label>
+			<label for="sd">{L_ORDER} <select name="sd" id="sd">{S_ORDER_SELECT}</select></label>
+			<input type="submit" name="sort" value="{L_SUBMIT}" class="button2"/>
+		</fieldset>
+		<!-- ENDIF -->
+
+	</form>
+
+	{% EVENT memberlist_body_page_footer_before %}
+
+	<!-- IF S_IN_SEARCH_POPUP -->
+	<!-- INCLUDE simple_footer.html -->
+	<!-- ELSE -->
+	<!-- INCLUDE overall_footer.html -->
+	<!-- ENDIF -->
+</form>

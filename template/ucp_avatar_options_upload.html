@@ -1,0 +1,21 @@
+<dl class="my-1">
+	<dt>
+		<label for="avatar_upload_file">{L_UPLOAD_AVATAR_FILE}{L_COLON}</label>
+	</dt>
+	<dd>
+		<input type="hidden" name="MAX_FILE_SIZE" value="{AVATAR_UPLOAD_SIZE}" />
+		<input type="file" name="avatar_upload_file" id="avatar_upload_file" class="input my-1" accept="{{ AVATAR_ALLOWED_EXTENSIONS }}" />
+	</dd>
+</dl>
+
+<!-- IF S_UPLOAD_AVATAR_URL -->
+	<dl class="my-1">
+		<dt>
+			<label for="avatar_upload_url">{L_UPLOAD_AVATAR_URL}{L_COLON}</label>
+		</dt>
+		<dd>
+			<input type="url" name="avatar_upload_url" id="avatar_upload_url" value="" class="input my-1" />
+			<p class="text-sm text-gray-600">{L_UPLOAD_AVATAR_URL_EXPLAIN}</p>
+		</dd>
+	</dl>
+<!-- ENDIF -->

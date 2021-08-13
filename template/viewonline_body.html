@@ -1,0 +1,111 @@
+<!-- INCLUDE overall_header.html -->
+
+<h2 class="mb-1 text-2xl font-medium">{L_WHO_IS_ONLINE}</h2>
+
+<div class="text-gray-700">
+	<p>{TOTAL_REGISTERED_USERS_ONLINE}</p>
+	<p>{TOTAL_GUEST_USERS_ONLINE}</p>
+</div>
+
+<div class="flex justify-between items-center">
+	<div>
+		<!-- IF .pagination -->
+		<!-- INCLUDE pagination.html -->
+		<!-- ELSE -->
+		<span class="text-sm">{PAGE_NUMBER}</span>
+		<!-- ENDIF -->
+	</div>
+	<div>
+		<!-- IF S_SWITCH_GUEST_DISPLAY -->
+		<a href="{U_SWITCH_GUEST_DISPLAY}" class="button button-secondary" title="{L_SWITCH_GUEST_DISPLAY}">{L_SWITCH_GUEST_DISPLAY}</a>
+		<!-- ENDIF -->
+	</div>
+</div>
+
+
+<!-- IF .user_row -->
+
+<div class="grid grid-cols-4 md:grid-cols-12 gap-4 my-6">
+	<!-- BEGIN user_row -->
+	<div class="col-span-4 text-center">
+		<div class="flex justify-between items-center align-middle">
+			<div class="flex-none p-2 ml-2">
+				{% if MAS_VO_PG_AVATAR %}
+				<div class="who_is_online_avatar avatar">
+					{% if user_row.AVATAR_IMG %}
+					{{ user_row.AVATAR_IMG }}
+					{% else %}
+					<img src="{T_THEME_PATH}/images/no_avatar.gif" alt="" class="avatar who_is_online_avatar w-full"/>
+					{% endif %}
+				</div>
+				{% endif %}
+			</div>
+
+			<div class="flex-1 text-left">
+				<div>
+					<span class="font-medium">{user_row.USERNAME_FULL}</span>
+					<!-- IF user_row.USER_IP -->
+					<span class="text-xs ml-0.5">({user_row.USER_IP})</span>
+					<!-- ENDIF -->
+				</div>
+				<p class="text-sm">
+					<a href="{user_row.U_FORUM_LOCATION}">
+						{user_row.FORUM_LOCATION}
+					</a>
+					<!-- IF user_row.USER_BROWSER -->
+					<span title="{user_row.USER_BROWSER}">
+						<svg class="w-4 h-4 inline" xmlns="http://www.w3.org/2000/svg" width="24" height="24"
+							 viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"
+							 stroke-linecap="round" stroke-linejoin="round" display="block" id="Info"><circle cx="12"
+																											  cy="12"
+																											  r="10"/><path
+								d="M12 7h.01"/><path d="M10 11h2v5"/><path d="M10 16h4"/></svg>
+					</span>
+					<!-- ENDIF -->
+				</p>
+				<p class="text-gray-600 text-sm">
+					{user_row.LASTUPDATE}
+				</p>
+			</div>
+		</div>
+	</div>
+	<!-- END user_row -->
+</div>
+
+<!-- ELSE -->
+<div class="text-center my-4 text-gray-600">
+	<svg class="h-14 w-14 inline" xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24"
+		 fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"
+		 display="block" id="PeopleGroup">
+		<path d="M16.719 19.752l-.64-5.124A3 3 0 0 0 13.101 12h-2.204a3 3 0 0 0-2.976 2.628l-.641 5.124A2 2 0 0 0 9.266 22h5.468a2 2 0 0 0 1.985-2.248z"/>
+		<circle cx="12" cy="5" r="3"/>
+		<circle cx="4" cy="9" r="2"/>
+		<circle cx="20" cy="9" r="2"/>
+		<path d="M4 14h-.306a2 2 0 0 0-1.973 1.671l-.333 2A2 2 0 0 0 3.361 20H7"/>
+		<path d="M20 14h.306a2 2 0 0 1 1.973 1.671l.333 2A2 2 0 0 1 20.639 20H17"/>
+	</svg>
+	<p class="my-2 font-bold text-center text-lg">{L_NO_ONLINE_USERS}</p>
+</div>
+<!-- ENDIF -->
+
+
+<!-- IF LEGEND -->
+<div class="border-b border-gray-100 my-2 max-w-xl mx-auto"></div>
+<p class="text-sm">{L_LEGEND}{L_COLON} {LEGEND}</p>
+<!-- ENDIF -->
+
+<div class="flex justify-between items-center my-4">
+	<div>
+		<!-- IF .pagination -->
+		<!-- INCLUDE pagination.html -->
+		<!-- ELSE -->
+		<span class="text-sm">{PAGE_NUMBER}</span>
+		<!-- ENDIF -->
+	</div>
+	<div>
+		<!-- IF S_SWITCH_GUEST_DISPLAY -->
+		<a href="{U_SWITCH_GUEST_DISPLAY}" class="button button-secondary" title="{L_SWITCH_GUEST_DISPLAY}">{L_SWITCH_GUEST_DISPLAY}</a>
+		<!-- ENDIF -->
+	</div>
+</div>
+<!-- INCLUDE overall_footer.html -->

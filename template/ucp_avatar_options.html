@@ -1,0 +1,62 @@
+<!-- IF not S_AVATARS_ENABLED -->
+<p>{L_AVATAR_FEATURES_DISABLED}</p>
+<!-- ENDIF -->
+
+<!-- IF ERROR -->
+<div class="max-w-3xl mx-auto my-3">
+	<div class="rounded-lg bg-red-50 text-red-600 border border-red-100 font-medium py-2 px-3 text-center">
+		{ERROR}
+	</div>
+</div>
+<!-- ENDIF -->
+
+<div class="md:flex justify-between items-center align-middle md:flex">
+
+	<div class="flex-none p-2 ml-2">
+		<!-- IF AVATAR -->
+		<div class="w-28 h-28 mx-auto">{AVATAR}</div>
+		<!-- ELSE -->
+		<img src="{T_THEME_PATH}/images/no_avatar.gif" alt="" class="avatar"/>
+		<!-- ENDIF -->
+	</div>
+
+	<div class="flex-1 text-left px-8">
+		<div>
+			<dl class="my-2">
+				<dt><label>{L_AVATAR_TYPE}{L_COLON}</label></dt>
+				<dd><select name="avatar_driver" id="avatar_driver" data-togglable-settings="true" class="input my-1">
+					<!-- BEGIN avatar_drivers -->
+					<option value="{avatar_drivers.DRIVER}"<!-- IF avatar_drivers.SELECTED --> selected="selected"<!-- ENDIF -->
+					data-toggle-setting="#avatar_option_{avatar_drivers.DRIVER}">{avatar_drivers.L_TITLE}</option>
+					<!-- END avatar_drivers -->
+				</select></dd>
+			</dl>
+
+			<label for="avatar_delete"><input type="checkbox"  name="avatar_delete" id="avatar_delete" class="mr-1 checkbox-input"/>{L_DELETE_AVATAR}</label>
+
+			<div class="border-b border-gray-100 my-2 max-w-xl mx-auto"></div>
+			<div id="avatar_options">
+				<!-- BEGIN avatar_drivers -->
+				<div id="avatar_option_{avatar_drivers.DRIVER}">
+					<noscript>
+						<h3 class="font-medium my-1 text-gray-800">{avatar_drivers.L_TITLE}</h3>
+					</noscript>
+					<fieldset>
+						{avatar_drivers.OUTPUT}
+					</fieldset>
+				</div>
+				<!-- END avatar_drivers -->
+			</div>
+			<p class="text-sm text-gray-800 text-center font-medium">{L_AVATAR_EXPLAIN}</p>
+		</div>
+	</div>
+
+</div>
+
+<!-- IF not S_GROUP_MANAGE -->
+<div class="mx-auto my-4 text-center">
+	<div class="space-x-1">
+		<input type="submit" name="submit" value="{L_SUBMIT}" class="button"/>
+	</div>
+</div>
+<!-- ENDIF -->

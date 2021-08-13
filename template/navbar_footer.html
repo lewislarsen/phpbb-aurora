@@ -1,0 +1,51 @@
+<div class="mx-auto max-w-6xl">
+	<div class="md:flex justify-between items-center align-middle">
+		<div class="px-2 py-2 md:py-3 text-center md:text-left">
+			<span>{{ CREDIT_LINE }}</span>
+			<!-- IF TRANSLATION_INFO -->
+			<p>
+				<span>{{ TRANSLATION_INFO }}</span>
+			</p>
+			<!-- ENDIF -->
+			<!-- EVENT overall_footer_copyright_append -->
+			<!-- IF DEBUG_OUTPUT -->
+			<p>
+				<span>{{ DEBUG_OUTPUT }}</span>
+			</p>
+			<!-- ENDIF -->
+			<!-- IF U_ACP -->
+			<p>
+				<a class="font-bold text-center text-xs md:my-1" href="{{ U_ACP }}">{{ lang('ACP') }}</a>
+			</p>
+			<!-- ENDIF -->
+		</div>
+		<div>
+			<div class="px-2 md:py-3 mx-auto space-x-2 text-center">
+				<!-- EVENT index_body_markforums_before -->
+				<!-- IF U_MARK_FORUMS -->
+				<div class="md:flex justify-end my-2 text-center md:text-left">
+					<a href="{U_MARK_FORUMS}" class="button button-secondary" accesskey="m" data-ajax="mark_forums_read">{L_MARK_FORUMS_READ}</a>
+				</div>
+				<!-- ENDIF -->
+				<!-- EVENT index_body_markforums_after -->
+				<a href="{{ INDEX }}" title="{{ lang('Home') }}">
+					<span>{{ lang('Home') }}</span>
+				</a>
+				<a href="{{ U_PRIVACY }}" title="{{ lang('PRIVACY_LINK') }}">
+					<span>{{ lang('PRIVACY_LINK') }}</span>
+				</a>
+				<a href="{{ U_TERMS_USE }}" title="{{ lang('TERMS_LINK') }}">
+					<span>{{ lang('TERMS_LINK') }}</span>
+				</a>
+				<!-- IF U_CONTACT_US -->
+				<a href="{U_CONTACT_US}" title="{L_CONTACT_US}">
+					<span>{L_CONTACT_US}</span>
+				</a>
+				<!-- ENDIF -->
+				<p class="text-xs text-gray-500 font-medium my-2">
+					<!-- IF S_USER_LOGGED_IN -->{LAST_VISIT_DATE}<!-- ELSE --> {CURRENT_TIME}<!-- ENDIF -->
+				</p>
+			</div>
+		</div>
+	</div>
+</div>

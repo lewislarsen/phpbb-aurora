@@ -1,0 +1,209 @@
+<!-- INCLUDE ucp_header.html -->
+<div class="flex-grow w-full md:w-4/5">
+	<div class="px-6 py-3 mb-3 ml-5 bg-white rounded-md border border-gray-200 shadow">
+
+		<h3 class="my-3 text-xl font-medium text-gray-800">{L_USERGROUPS}</h3>
+
+		<form id="ucp" method="post" action="{S_UCP_ACTION}" {S_FORM_ENCTYPE}>
+
+			<p class="text-sm text-gray-700 max-w-3xl mx-auto text-left pb-2.5 border-b border-gray-100">
+				{L_GROUPS_EXPLAIN}</p>
+
+			<div class="my-2 rounded border border-gray-200 shadow-sm">
+				<div class="grid overflow-hidden grid-cols-4 gap-4 px-3 py-2 text-sm text-gray-800 bg-gray-50 border-b border-gray-100 md:grid-cols-12">
+					<div class="col-span-3 md:col-span-8">
+						{L_USERGROUPS}
+					</div>
+				</div>
+				<!-- DEFINE $SHOW_BUTTONS = 0 -->
+				<!-- IF .leader -->
+				<div class="grid grid-cols-4 border-t border-gray-100 transition duration-200 ease-in-out md:grid-cols-12 hover:bg-gray-50 text-gray-600">
+					<div class="col-span-3 px-3 py-1 text-left bg-gray-100 border-t border-b border-gray-200 md:col-span-10">
+						{L_GROUP_LEADER}
+					</div>
+					<div class="flex col-span-1 items-center px-3 py-1 bg-gray-100 border-t border-b border-gray-200 md:col-span-2">
+						{L_SELECT}
+					</div>
+				</div>
+				<!-- BEGIN leader -->
+				<!-- IF not leader.GROUP_SPECIAL -->
+				<!-- DEFINE $SHOW_BUTTONS = 1 -->
+				<!-- ENDIF -->
+				<div class="grid grid-cols-4 border-t border-gray-100 transition duration-200 ease-in-out md:grid-cols-12 hover:bg-gray-50">
+					<div class="col-span-3 px-3 py-2 md:col-span-10">
+						<!-- IF S_CHANGE_DEFAULT -->
+						<input title="{L_CHANGE_DEFAULT_GROUP}" type="radio" class="mr-2 radio-input" name="default"
+						<!-- IF leader.S_GROUP_DEFAULT -->checked="checked"<!-- ENDIF --> value="{leader.GROUP_ID}" />
+						<!-- ENDIF -->
+						<a href="{leader.U_VIEW_GROUP}"
+						   class="text-lg font-medium transition duration-200 ease-in-out hover:opacity-75"
+						<!-- IF leader.GROUP_COLOUR -->style="color:#{leader.GROUP_COLOUR}"<!-- ENDIF -->
+						>{leader.GROUP_NAME}</a>
+						<!-- IF not leader.GROUP_SPECIAL -->
+						<p class="my-1 ml-6 text-xs text-gray-600 md:text-sm">{leader.GROUP_STATUS}</p>
+						<!-- ENDIF -->
+						<!-- IF leader.GROUP_DESC -->
+						<p class="my-1 ml-6 text-xs text-gray-600 md:text-sm">{leader.GROUP_DESC}</p>
+						<!-- ENDIF -->
+					</div>
+					<div class="flex col-span-1 items-center px-3 py-2 md:col-span-2">
+						<input type="radio" name="selected" value="{leader.GROUP_ID}" class="radio-input"
+						<!-- IF leader.GROUP_SPECIAL -->disabled="disabled"<!-- ENDIF --> />
+					</div>
+				</div>
+				<!-- END leader -->
+				<!-- ENDIF -->
+
+				<!-- IF .member -->
+				<div class="grid grid-cols-4 border-t border-gray-100 transition duration-200 ease-in-out md:grid-cols-12 hover:bg-gray-50 text-gray-600">
+					<div class="col-span-3 px-3 py-1 text-left bg-gray-100 border-t border-b border-gray-200 md:col-span-10">
+						{L_GROUP_MEMBER}
+					</div>
+					<div class="flex col-span-1 items-center px-3 py-1 bg-gray-100 border-t border-b border-gray-200 md:col-span-2">
+						{L_SELECT}
+					</div>
+				</div>
+				<!-- BEGIN member -->
+				<!-- IF not member.GROUP_SPECIAL -->
+				<!-- DEFINE $SHOW_BUTTONS = 1 -->
+				<!-- ENDIF -->
+				<div class="grid grid-cols-4 border-t border-gray-100 transition duration-200 ease-in-out md:grid-cols-12 hover:bg-gray-50">
+					<div class="col-span-3 px-3 py-2 md:col-span-10">
+						<!-- IF S_CHANGE_DEFAULT -->
+						<input title="{L_CHANGE_DEFAULT_GROUP}" type="radio" class="mr-2 radio-input" name="default"
+						<!-- IF member.S_GROUP_DEFAULT -->checked="checked"<!-- ENDIF --> value="{member.GROUP_ID}" />
+						<!-- ENDIF -->
+						<a href="{member.U_VIEW_GROUP}"
+						   class="text-lg font-medium transition duration-200 ease-in-out hover:opacity-75"
+						<!-- IF member.GROUP_COLOUR -->style="color:#{member.GROUP_COLOUR}"<!-- ENDIF -->
+						>{member.GROUP_NAME}</a>
+						<!-- IF not member.GROUP_SPECIAL -->
+						<p class="my-1 ml-6 text-xs text-gray-600 md:text-sm">{member.GROUP_STATUS}</p>
+						<!-- ENDIF -->
+						<!-- IF member.GROUP_DESC -->
+						<p class="my-1 ml-6 text-xs text-gray-600 md:text-sm">{member.GROUP_DESC}</p>
+						<!-- ENDIF -->
+					</div>
+					<div class="flex col-span-1 items-center px-3 py-2 md:col-span-2">
+						<input type="radio" name="selected" value="{member.GROUP_ID}" class="radio-input"
+						<!-- IF member.GROUP_SPECIAL -->disabled="disabled"<!-- ENDIF --> />
+					</div>
+				</div>
+				<!-- END member -->
+				<!-- ENDIF -->
+			</div>
+
+			<!-- IF .pending -->
+			<div class="my-4 rounded border border-gray-200 shadow-sm">
+				<div class="grid overflow-hidden grid-cols-4 gap-4 px-3 py-2 text-sm text-gray-800 bg-gray-50 border-b border-gray-100 md:grid-cols-12">
+					<div class="col-span-3 md:col-span-8">
+						{L_USERGROUPS}
+					</div>
+				</div>
+				<div class="grid grid-cols-4 border-t border-gray-100 transition duration-200 ease-in-out md:grid-cols-12 hover:bg-gray-50">
+					<div class="col-span-3 px-3 py-1 text-left bg-gray-100 border-t border-b border-gray-200 md:col-span-10">
+						{L_GROUP_PENDING}
+					</div>
+					<div class="flex col-span-1 items-center px-3 py-1 bg-gray-100 border-t border-b border-gray-200 md:col-span-2">
+						{L_SELECT}
+					</div>
+				</div>
+				<!-- BEGIN pending -->
+				<!-- IF not pending.GROUP_SPECIAL -->
+				<!-- DEFINE $SHOW_BUTTONS = 1 -->
+				<!-- ENDIF -->
+				<div class="grid grid-cols-4 border-t border-gray-100 transition duration-200 ease-in-out md:grid-cols-12 hover:bg-gray-50">
+					<div class="col-span-3 px-3 py-2 md:col-span-10">
+						<a href="{pending.U_VIEW_GROUP}"
+						   class="text-lg font-medium transition duration-200 ease-in-out hover:opacity-75 ml-6"
+						<!-- IF pending.GROUP_COLOUR -->style="color:#{pending.GROUP_COLOUR}"<!-- ENDIF -->
+						>{pending.GROUP_NAME}</a>
+						<!-- IF not pending.GROUP_SPECIAL -->
+						<p class="my-1 ml-6 text-xs text-gray-600 md:text-sm">{pending.GROUP_STATUS}</p>
+						<!-- ENDIF -->
+						<!-- IF pending.GROUP_DESC -->
+						<p class="my-1 ml-6 text-xs text-gray-600 md:text-sm">{pending.GROUP_DESC}</p>
+						<!-- ENDIF -->
+					</div>
+					<div class="flex col-span-1 items-center px-3 py-2 md:col-span-2">
+						<input type="radio" name="selected" value="{pending.GROUP_ID}" class="radio-input"
+						<!-- IF pending.GROUP_SPECIAL -->disabled="disabled"<!-- ENDIF --> />
+					</div>
+				</div>
+				<!-- END pending -->
+			</div>
+			<!-- ENDIF -->
+			<!-- IF .nonmember -->
+			<div class="my-4 rounded border border-gray-200 shadow-sm">
+				<div class="grid overflow-hidden grid-cols-4 gap-4 px-3 py-2 text-sm text-gray-800 bg-gray-50 border-b border-gray-100 md:grid-cols-12">
+					<div class="col-span-3 md:col-span-8">
+						{L_USERGROUPS}
+					</div>
+				</div>
+				<div class="grid grid-cols-4 border-t border-gray-100 transition duration-200 ease-in-out md:grid-cols-12 hover:bg-gray-50 text-gray-600">
+					<div class="col-span-3 px-3 py-1 text-left bg-gray-100 border-t border-b border-gray-200 md:col-span-10">
+						{L_GROUP_NONMEMBER}
+					</div>
+					<div class="flex col-span-1 items-center px-3 py-1 bg-gray-100 border-t border-b border-gray-200 md:col-span-2">
+						{L_SELECT}
+					</div>
+				</div>
+				<!-- BEGIN nonmember -->
+				<!-- IF nonmember.S_CAN_JOIN -->
+				<!-- DEFINE $SHOW_BUTTONS = 1 -->
+				<!-- ENDIF -->
+				<div class="grid grid-cols-4 border-t border-gray-100 transition duration-200 ease-in-out md:grid-cols-12 hover:bg-gray-50">
+					<div class="col-span-3 px-3 py-2 md:col-span-10">
+						<a href="{nonmember.U_VIEW_GROUP}"
+						   class="text-lg font-medium transition duration-200 ease-in-out hover:opacity-75 ml-6"
+						<!-- IF nonmember.GROUP_COLOUR -->style="color:#{nonmember.GROUP_COLOUR}"<!-- ENDIF -->
+						>{nonmember.GROUP_NAME}</a>
+						<!-- IF not nonmember.GROUP_SPECIAL -->
+						<p class="my-1 ml-6 text-xs text-gray-600 md:text-sm">{nonmember.GROUP_STATUS}</p>
+						<!-- ENDIF -->
+						<!-- IF nonmember.GROUP_DESC -->
+						<p class="my-1 ml-6 text-xs text-gray-600 md:text-sm">{nonmember.GROUP_DESC}</p>
+						<!-- ENDIF -->
+					</div>
+					<div class="flex col-span-1 items-center px-3 py-2 md:col-span-2">
+						<input type="radio" name="selected" value="{nonmember.GROUP_ID}" class="radio-input"
+						<!-- IF not nonmember.S_CAN_JOIN -->disabled="disabled"<!-- ENDIF --> />
+					</div>
+				</div>
+				<!-- END nonmember -->
+			</div>
+			<!-- ENDIF -->
+
+
+			<!-- IF S_CHANGE_DEFAULT or $SHOW_BUTTONS eq 1 -->
+			<!-- IF S_CHANGE_DEFAULT -->
+			<div class="mx-auto my-4 text-center">
+				<div class="space-x-1">
+					<input class="button" type="submit" name="change_default" value="{L_CHANGE_DEFAULT_GROUP}"/>
+					{S_FORM_TOKEN}
+				</div>
+			</div>
+			<!-- ENDIF -->
+
+			<!-- IF $SHOW_BUTTONS eq 1 -->
+			<div class="flex justify-end">
+				<div class="flex items-center">
+					<label for="action"></label>
+					<select name="action" id="action" class="input">
+						<option value="join">{L_JOIN_SELECTED}</option>
+						<option value="resign">{L_RESIGN_SELECTED}</option>
+						<option value="demote">{L_DEMOTE_SELECTED}</option>
+					</select>&nbsp;
+					<input class="button" type="submit" name="submit" value="{L_SUBMIT}"/>
+					{S_FORM_TOKEN}
+				</div>
+			</div>
+			<!-- ENDIF -->
+
+			<!-- ENDIF -->
+
+		</form>
+	</div>
+</div>
+
+<!-- INCLUDE ucp_footer.html -->

@@ -1,0 +1,421 @@
+<!-- INCLUDE overall_header.html -->
+<!-- EVENT viewforum_forum_title_before -->
+<h2 class="mb-1 text-2xl font-medium"><!-- EVENT viewforum_forum_name_prepend -->{FORUM_NAME}
+	<!-- EVENT viewforum_forum_name_append --></h2>
+<!-- EVENT viewforum_forum_title_after -->
+<!-- IF FORUM_DESC or MODERATORS or U_MCP -->
+<div>
+	<!-- NOTE: remove the style="display: none" when you want to have the forum description on the forum body -->
+	<!-- IF FORUM_DESC -->
+	<div style="display: none !important;">{FORUM_DESC}<br/></div><!-- ENDIF -->
+	<!-- IF MODERATORS --><p><strong><!-- IF S_SINGLE_MODERATOR -->{L_MODERATOR}<!-- ELSE --> {L_MODERATORS}
+	<!-- ENDIF --> {L_COLON}</strong> {MODERATORS}</p><!-- ENDIF -->
+</div>
+<!-- ENDIF -->
+
+<!-- IF S_FORUM_RULES -->
+<div class="rules<!-- IF U_FORUM_RULES --> rules-link<!-- ENDIF -->">
+	<div class="inner">
+
+		<!-- IF U_FORUM_RULES -->
+		<a href="{U_FORUM_RULES}">{L_FORUM_RULES}</a>
+		<!-- ELSE -->
+		<strong>{L_FORUM_RULES}</strong><br/>
+		{FORUM_RULES}
+		<!-- ENDIF -->
+
+	</div>
+</div>
+<!-- ENDIF -->
+
+<!-- IF S_HAS_SUBFORUM -->
+<!-- IF not S_IS_BOT and U_MARK_FORUMS -->
+<div class="flex justify-end">
+	<a href="{U_MARK_FORUMS}" class="button button-secondary"
+	   data-ajax="mark_forums_read">{L_MARK_SUBFORUMS_READ}</a>
+</div>
+<!-- ENDIF -->
+<div class="my-2">
+	<!-- INCLUDE forumlist_body.html -->
+</div>
+<!-- ENDIF -->
+
+<!-- IF S_DISPLAY_POST_INFO or .pagination or TOTAL_POSTS or TOTAL_TOPICS -->
+
+
+<div class="flex justify-between items-center align-middle">
+	<div>
+		<div class="px-2 py-1 text-xs font-medium text-gray-800 uppercase bg-gray-50 rounded-md border border-gray-200 text-wide">
+			{TOTAL_TOPICS}
+		</div>
+		<!-- IF .pagination -->
+		<!-- INCLUDE pagination.html -->
+		<!-- ENDIF -->
+	</div>
+
+	<div class="justify-end space-x-2 flex">
+		<!-- IF not S_IS_BOT and S_DISPLAY_POST_INFO -->
+		<!-- EVENT viewforum_buttons_top_before -->
+		<a href="{U_POST_NEW_TOPIC}" class="button ml-0.5"
+		   title="<!-- IF S_IS_LOCKED -->{L_FORUM_LOCKED}<!-- ELSE -->{L_POST_TOPIC}<!-- ENDIF -->">
+			<!-- IF S_IS_LOCKED -->
+			<span>{L_BUTTON_FORUM_LOCKED}</span>
+			<svg class="w-4 h-4 inline" xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24"
+				 fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"
+				 display="block" id="LockOn" data-darkreader-inline-fill="" data-darkreader-inline-stroke=""
+				 style="--darkreader-inline-fill:none; --darkreader-inline-stroke:currentColor;">
+				<rect x="3" y="10" width="18" height="12" rx="2"></rect>
+				<path d="M6 6a3 3 0 0 1 3-3h6a3 3 0 0 1 3 3v4H6V6z"></path>
+			</svg>
+			<!-- ELSE -->
+			<span>{L_BUTTON_NEW_TOPIC}</span>
+			<!-- ENDIF -->
+		</a>
+		<!-- EVENT viewforum_buttons_top_after -->
+		<!-- ENDIF -->
+	</div>
+</div>
+<!-- ENDIF -->
+
+<!-- IF S_NO_READ_ACCESS -->
+
+<div class="panel">
+	<div class="inner">
+		<strong>{L_NO_READ_ACCESS}</strong>
+	</div>
+</div>
+
+<!-- IF not S_USER_LOGGED_IN and not S_IS_BOT -->
+
+<form action="{S_LOGIN_ACTION}" method="post">
+
+	<div class="panel">
+		<div class="inner">
+
+			<div class="content">
+				<h3><a href="{U_LOGIN_LOGOUT}">{L_LOGIN_LOGOUT}</a><!-- IF S_REGISTER_ENABLED -->&nbsp; &bull; &nbsp;<a
+						href="{U_REGISTER}">{L_REGISTER}</a><!-- ENDIF --></h3>
+
+				<fieldset class="fields1">
+					<dl>
+						<dt><label for="username">{L_USERNAME}{L_COLON}</label></dt>
+						<dd><input type="text" tabindex="1" name="username" id="username" size="25" value="{USERNAME}"
+								   class="inputbox autowidth"/></dd>
+					</dl>
+					<dl>
+						<dt><label for="password">{L_PASSWORD}{L_COLON}</label></dt>
+						<dd><input type="password" tabindex="2" id="password" name="password" size="25"
+								   class="inputbox autowidth" autocomplete="off"/></dd>
+						<!-- IF S_AUTOLOGIN_ENABLED -->
+						<dd><label for="autologin"><input type="checkbox" name="autologin" id="autologin" tabindex="3"/>
+							{L_LOG_ME_IN}</label></dd><!-- ENDIF -->
+						<dd><label for="viewonline"><input type="checkbox" name="viewonline" id="viewonline"
+														   tabindex="4"/> {L_HIDE_ME}</label></dd>
+					</dl>
+					<dl>
+						<dt>&nbsp;</dt>
+						<dd><input type="submit" name="login" tabindex="5" value="{L_LOGIN}" class="button1"/></dd>
+					</dl>
+					{S_LOGIN_REDIRECT}
+					{S_FORM_TOKEN_LOGIN}
+				</fieldset>
+			</div>
+		</div>
+	</div>
+</form>
+
+<!-- ENDIF -->
+<!-- ENDIF -->
+<!-- EVENT viewforum_body_topic_row_before -->
+<!-- IF topicrow -->
+<div class="my-2 rounded-sm border border-gray-200">
+	<div class="grid grid-cols-5 gap-4 px-2 py-2 text-sm text-gray-800 bg-gray-100 md:grid-cols-7">
+		<div class="col-span-3 md:col-span-4">
+			{L_TOPICS}
+		</div>
+		<div class="col-span-2 md:col-span-1">
+			{L_REPLIES} & {L_VIEWS}
+		</div>
+		<div class="hidden col-span-2 text-right md:block">
+			{L_LAST_POST}
+		</div>
+	</div>
+	<!-- BEGIN topicrow -->
+	<!-- IF topicrow.S_FIRST_ROW or not topicrow.S_TOPIC_TYPE_SWITCH -->
+	<!-- ENDIF -->
+	<!-- EVENT viewforum_body_topicrow_row_before -->
+	<div class="grid grid-cols-5 gap-4 py-2 text-sm text-gray-800 border-t border-gray-100 transition duration-200 ease-in-out md:grid-cols-7 hover:bg-gray-50">
+		<div class="col-span-3 md:col-span-4">
+			<div class="flex justify-between items-center align-middle">
+				<div>
+					<!-- EVENT topiclist_row_prepend -->
+					<div class="flex justify-center items-center items-stretch align-middle">
+						<div class="flex-none p-2 ml-2">
+							<div class="inline-block hidden -mt-1 w-8 h-8 align-baseline thread_avatar md:block">
+								{% if MAS_VF_FP_AVATAR %}
+								{% if topicrow.TOPIC_AUTHOR_AVATAR_IMG %}
+								{{ topicrow.TOPIC_AUTHOR_AVATAR_IMG }}
+								{% elseif recent_topics.TOPIC_AUTHOR_AVATAR_IMG %}
+								{{ recent_topics.TOPIC_AUTHOR_AVATAR_IMG }}
+								{% else %}
+								<img src="{T_THEME_PATH}/images/no_avatar.gif" alt="" class="inline avatar"/>
+								{% endif %}
+								{% endif %}
+							</div>
+						</div>
+						<div class="flex-1 text-left">
+							<!-- IF topicrow.U_VIEW_TOPIC -->
+							<!-- IF topicrow.S_UNREAD_TOPIC -->
+							<a href="{topicrow.U_VIEW_TOPIC}"
+							   class="block text-base font-bold text-gray-800 hover:text-gray-700">{topicrow.TOPIC_TITLE}</a>
+							<!-- ELSE -->
+							<a href="{topicrow.U_VIEW_TOPIC}"
+							   class="block text-base font-medium text-gray-800 hover:text-gray-700">{topicrow.TOPIC_TITLE}</a>
+							<!-- ENDIF -->
+							<!-- ELSE -->
+							{topicrow.TOPIC_TITLE}
+							<!-- ENDIF -->
+							<div class="text-xs">
+								{% EVENT topiclist_row_topic_by_author_before %}
+								{L_POST_BY_AUTHOR}
+								{topicrow.TOPIC_AUTHOR_FULL}
+								<time datetime="{topicrow.FIRST_POST_TIME_RFC3339}">{topicrow.FIRST_POST_TIME}</time>
+								{% EVENT topiclist_row_topic_by_author_after %}
+								<!-- IF topicrow.S_POST_GLOBAL and FORUM_ID != topicrow.FORUM_ID -->
+								{L_IN}
+								<a href="{topicrow.U_VIEW_FORUM}">{topicrow.FORUM_NAME}</a>
+								<!-- ENDIF -->
+							</div>
+						</div>
+					</div>
+					<!-- EVENT topiclist_row_topic_title_after -->
+				</div>
+				<div>
+					<!-- IF topicrow.S_TOPIC_UNAPPROVED or topicrow.S_POSTS_UNAPPROVED -->
+					<a href="{topicrow.U_MCP_QUEUE}"
+					   title="<!-- IF topicrow.S_TOPIC_UNAPPROVED -->{L_TOPIC_UNAPPROVED}<!-- ELSE -->{L_POSTS_UNAPPROVED}<!-- ENDIF -->">
+						<i class="icon fa-question fa-fw icon-blue" aria-hidden="true"></i>
+						<span class="sr-only">
+					<!-- IF topicrow.S_TOPIC_UNAPPROVED -->
+					{L_TOPIC_UNAPPROVED}
+							<!-- ELSE -->
+						{L_POSTS_UNAPPROVED}
+							<!-- ENDIF -->
+					</span>
+					</a>
+					<!-- ENDIF -->
+					<!-- IF topicrow.S_TOPIC_DELETED -->
+					<a href="{topicrow.U_MCP_QUEUE}" title="{L_TOPIC_DELETED}">
+						<svg class="w-4 h-4 inline text-red-500" xmlns="http://www.w3.org/2000/svg" width="24"
+							 height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"
+							 stroke-linecap="round" stroke-linejoin="round" display="block" id="TrashCan"
+							 data-darkreader-inline-fill="" data-darkreader-inline-stroke=""
+							 style="--darkreader-inline-fill:none; --darkreader-inline-stroke:currentColor;">
+							<path d="M4 6h16l-1.58 14.22A2 2 0 0 1 16.432 22H7.568a2 2 0 0 1-1.988-1.78L4 6z"></path>
+							<path d="M7.345 3.147A2 2 0 0 1 9.154 2h5.692a2 2 0 0 1 1.81 1.147L18 6H6l1.345-2.853z"></path>
+							<path d="M2 6h20"></path>
+							<path d="M10 11v5"></path>
+							<path d="M14 11v5"></path>
+						</svg>
+						<span class="sr-only">{L_TOPIC_DELETED}</span>
+					</a>
+					<!-- ENDIF -->
+					<!-- IF topicrow.S_TOPIC_REPORTED -->
+					<a href="{topicrow.U_MCP_REPORT}" title="{L_TOPIC_REPORTED}">
+						<svg class="inline w-4 h-4 text-red-500" xmlns="http://www.w3.org/2000/svg" width="24"
+							 height="24"
+							 viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"
+							 stroke-linecap="round"
+							 stroke-linejoin="round" display="block" id="CircleAlert">
+							<circle cx="12" cy="12" r="10"></circle>
+							<path d="M12 7v6m0 3.5v.5"></path>
+						</svg>
+						<span class="sr-only">{L_TOPIC_REPORTED}</span>
+					</a>
+					<!-- ENDIF -->
+					<!-- IF topicrow.S_HAS_POLL -->
+					<svg class="w-4 h-4 inline text-gray-700" xmlns="http://www.w3.org/2000/svg" width="24" height="24"
+						 viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round"
+						 stroke-linejoin="round" display="block" id="AlignBottom" data-darkreader-inline-fill=""
+						 data-darkreader-inline-stroke=""
+						 style="--darkreader-inline-fill:none; --darkreader-inline-stroke:currentColor;">
+						<path d="M21 22H3"></path>
+						<path d="M6 18V2h4v16H6z"></path>
+						<path d="M14 18V8h4v10h-4z"></path>
+					</svg>
+					<!-- ENDIF -->
+					<!-- IF topicrow.ATTACH_ICON_IMG -->
+					<svg class="w-4 h-4 inline text-gray-700" xmlns="http://www.w3.org/2000/svg" width="24" height="24"
+						 viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round"
+						 stroke-linejoin="round" display="block" id="Attach" data-darkreader-inline-fill=""
+						 data-darkreader-inline-stroke=""
+						 style="--darkreader-inline-fill:none; --darkreader-inline-stroke:currentColor;">
+						<path d="M6 7.91V16a6 6 0 0 0 6 6v0a6 6 0 0 0 6-6V6a4 4 0 0 0-4-4v0a4 4 0 0 0-4 4v9.182a2 2 0 0 0 2 2v0a2 2 0 0 0 2-2V8"></path>
+					</svg>
+					<!-- ENDIF -->
+				</div>
+			</div>
+		</div>
+		<div class="col-span-2 md:col-span-1">
+			<dl>
+				<dt class="float-left mr-1">{L_REPLIES}{L_COLON}</dt>
+				<dd>{topicrow.REPLIES}</dd>
+			</dl>
+			<dl class="mt-1">
+				<dt class="float-left mr-1 text-xs">{L_VIEWS}{L_COLON}</dt>
+				<dd class="text-xs">{topicrow.VIEWS}</dd>
+			</dl>
+		</div>
+		<div class="hidden col-span-2 md:block">
+			<div class="flex justify-center items-center items-stretch align-middle">
+				<div class="flex-1 text-right">
+					<div>
+						<time datetime="{topicrow.LAST_POST_TIME_RFC3339}" class="block">{topicrow.LAST_POST_TIME}
+						</time>
+						{topicrow.LAST_POST_AUTHOR_FULL}
+						<!-- IF not S_IS_BOT and topicrow.U_LAST_POST -->
+						<a href="{topicrow.U_LAST_POST}" title="{L_GOTO_LAST_POST}">
+							<span class="sr-only">{VIEW_LATEST_POST}</span>
+						</a>
+						<!-- ENDIF -->
+					</div>
+				</div>
+				<div class="flex-none p-2 mr-2">
+					<div class="hidden -mt-1 last_post_avatar md:block">
+						{% if MAS_VF_LP_AVATAR %}
+						{% if topicrow.LAST_POST_AUTHOR_AVATAR_IMG %}
+						{{ topicrow.LAST_POST_AUTHOR_AVATAR_IMG }}
+						{% elseif recent_topics.LAST_POST_AUTHOR_AVATAR_IMG %}
+						{{ recent_topics.LAST_POST_AUTHOR_AVATAR_IMG }}
+						{% else %}
+						<img src="{T_THEME_PATH}/images/no_avatar.gif" alt="" class="inline avatar"/>
+						{% endif %}
+						{% endif %}
+					</div>
+				</div>
+			</div>
+		</div>
+	</div>
+	<!-- EVENT viewforum_body_topic_row_after -->
+	<!-- IF topicrow.S_LAST_ROW -->
+	<!-- ENDIF -->
+	<!-- BEGINELSE -->
+	<!-- IF S_IS_POSTABLE -->
+	<div class="panel">
+		<div class="inner">
+			<strong>{{ lang(S_SORT_DAYS ? 'NO_TOPICS_TIME_FRAME' : 'NO_TOPICS') }}</strong>
+		</div>
+	</div>
+	<!-- ELSE IF not S_HAS_SUBFORUM -->
+	<div class="panel">
+		<div class="inner">
+			<strong>{L_NO_FORUMS_IN_CATEGORY}</strong>
+		</div>
+	</div>
+	<!-- ENDIF -->
+	<!-- END topicrow -->
+</div>
+<!-- ELSE -->
+<div class="text-center my-4 text-gray-600">
+	<svg class="h-14 w-14 inline" xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" display="block" id="ChatBubble"><path d="M14 19c3.771 0 5.657 0 6.828-1.172C22 16.657 22 14.771 22 11c0-3.771 0-5.657-1.172-6.828C19.657 3 17.771 3 14 3h-4C6.229 3 4.343 3 3.172 4.172 2 5.343 2 7.229 2 11c0 3.771 0 5.657 1.172 6.828.653.654 1.528.943 2.828 1.07"/><path d="M14 19c-1.236 0-2.598.5-3.841 1.145-1.998 1.037-2.997 1.556-3.489 1.225-.492-.33-.399-1.355-.212-3.404L6.5 17.5"/></svg>
+	<p class="my-2 font-bold text-center text-lg">{L_NO_TOPICS}</p>
+</div>
+<!-- ENDIF -->
+<!-- IF .topicrow and not S_DISPLAY_ACTIVE -->
+<div class="flex justify-between items-center align-middle">
+	<div>
+		<!-- IF .pagination -->
+		<!-- INCLUDE pagination.html -->
+		<!-- ENDIF -->
+		<!-- IF S_DISPLAY_SEARCHBOX -->
+		<div class="mx-2">
+			<div class="justify-end hidden md:flex">
+				<div>
+					<form method="get" id="forum-search" action="{S_SEARCHBOX_ACTION}"
+						  class="flex items-center space-x-1">
+						<input class="input" type="search" name="keywords" id="search_keywords" size="20"
+							   placeholder="{L_SEARCH_FORUM}"/>
+						<button class="button inline" type="submit" title="{L_SEARCH}">
+							<svg class="w-4 h-4 inline -mt-1" xmlns="http://www.w3.org/2000/svg" width="24" height="24"
+								 viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"
+								 stroke-linecap="round"
+								 stroke-linejoin="round" display="block" id="Search" data-darkreader-inline-fill=""
+								 data-darkreader-inline-stroke=""
+								 style="--darkreader-inline-fill:none; --darkreader-inline-stroke:currentColor;">
+								<path d="M21 21l-4.486-4.494M19 10.5a8.5 8.5 0 1 1-17 0 8.5 8.5 0 0 1 17 0z"></path>
+							</svg>
+							<span class="sr-only">{L_SEARCH}</span>
+						</button>
+						<a href="{{ U_SEARCH_FORUM }}" class="button inline" title="{L_SEARCH_ADV}">
+							<svg class="w-4 h-4 inline -mt-1" xmlns="http://www.w3.org/2000/svg" width="24" height="24"
+								 viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"
+								 stroke-linecap="round"
+								 stroke-linejoin="round" display="block" id="Gear" data-darkreader-inline-fill=""
+								 data-darkreader-inline-stroke=""
+								 style="--darkreader-inline-fill:none; --darkreader-inline-stroke:currentColor;">
+								<path d="M14 3.269C14 2.568 13.432 2 12.731 2H11.27C10.568 2 10 2.568 10 3.269v0c0 .578-.396 1.074-.935 1.286-.085.034-.17.07-.253.106-.531.23-1.162.16-1.572-.249v0a1.269 1.269 0 0 0-1.794 0L4.412 5.446a1.269 1.269 0 0 0 0 1.794v0c.41.41.48 1.04.248 1.572a7.946 7.946 0 0 0-.105.253c-.212.539-.708.935-1.286.935v0C2.568 10 2 10.568 2 11.269v1.462C2 13.432 2.568 14 3.269 14v0c.578 0 1.074.396 1.286.935.034.085.07.17.105.253.231.531.161 1.162-.248 1.572v0a1.269 1.269 0 0 0 0 1.794l1.034 1.034a1.269 1.269 0 0 0 1.794 0v0c.41-.41 1.04-.48 1.572-.249.083.037.168.072.253.106.539.212.935.708.935 1.286v0c0 .701.568 1.269 1.269 1.269h1.462c.701 0 1.269-.568 1.269-1.269v0c0-.578.396-1.074.935-1.287.085-.033.17-.068.253-.104.531-.232 1.162-.161 1.571.248v0a1.269 1.269 0 0 0 1.795 0l1.034-1.034a1.269 1.269 0 0 0 0-1.794v0c-.41-.41-.48-1.04-.249-1.572.037-.083.072-.168.106-.253.212-.539.708-.935 1.286-.935v0c.701 0 1.269-.568 1.269-1.269V11.27c0-.701-.568-1.269-1.269-1.269v0c-.578 0-1.074-.396-1.287-.935a7.755 7.755 0 0 0-.105-.253c-.23-.531-.16-1.162.249-1.572v0a1.269 1.269 0 0 0 0-1.794l-1.034-1.034a1.269 1.269 0 0 0-1.794 0v0c-.41.41-1.04.48-1.572.249a7.913 7.913 0 0 0-.253-.106C14.396 4.343 14 3.847 14 3.27v0z"></path>
+								<path d="M16 12a4 4 0 1 1-8 0 4 4 0 0 1 8 0z"></path>
+							</svg>
+							<span class="sr-only">{L_SEARCH_ADV}</span>
+						</a>
+						{S_SEARCH_LOCAL_HIDDEN_FIELDS}
+					</form>
+				</div>
+			</div>
+		</div>
+		<!-- ENDIF -->
+	</div>
+	<div>
+		<!-- IF U_WATCH_FORUM_LINK and not S_IS_BOT -->
+		<a class="inline button button-secondary" href="{U_WATCH_FORUM_LINK}" title="{S_WATCH_FORUM_TITLE}"
+		   data-ajax="toggle_link" data-toggle-text="{S_WATCH_FORUM_TOGGLE}" data-toggle-url="{U_WATCH_FORUM_TOGGLE}">
+			<span>{S_WATCH_FORUM_TITLE}</span>
+		</a>
+		<!-- ENDIF -->
+		<!-- IF not S_IS_BOT and U_MARK_TOPICS and .topicrow -->
+		<a href="{U_MARK_TOPICS}" data-ajax="mark_topics_read" class="button button-secondary">
+			<span class="md:inline hidden">{L_MARK_TOPICS_READ}</span>
+			<span class="md:hidden">
+				<svg class="h-4 w-4 inline -mt-1" xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" display="block" id="EyeOpen"><path d="M21.257 10.962c.474.62.474 1.457 0 2.076C19.764 14.987 16.182 19 12 19c-4.182 0-7.764-4.013-9.257-5.962a1.692 1.692 0 0 1 0-2.076C4.236 9.013 7.818 5 12 5c4.182 0 7.764 4.013 9.257 5.962z"/><circle cx="12" cy="12" r="3"/></svg>
+			</span>
+		</a>
+		<!-- ENDIF -->
+		<!-- IF S_SELECT_SORT_DAYS and not S_IS_BOT -->
+		<form method="post" action="{S_FORUM_ACTION}" class="inline">
+			<!-- INCLUDE display_options.html -->
+		</form>
+		<!-- ENDIF -->
+		<!-- IF not S_IS_BOT and S_DISPLAY_POST_INFO -->
+		<!-- EVENT viewforum_buttons_bottom_before -->
+
+		<a href="{U_POST_NEW_TOPIC}" class="inline button"
+		   title="<!-- IF S_IS_LOCKED -->{L_FORUM_LOCKED}<!-- ELSE -->{L_POST_TOPIC}<!-- ENDIF -->">
+			<!-- IF S_IS_LOCKED -->
+			<span>{L_BUTTON_FORUM_LOCKED}</span>
+			<!-- ELSE -->
+			<span>{L_BUTTON_NEW_TOPIC}</span>
+			<!-- ENDIF -->
+		</a>
+		<!-- EVENT viewforum_buttons_bottom_after -->
+		<!-- ENDIF -->
+	</div>
+</div>
+<!-- ENDIF -->
+
+{% EVENT viewforum_body_online_list_before %}
+
+<!-- IF S_DISPLAY_ONLINE_LIST and U_VIEWONLINE -->
+<div class="my-3">
+	<div class="bg-gray-50 rounded border border-gray-100 py-2 px-3 text-left text-sm flex items-center align-middle">
+		<p>{LOGGED_IN_USER_LIST}</p>
+	</div>
+</div>
+<!-- ENDIF -->
+
+<!-- IF S_IS_POSTABLE and rules|length
+<div class="stat-block permissions">
+	<h3>{L_FORUM_PERMISSIONS}</h3>
+	<p> BEGIN rules {rules.RULE}<br/> END rules </p>
+</div>
+ ENDIF -->
+<!-- INCLUDE overall_footer.html -->

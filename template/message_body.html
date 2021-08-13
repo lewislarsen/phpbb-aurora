@@ -1,0 +1,23 @@
+<!-- IF S_SIMPLE_MESSAGE -->
+	<!-- INCLUDE simple_header.html -->
+<!-- ELSE -->
+	<!-- INCLUDE overall_header.html -->
+<!-- ENDIF -->
+<div class="px-6 py-3 mx-auto mb-3 max-w-6xl bg-white rounded-md border border-gray-200 shadow">
+	<h2 class="mb-1 text-2xl font-medium">{MESSAGE_TITLE}</h2>
+	<p class="my-1 text-left font-medium">{MESSAGE_TEXT}</p>
+
+	<!-- IF SCRIPT_NAME == "search" and not S_BOARD_DISABLED and not S_NO_SEARCH and L_RETURN_TO_SEARCH_ADV -->
+	<p>
+		<a href="{U_SEARCH}" class="arrow-{S_CONTENT_FLOW_BEGIN}" accesskey="r">
+			<i class="icon fa-angle-{S_CONTENT_FLOW_BEGIN} fa-fw icon-black" aria-hidden="true"></i><span>{L_GO_TO_SEARCH_ADV}</span>
+		</a>
+	</p>
+	<!-- ENDIF -->
+
+</div>
+<!-- IF S_SIMPLE_MESSAGE -->
+	<!-- INCLUDE simple_footer.html -->
+<!-- ELSE -->
+	<!-- INCLUDE overall_footer.html -->
+<!-- ENDIF -->

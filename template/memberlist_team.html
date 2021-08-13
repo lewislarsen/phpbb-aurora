@@ -1,0 +1,75 @@
+<!-- INCLUDE overall_header.html -->
+
+<h2 class="mb-1 text-2xl font-medium">{PAGE_TITLE}</h2>
+
+<form method="post" action="{S_MODE_ACTION}">
+
+	<!-- BEGIN group -->
+	<div class="mt-2 mb-4 rounded border border-gray-200 shadow-sm">
+		<div class="grid overflow-hidden grid-cols-4 gap-4 px-3 py-2 text-sm text-gray-800 bg-gray-100 border-b border-gray-100 md:grid-cols-12">
+			<div class="col-span-2 md:col-span-4">
+				<!-- IF group.U_GROUP -->
+				<a href="{group.U_GROUP}" class="text-gray-800 hover:text-gray-600 ease-in-out duration-200 transition"
+				   title="{group.GROUP_NAME}">{group.GROUP_NAME}</a>
+				<!-- ELSE -->
+				{group.GROUP_NAME}
+				<!-- ENDIF -->
+			</div>
+			<div class="hidden col-span-2 md:block">
+				{L_RANK}
+			</div>
+			<div class="hidden col-span-2 md:block">
+				{L_PRIMARY_GROUP}
+			</div>
+			<!-- IF S_DISPLAY_MODERATOR_FORUMS -->
+			<div class="hidden col-span-2 md:block">
+				{L_MODERATOR}
+			</div>
+			<!-- ENDIF -->
+		</div>
+		<!-- BEGIN user -->
+		<div class="grid grid-cols-4 gap-4 px-3 py-3 border-t border-gray-100 transition duration-200 ease-in-out md:grid-cols-12 hover:bg-gray-50">
+			<div class="col-span-2 md:col-span-4">
+				<!-- EVENT memberlist_team_username_prepend -->
+				{group.user.USERNAME_FULL}
+				<!-- IF group.user.S_INACTIVE -->
+				<div class="text-gray-600 text-xs">({L_INACTIVE})</div>
+				<!-- ENDIF -->
+				<!-- EVENT memberlist_team_username_append -->
+			</div>
+			<div class="hidden col-span-2 md:flex items-center">
+				<!-- IF group.user.RANK_IMG -->
+				<span class="rank-img">{group.user.RANK_IMG}</span>
+				<!-- ELSEIF group.user.RANK_TITLE -->
+				<span class="font-medium text-gray-800">{group.user.RANK_TITLE}</span>
+				<!-- ELSE -->
+				<span class="text-gray-800">—</span>
+				<!-- ENDIF -->
+			</div>
+			<div class="hidden col-span-2 md:flex items-center">
+				<!-- IF group.user.U_GROUP -->
+				<a class="font-medium" <!-- IF group.user.GROUP_COLOR --> style="font-weight: 500; color: #{group.user.GROUP_COLOR}"
+				<!-- ENDIF --> href="{group.user.U_GROUP}">{group.user.GROUP_NAME}</a>
+				<!-- ELSE -->
+				{group.user.GROUP_NAME}
+				<!-- ENDIF -->
+			</div>
+			<!-- IF S_DISPLAY_MODERATOR_FORUMS -->
+			<div class="hidden col-span-2 md:flex flex items-center text-gray-800">
+				<!-- IF group.user.FORUM_OPTIONS -->
+				<select class="input">{group.user.FORUMS}</select>
+				<!-- ELSEIF group.user.FORUMS -->
+				{group.user.FORUMS}
+				<!-- ELSE -->
+				<span class="text-gray-800">—</span>
+				<!-- ENDIF -->
+			</div>
+			<!-- ENDIF -->
+		</div>
+		<!-- BEGINELSE -->
+		<p class="font-medium text-center text-gray-800 py-3">{L_NO_MEMBERS}</p>
+		<!-- END user -->
+	</div>
+	<!-- END group -->
+</form>
+<!-- INCLUDE overall_footer.html -->

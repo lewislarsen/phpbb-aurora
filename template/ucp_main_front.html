@@ -1,0 +1,115 @@
+<!-- INCLUDE ucp_header.html -->
+
+<div class="flex-grow w-full md:w-4/5">
+	<div class="bg-white rounded-md border border-gray-200 shadow px-6 py-3 mb-3 ml-5">
+		<h3 class="font-medium text-xl my-3 text-gray-800">{L_TITLE}</h3>
+
+		<p class="text-sm text-gray-700 max-w-3xl mx-auto text-left pb-2.5 border-b border-gray-100">{L_UCP_WELCOME}</p>
+
+		<div class="grid grid-cols-1 md:grid-cols-4 gap-y-6 md:gap-6 my-4 max-w-3xl mx-auto">
+			<div class="col-span-2">
+				<div class="flex justify-center md:flex mx-auto">
+					<div>
+						<div class="text-center my-2">
+							<div class="md:h-40 md:w-40 my-1">
+								<!-- IF CURRENT_USER_AVATAR -->
+								<div class="avatar">{CURRENT_USER_AVATAR}</div>
+								<!-- ELSE -->
+								<img src="{T_THEME_PATH}/images/no_avatar.gif" alt="" class="avatar w-full"/>
+								<!-- ENDIF -->
+							</div>
+							<div class="text-center">
+								<a class="md:text-xl block" href="{U_USER_PROFILE}" title="{USERNAME}">
+									{CURRENT_USERNAME_SIMPLE}
+								</a>
+								<a href="{U_USER_PROFILE}" class="button block mt-4" title="{L_VIEW_PROFILE}">
+									{L_VIEW_PROFILE}
+								</a>
+							</div>
+						</div>
+					</div>
+				</div>
+			</div>
+			<div class="col-span-2 text-sm">
+				<h3 class="text-gray-800 text-lg font-medium text-center mb-2 pb-2.5 border-b border-gray-100">
+					{L_YOUR_DETAILS}</h3>
+				<!-- EVENT ucp_main_front_user_activity_before -->
+
+				<div class="max-w-sm mx-auto text-center">
+					<!-- EVENT ucp_main_front_user_activity_prepend -->
+					<div class="flex my-1">
+						<div class="flex-none">
+							<span class="font-bold text-gray-800">{L_JOINED}{L_COLON}</span>
+						</div>
+						<div class="flex-1 text-right">
+							{JOINED}
+						</div>
+					</div>
+					<div class="flex my-1">
+						<div class="flex-none">
+							<span class="font-bold text-gray-800">{L_LAST_ACTIVE}{L_COLON}</span>
+						</div>
+						<div class="flex-1 text-right">
+							{LAST_VISIT_YOU}
+						</div>
+					</div>
+					<div class="flex my-1">
+						<div class="flex-none">
+							<span class="font-bold text-gray-800">{L_TOTAL_POSTS}{L_COLON}</span>
+						</div>
+						<div class="flex-1 text-right">
+							<!-- IF POSTS_PCT -->
+							{POSTS}
+							<!-- IF S_DISPLAY_SEARCH -->
+							(<span class="font-bold text-xs"><a href="{U_SEARCH_USER}">{L_SEARCH_YOUR_POSTS}</a></span>)
+							<!-- ENDIF -->
+							<!-- ELSE -->
+							{POSTS}
+							<!-- ENDIF -->
+						</div>
+					</div>
+					<!-- IF ACTIVE_FORUM != '' -->
+					<div class="flex my-1">
+						<div class="flex-none">
+							<span class="font-bold text-gray-800">{L_ACTIVE_IN_FORUM}{L_COLON}</span>
+						</div>
+						<div class="flex-1 text-right">
+					<span class="font-bold">
+						<a href="{U_ACTIVE_FORUM}">{ACTIVE_FORUM}</a>
+					</span>
+							<p class="text-xs text-gray-600 font-medium">({ACTIVE_FORUM_POSTS} / {ACTIVE_FORUM_PCT})</p>
+						</div>
+					</div>
+					<!-- ENDIF -->
+					<!-- IF ACTIVE_TOPIC != '' -->
+					<div class="flex my-1">
+						<div class="flex-none">
+							<span class="font-bold text-gray-800">{L_ACTIVE_IN_TOPIC}{L_COLON}</span>
+						</div>
+						<div class="flex-1 text-right">
+					<span class="font-bold">
+						<a href="{U_ACTIVE_TOPIC}">{ACTIVE_TOPIC}</a>
+					</span>
+							<p class="text-xs text-gray-600 font-medium">({ACTIVE_TOPIC_POSTS} / {ACTIVE_TOPIC_PCT})</p>
+						</div>
+					</div>
+					<!-- ENDIF -->
+					<!-- IF WARNINGS -->
+					<div class="flex my-1">
+						<div class="flex-none">
+							<span class="font-bold text-gray-800">{L_YOUR_WARNINGS}{L_COLON}</span>
+						</div>
+						<div class="flex-1 text-right">
+							<span class="text-red-500 hover:text-red-300 ease-in-out transition duration-400 font-medium">{WARNINGS}</span>
+						</div>
+					</div>
+					<!-- ENDIF -->
+					<!-- EVENT ucp_main_front_user_activity_append -->
+				</div>
+				<!-- EVENT ucp_main_front_user_activity_after -->
+			</div>
+		</div>
+	</div>
+</div>
+
+<!-- INCLUDE ucp_footer.html -->

@@ -1,0 +1,119 @@
+<h2 class="mb-1 text-2xl font-medium">{L_FIND_USERNAME}</h2>
+
+<form method="post" action="{S_MODE_ACTION}" id="search_memberlist">
+
+	<p class="max-w-4xl mx-auto my-6 text-gray-800 text-left text-sm">
+		{L_FIND_USERNAME_EXPLAIN}
+	</p>
+
+	<!-- EVENT memberlist_search_fields_before -->
+
+
+	<div class="grid md:grid-cols-2 gap-x-10 px-3">
+		<div>
+				<dl class="my-2">
+					<dt><label for="username" class="font-medium">{L_USERNAME}{L_COLON}</label></dt>
+					<dd>
+						<!-- IF U_LIVE_SEARCH -->
+						<div class="dropdown-container dropdown-{S_CONTENT_FLOW_END}">
+							<!-- ENDIF -->
+							<input type="text" name="username" id="username" value="{USERNAME}" class="input my-1"<!-- IF U_LIVE_SEARCH --> autocomplete="off" data-filter="phpbb.search.filter" data-ajax="member_search" data-min-length="3" data-url="{U_LIVE_SEARCH}" data-results="#user-search"<!-- ENDIF --> />
+							<!-- IF U_LIVE_SEARCH -->
+							<div class="dropdown live-search hidden" id="user-search">
+								<div class="pointer"><div class="pointer-inner"></div></div>
+								<ul class="dropdown-contents search-results">
+									<li class="search-result-tpl"><span class="search-result"></span></li>
+								</ul>
+							</div>
+						</div>
+						<!-- ENDIF -->
+					</dd>
+				</dl>
+				<!-- IF S_EMAIL_SEARCH_ALLOWED -->
+				<dl class="my-2">
+					<dt><label for="email" class="font-medium">{L_EMAIL}{L_COLON}</label></dt>
+					<dd><input type="text" name="email" id="email" value="{EMAIL}" class="input my-1" /></dd>
+				</dl>
+				<!-- ENDIF -->
+				<!-- IF S_JABBER_ENABLED -->
+				<dl class="my-2">
+					<dt><label for="jabber" class="font-medium">{L_JABBER}{L_COLON}</label></dt>
+					<dd><input type="text" name="jabber" id="jabber" value="{JABBER}" class="input my-1" /></dd>
+				</dl>
+				<!-- ENDIF -->
+				<dl class="my-2">
+					<dt><label for="search_group_id" class="font-medium">{L_GROUP}{L_COLON}</label></dt>
+					<dd><select name="search_group_id" id="search_group_id" class="input my-1">{S_GROUP_SELECT}</select></dd>
+				</dl>
+
+				<!-- EVENT memberlist_search_sorting_options_before -->
+				<dl class="my-2">
+					<dt><label for="sk" class="font-medium">{L_SORT_BY}{L_COLON}</label></dt>
+					<dd>
+						<div class="flex space-x-2">
+							<div class="flex-auto">
+								<select name="sk" id="sk" class="input my-1">{S_SORT_OPTIONS}</select>
+							</div>
+							<div class="flex-1">
+								<select name="sd" class="input my-1">{S_ORDER_SELECT}</select>
+							</div>
+						</div>
+					</dd>
+				</dl>
+			</div>
+		<div>
+			<dl class="my-2">
+				<dt><label for="joined" class="font-medium">{L_JOINED}{L_COLON}</label></dt>
+				<dd>
+					<div class="flex space-x-2">
+						<div class="flex-auto">
+							<select name="joined_select" class="input my-1">{S_JOINED_TIME_OPTIONS}</select>
+						</div>
+						<div class="flex-1">
+							<input class="input my-1" type="text" name="joined" id="joined" value="{JOINED}" placeholder="2004-02-29" />
+						</div>
+					</div>
+				</dd>
+			</dl>
+			<!-- IF S_VIEWONLINE -->
+			<dl class="my-2">
+				<dt><label for="active" class="font-medium">{L_LAST_ACTIVE}{L_COLON}</label></dt>
+				<dd>
+					<div class="flex space-x-2">
+						<div class="flex-auto">
+							<select name="active_select" class="input my-1">{S_ACTIVE_TIME_OPTIONS}</select>
+						</div>
+						<div class="flex-1">
+							<input class="input my-1" type="text" name="active" id="active" value="{ACTIVE}" placeholder="2004-02-29" />
+						</div>
+					</div>
+				</dd>
+			</dl>
+			<!-- ENDIF -->
+			<dl class="my-2">
+				<dt><label for="count" class="font-medium">{L_POSTS}{L_COLON}</label></dt>
+				<dd>
+					<div class="flex space-x-2">
+						<div class="flex-auto">
+							<select name="count_select" class="input my-1">{S_COUNT_OPTIONS}</select>
+						</div>
+						<div class="flex-1">
+							<input class="input my-1" type="number" min="0" name="count" id="count" value="{COUNT}" placeholder="1000" />
+						</div>
+					</div>
+				</dd>
+			</dl>
+			<!-- IF S_IP_SEARCH_ALLOWED -->
+			<dl class="my-2">
+				<dt><label for="ip" class="font-medium">{L_POST_IP}{L_COLON}</label></dt>
+				<dd><input class="input my-1" type="text" name="ip" id="ip" value="{IP}" placeholder="127.0.0.1" /></dd>
+			</dl>
+			<!-- ENDIF -->
+			<!-- EVENT memberlist_search_fields_after -->
+		</div>
+	</div>
+	<div class="space-x-1 mx-auto text-center my-4">
+		<input type="submit" name="submit" class="button" value="{L_SEARCH}" />
+		{S_FORM_TOKEN}
+	</div>
+</form>

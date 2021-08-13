@@ -1,0 +1,78 @@
+<!-- IF S_AJAX_REQUEST -->
+	<form action="{S_CONFIRM_ACTION}" method="post">
+		<p>{MESSAGE_TEXT}</p>
+
+		<!-- IF not S_SHADOW_TOPICS -->
+		<!-- IF not S_SOFTDELETED and S_ALLOWED_DELETE and S_ALLOWED_SOFTDELETE -->
+			<label>
+				<strong>{L_DELETE_PERMANENTLY}{L_COLON}</strong>
+				<input id="delete_permanent" name="delete_permanent" type="checkbox" value="1" class="mb-2" {S_CHECKED_PERMANENT} />
+				<!-- IF S_TOPIC_MODE -->{DELETE_TOPIC_PERMANENTLY_EXPLAIN}<!-- ELSE -->{DELETE_POST_PERMANENTLY_EXPLAIN}<!-- ENDIF -->
+			</label>
+		<!-- ENDIF -->
+
+		<label for="delete_reason">
+			<strong>{L_DELETE_REASON}{L_COLON}</strong><br /><span>{L_DELETE_REASON_EXPLAIN}</span><br />
+			<input type="text" name="delete_reason" value="" class="inputbox autowidth" maxlength="120" size="45" />
+		</label>
+		<!-- ENDIF -->
+
+		<fieldset class="submit-buttons">
+			<input type="button" name="confirm" value="{L_YES}" class="button1" />&nbsp;
+			<input type="button" name="cancel" value="{L_NO}" class="button2" />
+		</fieldset>
+	</form>
+
+<!-- ELSE -->
+
+<!-- INCLUDE overall_header.html -->
+
+<form id="confirm" action="{S_CONFIRM_ACTION}" method="post">
+	<h2 class="mb-1 text-2xl font-medium">{MESSAGE_TITLE}</h2>
+
+	<p class="max-w-xl mx-auto my-6 text-gray-800 text-center">
+		{MESSAGE_TEXT}
+	</p>
+
+	<!-- IF not S_SHADOW_TOPICS -->
+
+	<!-- IF not S_SOFTDELETED and S_ALLOWED_DELETE and S_ALLOWED_SOFTDELETE -->
+	<div class="grid-cols-6 gap-2 md:grid">
+		<div class="py-1 px-2 md:hidden">
+			<label for="delete_permanent" class="text-base font-medium text-left text-gray-800">{L_DELETE_PERMANENTLY}{L_COLON}</label>
+		</div>
+		<div class="hidden md:block col-span-2 text-right py-1.5">
+			<label for="delete_permanent" class="text-base text-right text-gray-700 font-medium">{L_DELETE_PERMANENTLY}{L_COLON}</label>
+		</div>
+		<div class="col-span-3 px-2 md:px-4">
+			<input id="delete_permanent" name="delete_permanent" type="checkbox" value="1" {S_CHECKED_PERMANENT} />
+			<!-- IF S_TOPIC_MODE -->{DELETE_TOPIC_PERMANENTLY_EXPLAIN}<!-- ELSE -->{DELETE_POST_PERMANENTLY_EXPLAIN}<!-- ENDIF -->
+		</div>
+	</div>
+	<!-- ENDIF -->
+
+	{% EVENT confirm_delete_body_delete_reason_before %}
+
+	<div class="grid-cols-6 gap-2 md:grid mt-4">
+		<div class="py-1 px-2 md:hidden">
+			<label for="delete_reason"
+				   class="text-base font-medium text-left text-gray-800">{L_REASON}{L_COLON}</label>
+		</div>
+		<div class="hidden md:block col-span-2 text-right py-1.5">
+			<label for="delete_reason" class="text-base text-right text-gray-700 font-medium">{L_REASON}{L_COLON}</label>
+		</div>
+		<div class="col-span-3 px-2 md:px-4">
+			<textarea name="delete_reason" id="delete_reason" rows="6" cols="40" class="input">{REPORT_TEXT}</textarea>
+			<p class="text-sm text-gray-600 my-1">{L_DELETE_REASON_EXPLAIN}</p>
+		</div>
+	</div>
+	<!-- ENDIF -->
+
+	<div class="space-x-1 mx-auto text-center my-4">
+		<input type="submit" name="confirm" class="button" value="{L_YES}" />
+		<input type="submit" name="cancel" class="button button-secondary" value="{L_NO}" />
+	</div>
+</form>
+
+<!-- INCLUDE overall_footer.html -->
+<!-- ENDIF -->

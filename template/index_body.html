@@ -1,0 +1,81 @@
+<!-- INCLUDE overall_header.html -->
+
+<!-- INCLUDE forumlist_body.html -->
+
+<!-- EVENT index_body_forumlist_body_after -->
+
+<!-- EVENT index_body_stat_blocks_before -->
+<div class="grid grid-cols-1 md:grid-cols-12 gap-y-6 md:gap-6 my-4">
+	<!-- IF S_DISPLAY_ONLINE_LIST -->
+	<div class="col-span-9">
+		<div class="py-2 px-3 brand rounded-sm shadow-sm text-center mb-2 font-bold text-sm">
+			<!-- IF U_VIEWONLINE -->
+			<a href="{U_VIEWONLINE}" class="text-white hover:text-white hover:underline">{L_WHO_IS_ONLINE}</a>
+			<!-- ELSE -->
+			<h3 class="text-white">{L_WHO_IS_ONLINE}</h3>
+			<!-- ENDIF -->
+		</div>
+		<div class="py-3 px-3 text-left text-sm">
+			<!-- EVENT index_body_block_online_prepend -->
+			<p class="mb-1">{TOTAL_USERS_ONLINE}.</p>
+			<p class="text-sm text-gray-700">({L_ONLINE_EXPLAIN})</p>
+			<p class="my-1">{RECORD_USERS}.</p>
+			<!-- IF U_VIEWONLINE -->
+			<p class="my-2">{LOGGED_IN_USER_LIST}</p>
+			<!-- IF LEGEND -->
+			<p class="my-2 text-sm">{L_LEGEND}{L_COLON} {LEGEND}</p>
+			<!-- ENDIF -->
+			<!-- ENDIF -->
+			<!-- EVENT index_body_block_online_append -->
+		</div>
+	</div>
+	<!-- ENDIF -->
+	<!-- IF S_DISPLAY_BIRTHDAY_LIST -->
+	<div class="col-span-3">
+		<!-- EVENT index_body_birthday_block_before -->
+		<div class="py-2 px-3 brand rounded-sm shadow-sm text-center mb-2 font-bold text-sm">
+			<h3 class="text-white">{L_BIRTHDAYS}</h3>
+		</div>
+		<div class="py-3 px-3 text-left text-sm">
+			<!-- EVENT index_body_block_birthday_prepend -->
+			<!-- IF .birthdays -->
+			{L_CONGRATULATIONS}{L_COLON} <span class="font-bold">
+			<!-- BEGIN birthdays -->{birthdays.USERNAME}
+			<!-- IF birthdays.AGE !== '' -->
+			({birthdays.AGE})
+			<!-- ENDIF -->
+			<!-- IF not birthdays.S_LAST_ROW -->,
+			<!-- ENDIF -->
+			<!-- END birthdays --></span>
+			<!-- ELSE -->
+			<div class="text-center">
+				<svg class="h-8 w-8 inline" xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" display="block" id="Person"><circle cx="12" cy="7" r="5"/><path d="M17 14h.352a3 3 0 0 1 2.976 2.628l.391 3.124A2 2 0 0 1 18.734 22H5.266a2 2 0 0 1-1.985-2.248l.39-3.124A3 3 0 0 1 6.649 14H7"/></svg>
+				<p class="font-medium my-2">{L_NO_BIRTHDAYS}.</p>
+			</div>
+			<!-- ENDIF -->
+			<!-- EVENT index_body_block_birthday_append -->
+		</div>
+	</div>
+	<!-- ENDIF -->
+</div>
+<!-- EVENT index_body_birthday_block_before -->
+<!-- IF NEWEST_USER -->
+<div class="grid grid-cols-1 md:grid-cols-4 gap-2 md:gap-12 my-2 text-sm">
+	<!-- EVENT index_body_block_stats_prepend -->
+	<div class="bg-gray-50 rounded-sm border border-gray-100 py-2 px-2 text-center">
+		{TOTAL_POSTS}
+	</div>
+	<div class="bg-gray-50 rounded-sm border border-gray-100 py-2 px-2 text-center">
+		{TOTAL_TOPICS}
+	</div>
+	<div class="bg-gray-50 rounded-sm border border-gray-100 py-2 px-2 text-center">
+		{TOTAL_USERS}
+	</div>
+	<div class="bg-gray-50 rounded-sm border border-gray-100 py-2 px-2 text-center">
+		{NEWEST_USER}
+	</div>
+	<!-- EVENT index_body_block_stats_append -->
+</div>
+<!-- ENDIF -->
+<!-- EVENT index_body_stat_blocks_after -->
+<!-- INCLUDE overall_footer.html -->

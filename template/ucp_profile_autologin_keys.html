@@ -1,0 +1,98 @@
+<!-- INCLUDE ucp_header.html -->
+<div class="flex-grow w-full md:w-4/5">
+	<div class="px-6 py-3 mb-3 ml-5 bg-white rounded-md border border-gray-200 shadow">
+		<form id="ucp" method="post" action="{S_UCP_ACTION}" {S_FORM_ENCTYPE}>
+
+			<h3 class="my-3 text-xl font-medium text-gray-800">{L_TITLE}</h3>
+
+			<p class="text-sm text-gray-700 max-w-3xl mx-auto text-left pb-2.5 border-b border-gray-100">
+				{L_PROFILE_AUTOLOGIN_KEYS}</p>
+
+			<!-- IF ERROR -->
+			<div class="max-w-3xl mx-auto my-3">
+				<div class="rounded-lg bg-red-50 text-red-600 border border-red-100 font-medium py-2 px-3 text-center">
+					{ERROR}
+				</div>
+			</div>
+			<!-- ENDIF -->
+
+
+			<!-- IF .sessions -->
+			{% DEFINE COLSPAN = 4 %}
+			<div class="my-2 rounded border border-gray-200 shadow-sm">
+				<div class="grid overflow-hidden grid-cols-4 gap-4 px-3 py-2 text-sm text-gray-800 bg-gray-100 border-b border-gray-100 md:grid-cols-12">
+					{% EVENT ucp_profile_autologin_keys_thead_key_before %}
+					<div class="col-span-3 md:col-span-5">
+						{L_LOGIN_KEY}
+					</div>
+					{% EVENT ucp_profile_autologin_keys_thead_key_after %}
+					<div class="hidden col-span-3 md:block">
+						{L_IP}
+					</div>
+					<div class="hidden col-span-3 md:block">
+						{L_LOGIN_TIME}
+					</div>
+					{% EVENT ucp_profile_autologin_keys_thead_mark_before %}
+					<div class="col-span-1">
+						{L_MARK}
+					</div>
+					{% EVENT ucp_profile_autologin_keys_thead_mark_after %}
+				</div>
+				<!-- BEGIN sessions -->
+				<div class="grid grid-cols-4 gap-4 px-3 py-3 border-t border-gray-100 transition duration-200 ease-in-out md:grid-cols-12 hover:bg-gray-50">
+					{% EVENT ucp_profile_autologin_keys_tbody_key_before %}
+					<div class="col-span-3 md:col-span-5">
+						{sessions.KEY}
+						<div class="md:hidden text-sm my-1">
+							{sessions.IP} - {sessions.LOGIN_TIME}
+						</div>
+					</div>
+					{% EVENT ucp_profile_autologin_keys_tbody_key_after %}
+					<div class="hidden col-span-3 md:flex items-center">
+						{sessions.IP}
+					</div>
+					<div class="hidden col-span-3 md:flex items-center">
+						{sessions.LOGIN_TIME}
+					</div>
+					{% EVENT ucp_profile_autologin_keys_tbody_mark_before %}
+					<div class="col-span-1 flex items-center">
+						<input type="checkbox" name="keys[]" value="{sessions.KEY}" class="checkbox-input"
+							   id="{sessions.KEY}"/>
+					</div>
+					{% EVENT ucp_profile_autologin_keys_tbody_mark_after %}
+				</div>
+				<!-- END sessions -->
+			</div>
+			<!-- ENDIF -->
+
+			<!-- IF !.sessions -->
+			<div class="text-center my-4 text-gray-600">
+				<svg class="h-14 w-14 inline" xmlns="http://www.w3.org/2000/svg" width="24" height="24"
+					 viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round"
+					 stroke-linejoin="round" display="block" id="Door">
+					<path d="M5 2h11a3 3 0 0 1 3 3v14a1 1 0 0 1-1 1h-3"></path>
+					<path d="M5 2l7.588 1.518A3 3 0 0 1 15 6.459V20.78a1 1 0 0 1-1.196.98l-7.196-1.438A2 2 0 0 1 5 18.36V2z"></path>
+					<path d="M12 12v2"></path>
+				</svg>
+				<p class="my-2 font-bold text-center text-lg">{L_PROFILE_NO_AUTOLOGIN_KEYS}</p>
+			</div>
+			<!-- ENDIF -->
+
+			<!-- IF .sessions -->
+			<div class="mx-auto my-4 text-center">
+				<div class="space-x-1">
+					{S_HIDDEN_FIELDS}
+					<input type="submit" name="submit" value="{L_DELETE_MARKED}" class="button"/>
+					<a class="button button-secondary" href="#"
+					   onclick="$('#ucp input:checkbox').prop('checked', true); return false;">{L_MARK_ALL}</a>
+					<a class="button button-secondary" href="#"
+					   onclick="$('#ucp input:checkbox').prop('checked', false); return false;">{L_UNMARK_ALL}</a>
+					{S_FORM_TOKEN}
+				</div>
+			</div>
+			<!-- ENDIF -->
+
+		</form>
+	</div>
+</div>
+<!-- INCLUDE ucp_footer.html -->

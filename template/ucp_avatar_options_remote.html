@@ -1,0 +1,28 @@
+<dl class="my-1">
+	<dt>
+		<label for="avatar_remote_url">{L_LINK_REMOTE_AVATAR}{L_COLON}</label>
+	</dt>
+	<dd>
+		<input type="url" name="avatar_remote_url" id="avatar_remote_url" value="{AVATAR_REMOTE_URL}" class="input my-1"
+			   data-reset-on-edit="#avatar_remote_width, #avatar_remote_height"/>
+		<p class="text-gray-600 my-1 text-sm">{L_LINK_REMOTE_AVATAR_EXPLAIN}</p>
+	</dd>
+</dl>
+<dl class="my-1">
+	<dt>
+		<label for="avatar_remote_width">{L_LINK_REMOTE_SIZE}{L_COLON}</label>
+	</dt>
+	<dd>
+		<div class="flex space-x-2">
+			<div class="flex-1">
+				<input type="number" name="avatar_remote_width" id="avatar_remote_width" min="{AVATAR_MIN_WIDTH}"
+					   max="{AVATAR_MAX_WIDTH}" value="{AVATAR_REMOTE_WIDTH}" class="input my-1" placeholder="120px"/>
+			</div>
+			<div class="flex-1">
+				<input type="number" name="avatar_remote_height" id="avatar_remote_height" min="{AVATAR_MIN_HEIGHT}"
+					   max="{AVATAR_MAX_HEIGHT}" value="{AVATAR_REMOTE_HEIGHT}" class="input my-1" placeholder="120px"/>
+			</div>
+		</div>
+		<p class="text-sm text-gray-600 my-1 text-center">{L_LINK_REMOTE_SIZE_EXPLAIN}</p>
+	</dd>
+</dl>

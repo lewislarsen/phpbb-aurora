@@ -1,0 +1,104 @@
+<div id="notification_list" class="dropdown dropdown-extended notification_list">
+	<div class="pointer">
+		<div class="pointer-inner"></div>
+	</div>
+	<div class="bg-white shadow-sm border border-gray-200 rounded max-w-sm">
+		<div class="py-1.5 border-b border-gray-200 text-sm text-gray-700">
+			<div class="flex justify-between items-center align-middle px-3.5">
+				<div>
+					<span class="font-medium text-base">{L_NOTIFICATIONS}</span>
+				</div>
+				<div>
+					<!-- IF NOTIFICATIONS_COUNT -->
+					<span id="mark_all_notifications"><a class="mr-1" href="{U_MARK_ALL_NOTIFICATIONS}"
+														 data-ajax="notification.mark_all_read"
+														 title="{L_MARK_ALL_READ}">{L_MARK_ALL_READ}</a></span>
+					<!-- ENDIF -->
+				</div>
+			</div>
+		</div>
+
+		<ul>
+			<!-- IF not .notifications -->
+			<div class="text-center my-4 text-gray-600">
+				<svg class="h-10 w-10 inline" xmlns="http://www.w3.org/2000/svg" width="24" height="24"
+					 viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round"
+					 stroke-linejoin="round" display="block" id="Bell" data-darkreader-inline-fill=""
+					 data-darkreader-inline-stroke=""
+					 style="--darkreader-inline-fill:none; --darkreader-inline-stroke:currentColor;">
+					<path d="M12.721 5.003L11.255 5c-3.344-.008-6.247 2.709-6.27 6v3.79c0 .79-.1 1.561-.531 2.218l-.287.438C3.73 18.11 4.2 19 4.985 19h14.03c.785 0 1.254-.89.818-1.554l-.287-.438c-.43-.657-.531-1.429-.531-2.219v-3.788c-.04-3.292-2.95-5.99-6.294-5.998z"></path>
+					<path d="M15 19a3 3 0 1 1-6 0"></path>
+					<path d="M12 2a2 2 0 0 1 2 2v1h-4V4a2 2 0 0 1 2-2z"></path>
+				</svg>
+				<p class="my-2 font-bold text-center text-lg">{L_NO_NOTIFICATIONS}.</p>
+			</div>
+			<!-- ENDIF -->
+			<!-- BEGIN notifications -->
+			<li class="border-b border-gray-100 duration-400 ease-in-out transition <!-- IF notifications.UNREAD --> bg-blue-100 hover:bg-blue-50 <!-- ELSE --> bg-white hover:bg-gray-50 <!-- ENDIF --><!-- IF notifications.STYLING --> {notifications.STYLING}<!-- ENDIF -->">
+
+				<!-- IF notifications.URL -->
+				<a href="<!-- IF notifications.UNREAD -->{notifications.U_MARK_READ}"
+				   data-real-url="{notifications.URL}<!-- ELSE -->{notifications.URL}<!-- ENDIF -->">
+					<!-- ENDIF -->
+
+					<div class="flex justify-between items-center align-middle">
+						<div class="flex-none w-14 h-14 mr-2">
+							<!-- IF notifications.AVATAR -->
+							<span>{notifications.AVATAR}</span>
+							<!-- ELSE -->
+							<img src="{T_THEME_PATH}/images/no_avatar.gif"
+								 alt=""/>
+							<!-- ENDIF -->
+						</div>
+
+						<div class="flex-1 text-left">
+							<div>
+								<p class="font-medium text-sm">
+									{notifications.FORMATTED_TITLE}
+								</p>
+								<!-- IF notifications.REFERENCE -->
+								<p class="notification-reference">
+									{notifications.REFERENCE}</p>
+								<!-- ENDIF -->
+								<!-- IF notifications.FORUM -->
+								<p class="notification-forum">
+									{notifications.FORUM}
+								</p>
+								<!-- ENDIF -->
+								<!-- IF notifications.REASON -->
+								<p class="notification-reason">
+									{notifications.REASON}
+								</p>
+								<!-- ENDIF -->
+								<p class="text-sm text-gray-600">
+									{notifications.TIME}
+								</p>
+							</div>
+						</div>
+					</div>
+					<!-- IF notifications.URL -->
+				</a>
+				<!-- ENDIF -->
+				<!-- IF notifications.UNREAD -->
+
+				<a href="{notifications.U_MARK_READ}"
+				   class="mark_read icon-mark"
+				   data-ajax="notification.mark_read"
+				   title="{L_MARK_READ}">
+					<svg class="w-4 h-4 inline" xmlns="http://www.w3.org/2000/svg" width="24" height="24"
+						 viewBox="0 0 24 24" fill="currentColor" stroke-width="2" display="block" id="CircleCheckFill">
+						<path fill-rule="evenodd" clip-rule="evenodd"
+							  d="M12 1C5.925 1 1 5.925 1 12s4.925 11 11 11 11-4.925 11-11S18.075 1 12 1zm4.768 9.14a1 1 0 1 0-1.536-1.28l-4.3 5.159-2.225-2.226a1 1 0 0 0-1.414 1.414l3 3a1 1 0 0 0 1.475-.067l5-6z"/>
+					</svg>
+					<span class="sr-only">{L_MARK_READ}</span>
+				</a>
+				<!-- ENDIF -->
+			</li>
+			<!-- END notifications -->
+		</ul>
+		<div class="border-t border-gray-200 py-1.5 px-3.5 text-sm bg-gray-100 text-left space-x-2">
+			<a href="{U_VIEW_ALL_NOTIFICATIONS}" title="{L_SEE_ALL}"><span>{L_SEE_ALL}</span></a>
+			<a href="{U_NOTIFICATION_SETTINGS}" title="{L_SETTINGS}">{L_SETTINGS}</a>
+		</div>
+	</div>
+</div>

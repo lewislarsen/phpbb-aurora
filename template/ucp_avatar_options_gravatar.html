@@ -1,0 +1,28 @@
+<dl class="my-1">
+	<dt>
+		<label for="avatar_gravatar_email">{L_GRAVATAR_AVATAR_EMAIL}{L_COLON}</label>
+	</dt>
+	<dd>
+		<input type="email" name="avatar_gravatar_email" id="avatar_gravatar_email" value="{AVATAR_GRAVATAR_EMAIL}"
+			   class="input my-1" data-reset-on-edit="#avatar_gravatar_width, #avatar_gravatar_height" placeholder="john.doe@gmail.com"/>
+		<p class="text-sm text-gray-600 my-1">{L_GRAVATAR_AVATAR_EMAIL_EXPLAIN}</p>
+	</dd>
+</dl>
+<dl class="my-1">
+	<dt>
+		<label for="avatar_gravatar_width">{L_GRAVATAR_AVATAR_SIZE}{L_COLON}</label>
+	</dt>
+	<dd>
+		<div class="flex space-x-2">
+			<div class="flex-1">
+				<input type="number" name="avatar_gravatar_width" id="avatar_gravatar_width" min="{AVATAR_MIN_WIDTH}"
+					   max="{AVATAR_MAX_WIDTH}" value="{AVATAR_GRAVATAR_WIDTH}" class="input my-1" placeholder="120px"/>
+			</div>
+			<div class="flex-1">
+				<input type="number" name="avatar_gravatar_height" id="avatar_gravatar_height" min="{AVATAR_MIN_HEIGHT}"
+					   max="{AVATAR_MAX_HEIGHT}" value="{AVATAR_GRAVATAR_HEIGHT}" class="input my-1" placeholder="120px"/>
+			</div>
+		</div>
+		<p class="text-sm text-gray-600 my-1 text-center">{L_LINK_REMOTE_SIZE_EXPLAIN}</p>
+	</dd>
+</dl>
