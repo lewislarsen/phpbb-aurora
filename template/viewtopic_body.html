@@ -51,7 +51,7 @@
 			   title="<!-- IF S_IS_LOCKED -->{L_TOPIC_LOCKED}<!-- ELSE -->{L_POST_REPLY}<!-- ENDIF -->">
 				<!-- IF S_IS_LOCKED -->
 				<span>{L_BUTTON_TOPIC_LOCKED}</span>
-				<svg class="w-4 h-4 inline" xmlns="http://www.w3.org/2000/svg" width="24" height="24"
+				<svg class="inline w-4 h-4" xmlns="http://www.w3.org/2000/svg" width="24" height="24"
 					 viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round"
 					 stroke-linejoin="round" display="block" id="LockOn" data-darkreader-inline-fill=""
 					 data-darkreader-inline-stroke=""
@@ -148,10 +148,10 @@
 <!-- BEGIN postrow -->
 <!-- EVENT viewtopic_body_postrow_post_before -->
 
-<div id="p{postrow.POST_ID}" class="my-3 border border-gray-300 rounded text-white">
+<div id="p{postrow.POST_ID}" class="my-3 text-white rounded border border-gray-300">
 	<div class="text-sm px-3.5 py-1.5 bg-brand">
 		<div class="flex justify-between items-center align-middle">
-			<div class="flex items-center align-middle mt-1">
+			<div class="flex items-center mt-1 align-middle">
 				<!-- EVENT viewtopic_body_postrow_post_details_before -->
 				<p class="mb-1 text-sm">
 					<!-- IF S_IS_BOT -->
@@ -167,21 +167,21 @@
 			</div>
 			<div class="text-sm text-white">
 				<!-- IF postrow.S_UNREAD_POST -->
-				<div class="newpost inline mr-1 px-2 py-1 rounded inline uppercase text-xs font-bold text-widest">
+				<div class="inline px-2 py-1 mr-1 text-xs font-bold uppercase rounded newpost text-widest">
 					{L_NEW_POST}
 				</div>
 				<!-- ENDIF -->
 
 				<a href="{postrow.U_MINI_POST}" title="{postrow.POST_ID}"
-				   class="text-white hover:opacity-75 ease-in-out duration-200 transition">
+				   class="text-white transition duration-200 ease-in-out hover:opacity-75">
 					#{postrow.POST_ID}
 				</a>
 			</div>
 		</div>
 	</div>
-	<div class="md:flex justify-center items-center items-stretch">
+	<div class="justify-center items-center items-stretch md:flex">
 		<div class="flex-none px-2 py-1 md:px-2.5 md:py-2 bg-gray-50 border-b md:border-b-0 md:border-r border-gray-200 md:max-w-sm">
-			<div class="md:px-2 py-1 md:py-3 text-gray-700 w-48">
+			<div class="py-1 w-48 text-gray-700 md:px-2 md:py-3">
 				<div class="block md:hidden">
 					<div class="flex justify-center items-center items-stretch align-middle">
 						<div class="flex-none p-1.5">
@@ -189,13 +189,13 @@
 							<!-- IF postrow.POSTER_AVATAR -->
 							<a href="{postrow.U_POST_AUTHOR}" class="w-14 h-14 avatar">{postrow.POSTER_AVATAR}</a>
 							<!-- ELSE -->
-							<a href="{postrow.U_POST_AUTHOR}" class="w-14 h-14 md:w-40 md:h-40 mb-2">
-								<img src="{T_THEME_PATH}/images/no_avatar.gif" alt="" class="avatar w-full"/>
+							<a href="{postrow.U_POST_AUTHOR}" class="mb-2 w-14 h-14 md:w-40 md:h-40">
+								<img src="{T_THEME_PATH}/images/no_avatar.gif" alt="" class="w-full avatar"/>
 							</a>
 							<!-- ENDIF -->
 							<!-- EVENT viewtopic_body_avatar_after -->
 						</div>
-						<div class="flex-1 text-sm text-left mr-2 md:ml-0 mt-2">
+						<div class="flex-1 mt-2 mr-2 text-sm text-left md:ml-0">
 							<!-- EVENT viewtopic_body_post_author_before -->
 							<!-- IF not postrow.U_POST_AUTHOR -->
 							<div class="text-base font-medium">{postrow.POST_AUTHOR_FULL}</div>
@@ -219,12 +219,12 @@
 					<!-- EVENT viewtopic_body_avatar_before -->
 					<!-- IF postrow.POSTER_AVATAR -->
 					<div class="mx-auto text-center">
-						<a href="{postrow.U_POST_AUTHOR}" class="w-14 h-14 md:w-40 md:h-40 avatar mb-2">{postrow.POSTER_AVATAR}</a>
+						<a href="{postrow.U_POST_AUTHOR}" class="mb-1 w-14 h-14 md:w-40 md:h-40 avatar">{postrow.POSTER_AVATAR}</a>
 					</div>
 					<!-- ELSE -->
 					<div class="mx-auto text-center">
-						<a href="{postrow.U_POST_AUTHOR}" class="w-14 h-14 md:w-40 md:h-40 mb-2">
-							<img src="{T_THEME_PATH}/images/no_avatar.gif" alt="" class="avatar w-full"/>
+						<a href="{postrow.U_POST_AUTHOR}" class="mb-2 w-14 h-14 md:w-40 md:h-40">
+							<img src="{T_THEME_PATH}/images/no_avatar.gif" alt="" class="w-full avatar"/>
 						</a>
 					</div>
 					<!-- ENDIF -->
@@ -232,19 +232,23 @@
 
 					<!-- EVENT viewtopic_body_post_author_before -->
 					<!-- IF not postrow.U_POST_AUTHOR -->
-					<div class="text-base text-center">{postrow.POST_AUTHOR_FULL}</div>
+					<div class="text-lg font-medium text-center">{postrow.POST_AUTHOR_FULL}</div>
 					<!-- ELSE -->
-					<div class="text-base text-center">{postrow.POST_AUTHOR_FULL}</div>
+					<div class="text-lg font-medium text-center">{postrow.POST_AUTHOR_FULL}</div>
 					<!-- ENDIF -->
 					<!-- EVENT viewtopic_body_post_author_after -->
 
 					<!-- EVENT viewtopic_body_postrow_rank_before -->
 					<!-- IF postrow.RANK_TITLE or postrow.RANK_IMG -->
-					<div class="text-sm font-medium text-center">{postrow.RANK_TITLE}
-						<div class="text-center">
+					<div class="-mt-1 text-sm font-medium text-center">
+						{postrow.RANK_TITLE}
+						<!-- IF postrow.RANK_IMG -->
+						<div class="py-1 text-center">
 							{postrow.RANK_IMG}
 						</div>
-					</div><!-- ENDIF -->
+						<!-- ENDIF -->
+					</div>
+					<!-- ENDIF -->
 					<!-- EVENT viewtopic_body_postrow_rank_after -->
 				</div>
 
@@ -341,7 +345,7 @@
 					<!-- IF postrow.S_POST_REPORTED -->
 					<p class="px-3 py-2 my-2 text-center bg-red-100 rounded-md border border-red-200">
 						<a href="{postrow.U_MCP_REPORT}"
-						   class="text-red-600 hover:text-red-700 ease-in-out duration-400 transition">
+						   class="text-red-600 transition ease-in-out hover:text-red-700 duration-400">
 							<svg class="inline -mt-1 w-4 h-4" xmlns="http://www.w3.org/2000/svg" width="24" height="24"
 								 viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"
 								 stroke-linecap="round" stroke-linejoin="round" display="block" id="CircleAlert">
@@ -352,15 +356,15 @@
 					</p>
 					<!-- ENDIF -->
 
-					<div class="my-1.5 md:h-full md:min-h-full text-sm text-gray-800 font-sans">{postrow.MESSAGE}</div>
+					<div class="my-2 font-sans text-base text-gray-800 h-auto">{postrow.MESSAGE}</div>
 
 					<!-- EVENT viewtopic_body_postrow_content_after -->
 
 					<!-- IF postrow.S_HAS_ATTACHMENTS -->
-					<div class="border-b border-gray-100 my-2 max-w-xl mx-auto"></div>
+					<div class="mx-auto my-2 max-w-xl border-b border-gray-100"></div>
 					<div class="my-2">
-						<p class="text-base text-brand my-1">{L_ATTACHMENTS}</p>
-						<div class="grid md:grid-cols-4 grid-cols-2 gap-5 gap-y-6">
+						<p class="my-1 text-base text-brand">{L_ATTACHMENTS}</p>
+						<div class="grid grid-cols-2 gap-5 gap-y-6 md:grid-cols-4">
 							<!-- BEGIN attachment -->
 							{postrow.attachment.DISPLAY_ATTACHMENT}
 							<!-- END attachment -->
@@ -374,13 +378,13 @@
 					<!-- IF postrow.DELETED_MESSAGE or postrow.DELETE_REASON -->
 					<div class="notice post_deleted_msg">
 						{postrow.DELETED_MESSAGE}
-						<!-- IF postrow.DELETE_REASON --><span class="font-medium block">{L_REASON}{L_COLON}</span> <span>{postrow.DELETE_REASON}</span>
+						<!-- IF postrow.DELETE_REASON --><span class="block font-medium">{L_REASON}{L_COLON}</span> <span>{postrow.DELETE_REASON}</span>
 						<!-- ENDIF -->
 					</div>
 					<!-- ELSEIF postrow.EDITED_MESSAGE or postrow.EDIT_REASON -->
 					<div class="py-1">
 						{postrow.EDITED_MESSAGE}
-						<!-- IF postrow.EDIT_REASON --><span class="font-medium block">{L_REASON}{L_COLON}</span> <span>{postrow.EDIT_REASON}</span>
+						<!-- IF postrow.EDIT_REASON --><span class="block font-medium">{L_REASON}{L_COLON}</span> <span>{postrow.EDIT_REASON}</span>
 						<!-- ENDIF -->
 					</div>
 					<!-- ENDIF -->
@@ -501,14 +505,14 @@
 				<!-- ENDIF -->
 
 				<!-- IF S_DISPLAY_SEARCHBOX -->
-				<div class="mx-2">
-					<div class="justify-end hidden md:flex">
+				<div class="mr-2">
+					<div class="hidden justify-end md:flex">
 						<div>
 							<form method="get" id="topic-search" action="{S_SEARCHBOX_ACTION}"
 								  class="flex items-center space-x-1">
 								<input class="input"  type="search" name="keywords" id="search_keywords" size="20" placeholder="{L_SEARCH_TOPIC}" />
-								<button class="button inline" type="submit" title="{L_SEARCH}">
-									<svg class="w-4 h-4 inline -mt-1" xmlns="http://www.w3.org/2000/svg" width="24" height="24"
+								<button class="inline button" type="submit" title="{L_SEARCH}">
+									<svg class="inline -mt-1 w-4 h-4" xmlns="http://www.w3.org/2000/svg" width="24" height="24"
 										 viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"
 										 stroke-linecap="round"
 										 stroke-linejoin="round" display="block" id="Search" data-darkreader-inline-fill=""
@@ -518,8 +522,8 @@
 									</svg>
 									<span class="sr-only">{L_SEARCH}</span>
 								</button>
-								<a href="{{ U_SEARCH_FORUM }}" class="button inline" title="{L_SEARCH_ADV}">
-									<svg class="w-4 h-4 inline -mt-1" xmlns="http://www.w3.org/2000/svg" width="24" height="24"
+								<a href="{{ U_SEARCH_FORUM }}" class="inline button" title="{L_SEARCH_ADV}">
+									<svg class="inline -mt-1 w-4 h-4" xmlns="http://www.w3.org/2000/svg" width="24" height="24"
 										 viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"
 										 stroke-linecap="round"
 										 stroke-linejoin="round" display="block" id="Gear" data-darkreader-inline-fill=""
@@ -548,7 +552,7 @@
 		<span title="{L_QUICK_MOD}" class="button button-secondary dropdown-trigger dropdown-select">
 			{L_MODERATE}
 			<span class="sr-only">{L_QUICK_MOD}</span>
-			<svg class="w-4 h-4 inline" xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24"
+			<svg class="inline w-4 h-4" xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24"
 				 fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"
 				 display="block" id="ChevronDown" data-darkreader-inline-fill="" data-darkreader-inline-stroke=""
 				 style="--darkreader-inline-fill:none; --darkreader-inline-stroke:currentColor;"><path
@@ -589,7 +593,7 @@
 
 <!-- IF S_DISPLAY_ONLINE_LIST and U_VIEWONLINE -->
 <div class="my-3">
-	<div class="bg-gray-50 rounded border border-gray-100 py-2 px-3 text-left text-sm flex items-center align-middle">
+	<div class="flex items-center px-3 py-2 text-sm text-left align-middle bg-gray-50 rounded border border-gray-100">
 		<p>{LOGGED_IN_USER_LIST}</p>
 	</div>
 </div>
