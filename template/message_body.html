@@ -1,9 +1,9 @@
 <!-- IF S_SIMPLE_MESSAGE -->
-	<!-- INCLUDE simple_header.html -->
+<!-- INCLUDE simple_header.html -->
 <!-- ELSE -->
-	<!-- INCLUDE overall_header.html -->
+<!-- INCLUDE overall_header.html -->
 <!-- ENDIF -->
-<div class="px-6 py-3 mx-auto mb-3 max-w-6xl bg-white rounded-md border border-gray-200 shadow">
+<div class="px-6 py-3 mx-auto mb-3 max-w-6xl bg-white rounded-md border border-gray-200 shadow" id="message">
 	<h2 class="mb-1 text-2xl font-medium">{MESSAGE_TITLE}</h2>
 	<p class="my-1 text-left font-medium">{MESSAGE_TEXT}</p>
 
@@ -17,7 +17,14 @@
 
 </div>
 <!-- IF S_SIMPLE_MESSAGE -->
-	<!-- INCLUDE simple_footer.html -->
+<!-- INCLUDE simple_footer.html -->
 <!-- ELSE -->
-	<!-- INCLUDE overall_footer.html -->
+<!-- INCLUDE overall_footer.html -->
 <!-- ENDIF -->
+
+<script>
+	// remove additional classes if the wrapper is present. Hard to predict on numerous pages so this is a guarantee to make the style not ugly.
+	if (document.getElementById("wrapper")) {
+		document.querySelector("#message").classList.remove("px-6", "py-3", "mx-auto", "mb-3", "max-w-6xl", "bg-white", "rounded-md", "border", "border-gray-200", "shadow");
+	}
+</script>
