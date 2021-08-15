@@ -17,7 +17,7 @@
 		<div class="col-span-3">
 			<div class="flex justify-between items-center align-middle">
 				<div class="flex justify-center items-center items-stretch align-middle">
-					<div class="flex-none p-2 ml-2">
+					<div class="flex-none p-2 ml-2 mr-1">
 						<!-- IF forumrow.FORUM_IMAGE -->
 						<!-- EVENT forumlist_body_forum_image_before -->
 						<!-- EVENT forumlist_body_forum_image_prepend -->
@@ -53,24 +53,28 @@
 					<div class="flex-1 text-left">
 						<div class="flex-none align-left">
 							<!-- IF forumrow.FORUM_DESC -->
-							<a title="{forumrow.FORUM_NAME}" href="{forumrow.U_VIEWFORUM}"
-							   class="text-base font-bold text-gray-800 hover:text-gray-600 flex items-center align-middle">{forumrow.FORUM_NAME}</a>
-							<div class="text-sm text-gray-600 font-medium">{forumrow.FORUM_DESC}</div>
+							<div class="mt-1.5">
+								<a title="{forumrow.FORUM_NAME}" href="{forumrow.U_VIEWFORUM}"
+								   class="text-base font-bold text-gray-800 hover:text-gray-600 flex items-center align-middle">{forumrow.FORUM_NAME}</a>
+								<div class="text-sm text-gray-600 font-medium">{forumrow.FORUM_DESC}</div>
+							</div>
 							<!-- ELSE -->
-							<a title="{forumrow.FORUM_NAME}" href="{forumrow.U_VIEWFORUM}"
-							   class="text-base font-bold text-gray-800 hover:text-gray-600 md:mt-4">{forumrow.FORUM_NAME}</a>
+							<div>
+								<a title="{forumrow.FORUM_NAME}" href="{forumrow.U_VIEWFORUM}"
+								   class="text-base font-bold text-gray-800 hover:text-gray-600 mt-3 md:mt-4">{forumrow.FORUM_NAME}</a>
+							</div>
 							<!-- ENDIF -->
 							<!-- IF forumrow.MODERATORS -->
-							<div class="text-xs text-gray-600">{forumrow.L_MODERATOR_STR}{L_COLON}</div>
+							<div class="text-sm text-gray-600">{forumrow.L_MODERATOR_STR}{L_COLON}</div>
 							{forumrow.MODERATORS}
 							<!-- ENDIF -->
 							<!-- IF .forumrow.subforum and forumrow.S_LIST_SUBFORUMS -->
 							<!-- EVENT forumlist_body_subforums_before -->
-							<div class="text-xs text-gray-600 inline">{forumrow.L_SUBFORUM_STR}{L_COLON}</div>
+							<div class="text-sm text-gray-600 inline">{forumrow.L_SUBFORUM_STR}{L_COLON}</div>
 							<!-- BEGIN subforum -->
 							<!-- EVENT forumlist_body_subforum_link_prepend -->
 							<a href="{forumrow.subforum.U_SUBFORUM}"
-							   class="inline-flex mr-1 text-xs text-gray-800 hover:text-gray-600"
+							   class="inline-flex text-sm text-gray-800 hover:text-gray-600"
 							   title="{forumrow.subforum.SUBFORUM_NAME}">
 								{forumrow.subforum.SUBFORUM_NAME}</a>
 							<!-- IF not forumrow.subforum.S_LAST_ROW -->{L_COMMA_SEPARATOR}<!-- ENDIF -->
@@ -80,7 +84,7 @@
 							<!-- ENDIF -->
 							<!-- IF forumrow.S_DISPLAY_SUBJECT -->
 							<div class="md:hidden">
-								<div class="text-xs font-bold">
+								<div class="text-xs font-medium">
 									<!-- IF forumrow.LAST_POST_TIME -->
 									<a href="{forumrow.U_LAST_POST}" title="{forumrow.LAST_POST_SUBJECT}"
 									   class="text-sm text-gray-800 hover:text-gray-600">
@@ -106,6 +110,7 @@
 		<div>
 			<div class="flex justify-between items-center align-middle hidden md:flex">
 				<div class="flex-none p-2 ml-2">
+					<!-- IF forumrow.LAST_POST_TIME -->
 					<div class="forum_last_post_avatar">
 						{% if forumrow.LAST_POSTER_AVATAR_IMG %}
 						{{ forumrow.LAST_POSTER_AVATAR_IMG }}
@@ -113,6 +118,7 @@
 						<img src="{T_THEME_PATH}/images/no_avatar.gif" alt="" class="w-full avatar"/>
 						{% endif %}
 					</div>
+					<!-- ENDIF -->
 				</div>
 				<div class="flex-1 text-left">
 					<!-- IF forumrow.U_UNAPPROVED_TOPICS -->
@@ -135,13 +141,13 @@
 					<!-- ENDIF -->
 					<div class="text-sm">
 						<span class="text-gray-600 font-medium"><date datetime="{forumrow.LAST_POST_TIME_RFC3339}">{forumrow.LAST_POST_TIME}</date></span>
-						<span>{forumrow.LAST_POSTER_FULL}</span>
+						<span>{L_POST_BY_AUTHOR} {forumrow.LAST_POSTER_FULL}</span>
 					</div>
 					<!-- ELSE -->
 					{% if forumrow.U_UNAPPROVED_TOPICS %}
 					{{ lang('TOPIC_UNAPPROVED_FORUM', forumrow.TOPICS) }}
 					{% else %}
-					{{ lang('NO_POSTS') }}
+					<div class="flex items-center my-5">{{ lang('NO_POSTS') }}</div>
 					{% endif %}
 					<!-- ENDIF -->
 				</div>
