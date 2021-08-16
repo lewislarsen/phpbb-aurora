@@ -1,0 +1,99 @@
+<!-- IF S_SIMPLE_MESSAGE -->
+<!-- INCLUDE simple_header.html -->
+<!-- ELSE -->
+<!-- INCLUDE overall_header.html -->
+<!-- ENDIF -->
+<div class="px-6 py-3 mx-auto mb-3 max-w-6xl bg-white rounded-md border border-gray-200 shadow" id="message">
+	<h2 class="mb-1 text-2xl font-medium">{NAME} <!-- IF S_SCRIPT_NAME --> for {SCRIPT_NAME} <!-- ENDIF --></h2>
+
+	<!-- IF S_REDIRECT_SET -->
+	<div class="max-w-3xl mx-auto mt-4">
+		<div class="rounded-lg bg-blue-50 text-blue-600 border border-blue-100 font-medium py-2 px-3 text-center">
+			<p class="my-1 text-center font-medium">You will be redirected to your destination automatically.</p>
+			<a href="{S_REDIRECT_URL}" class="my-1 ease-in-out duration-400 transition">
+				<svg class="h-4 w-4 inline mr-1" xmlns="http://www.w3.org/2000/svg" width="24" height="24"
+					 viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round"
+					 stroke-linejoin="round">
+					<path d="M13.5 10.5L21 3"/>
+					<path d="M16 3h5v5"/>
+					<path d="M21 14v5a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2V5a2 2 0 0 1 2-2h5"/>
+				</svg>
+				Go to destination now</a>
+		</div>
+		<!-- ENDIF -->
+		<div class="text-gray-700 font-medium max-w-4xl mx-auto py-6">
+			<!-- IF S_REGISTERED_USER -->
+			<div class="flex justify-center md:flex mx-auto">
+				<div>
+					<div class="text-center my-2">
+						<div class="md:h-28 md:w-28 my-1">
+							<!-- IF CURRENT_USER_AVATAR -->
+							<div class="avatar">{CURRENT_USER_AVATAR}</div>
+							<!-- ELSE -->
+							<img src="{T_THEME_PATH}/images/no_avatar.gif" alt="" class="avatar w-full"/>
+							<!-- ENDIF -->
+						</div>
+					</div>
+				</div>
+			</div>
+			<p class="my-3 text-center text-lg">Hello {CURRENT_USERNAME_SIMPLE}, you do not have permission to access
+				<!-- IF S_SCRIPT_NAME --> {SCRIPT_NAME}. <!-- ELSE --> this page or resource. <!-- ENDIF --></p>
+			<div class="border-b border-gray-100 my-4 max-w-xl mx-auto"></div>
+			<ul class="list-disc my-3 text-center">
+				<li class="my-1.5">
+					Your account may not yet be activated or be suspended by an Administrator.
+				</li>
+				<li class="my-1.5">
+					Your account may not have sufficient permissions to continue. If you are trying to access an
+					administrative only feature, manage content owned by other users or perform a highly privileged
+					action
+					this may be
+					why.
+				</li>
+				<li class="my-1.5">Are you sure you're logged in as the correct user? You are currently logged in as
+					{CURRENT_USERNAME_SIMPLE}. <a href="{U_LOGIN_LOGOUT}" title="{L_LOGIN_LOGOUT}" accesskey="x">{L_LOGIN_LOGOUT}</a>
+				</li>
+				<!-- IF U_CONTACT_US -->
+				<li class="my-1.5">
+					If you need to contact an Administrator about this, please do so <a href="{U_CONTACT_US}"
+																						title="{L_CONTACT_US}">here</a>.
+				</li>
+				<!-- ENDIF -->
+			</ul>
+			<!-- ELSE -->
+			<p class="my-3 text-center text-lg">Hello Guest, you do not have permission to access
+				<!-- IF S_SCRIPT_NAME --> {SCRIPT_NAME}. <!-- ELSE --> this page or resource. <!-- ENDIF --></p>
+			<div class="border-b border-gray-100 my-4 max-w-xl mx-auto"></div>
+			<ul class="list-disc my-3 text-center">
+				<li class="my-1.5">
+					You may not have sufficient permissions to continue.
+				</li>
+				<li class="my-1.5">
+					Please try logging in as guests may not be able to access this page. <a href="{U_LOGIN_LOGOUT}"
+																							title="{L_LOGIN_LOGOUT}"
+																							accesskey="x">{L_LOGIN_LOGOUT}</a>
+				</li>
+				<!-- IF U_CONTACT_US -->
+				<li class="my-1.5">
+					If you need to contact an Administrator about this, please do so <a href="{U_CONTACT_US}"
+																						title="{L_CONTACT_US}">here</a>.
+				</li>
+				<!-- ENDIF -->
+			</ul>
+			<!-- ENDIF -->
+		</div>
+	</div>
+</div>
+</div>
+<!-- IF S_SIMPLE_MESSAGE -->
+<!-- INCLUDE simple_footer.html -->
+<!-- ELSE -->
+<!-- INCLUDE overall_footer.html -->
+<!-- ENDIF -->
+
+<script>
+	// remove additional classes if the wrapper is present. Hard to predict on numerous pages so this is a guarantee to make the style not ugly.
+	if (document.getElementById("wrapper")) {
+		document.querySelector("#message").classList.remove("px-6", "py-3", "mx-auto", "mb-3", "max-w-6xl", "bg-white", "rounded-md", "border", "border-gray-200", "shadow");
+	}
+</script>

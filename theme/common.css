@@ -1221,6 +1221,11 @@ ul.linklist:after,
 	width: 60px;
 }
 
+.activity_stream_avatar {
+	height: 60px;
+	width: 60px;
+}
+
 .sidebarItem.is-selected {
 	font-weight: 700;
 	background: #f2f2f2;

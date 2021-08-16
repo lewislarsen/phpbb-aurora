@@ -1,0 +1,161 @@
+<div class="sticky top-0">
+	<div class="w-full text-sm bg-white border-b border-gray-200 shadow-sm">
+		<div class="mx-auto max-w-6xl">
+			<div class="px-4 py-2">
+				<div class="flex justify-between items-center align-middle">
+					<div class="flex items-center">
+						<div class="inline space-x-2">
+							<!-- IF U_SEARCH -->
+							<a href="activitystream.php" title="{L_NEW_POSTS}"
+							   class="font-medium text-gray-800 transition ease-in-out hover:text-gray-600 duration-400 hover:text-gray-900 hover:no-underline">
+								<svg class="inline w-5 h-5 md:h-4 md:w-4" xmlns="http://www.w3.org/2000/svg" width="24"
+									 height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"
+									 stroke-linecap="round" stroke-linejoin="round">
+									<path d="M5 21h12a4 4 0 0 0 4-4V5a2 2 0 0 0-2-2H9a2 2 0 0 0-2 2v13c0 1.657-.343 3-2 3z"/>
+									<path d="M3 10a2 2 0 0 1 2-2h2v10.5c0 1.38-.62 2.5-2 2.5s-2-1.12-2-2.5V10z"/>
+									<circle cx="12" cy="8" r="1"/>
+									<path d="M11 14h6"/>
+									<path d="M11 17h3"/>
+								</svg>
+								<span class="hidden md:inline">{L_NEW_POSTS}</span>
+							</a>
+							<!-- ENDIF -->
+							<!-- IF U_ACP -->
+							<a href="{U_ACP}" title="{L_ACP}"
+							   class="font-medium text-gray-800 transition ease-in-out hover:text-gray-600 duration-400 hover:text-gray-900 hover:no-underline">
+								<svg class="inline w-5 h-5 md:h-4 md:w-4" xmlns="http://www.w3.org/2000/svg" width="24"
+									 height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"
+									 stroke-linecap="round" stroke-linejoin="round" display="block" id="Shield">
+									<path d="M13.147 21.197l1.67-1.168a13.393 13.393 0 0 0 5.447-13.624.837.837 0 0 0-.453-.586L12 2 4.19 5.819a.837.837 0 0 0-.454.586 13.393 13.393 0 0 0 5.448 13.624l1.67 1.168a2 2 0 0 0 2.293 0z"></path>
+								</svg>
+								<span class="hidden md:inline">{L_ACP_SHORT}</span>
+							</a>
+							<!-- ENDIF -->
+							<!-- IF U_MCP -->
+							<a href="{U_MCP}" title="{L_MCP}"
+							   class="font-medium text-gray-800 transition ease-in-out hover:text-gray-600 duration-400 hover:text-gray-900 hover:no-underline">
+								<svg class="inline w-5 h-5 md:h-4 md:w-4" xmlns="http://www.w3.org/2000/svg" width="24"
+									 height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"
+									 stroke-linecap="round" stroke-linejoin="round" display="block" id="Flag">
+									<path d="M4 15h13.865a1 1 0 0 0 .768-1.64L15 9l3.633-4.36A1 1 0 0 0 17.865 3H4v18"/>
+								</svg>
+								<span class="hidden md:inline">{L_MCP_SHORT}</span>
+							</a>
+							<!-- ENDIF -->
+						</div>
+					</div>
+					<div class="flex items-center">
+						<div class="inline space-x-2">
+							<!-- IF S_REGISTERED_USER -->
+							<!-- IF U_RESTORE_PERMISSIONS -->
+							<a href="{U_RESTORE_PERMISSIONS}" title="{L_RESTORE_PERMISSIONS}"
+							   class="font-medium text-gray-800 transition ease-in-out hover:text-gray-600 duration-400 hover:text-gray-900 hover:no-underline">
+								<svg class="inline w-5 h-5 md:h-4 md:w-4" xmlns="http://www.w3.org/2000/svg" width="24"
+									 height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"
+									 stroke-linecap="round" stroke-linejoin="round" display="block" id="ArrowCycle">
+									<path d="M22 12c0 6-4.39 10-9.806 10C7.792 22 4.24 19.665 3 16"></path>
+									<path d="M2 12C2 6 6.39 2 11.806 2 16.209 2 19.76 4.335 21 8"></path>
+									<path d="M7 17l-4-1-1 4"></path>
+									<path d="M17 7l4 1 1-4"></path>
+								</svg>
+								<span class="hidden md:inline">{L_RESTORE_PERMISSIONS}</span>
+							</a>
+							<!-- ENDIF -->
+							<!-- IF S_NOTIFICATIONS_DISPLAY -->
+							<span class="dropdown-container dropdown-{S_CONTENT_FLOW_END} rightside"
+								  data-skip-responsive="true">
+						<a href="{U_VIEW_ALL_NOTIFICATIONS}" id="notification_list_button"
+						   class="font-medium text-gray-800 transition ease-in-out hover:text-gray-600 duration-400 dropdown-trigger hover:text-gray-900 hover:no-underline">
+						<svg class="inline w-5 h-5 md:h-4 md:w-4" xmlns="http://www.w3.org/2000/svg" width="24"
+							 height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"
+							 stroke-linecap="round" stroke-linejoin="round" display="block" id="Bell"><path
+								d="M12.721 5.003L11.255 5c-3.344-.008-6.247 2.709-6.27 6v3.79c0 .79-.1 1.561-.531 2.218l-.287.438C3.73 18.11 4.2 19 4.985 19h14.03c.785 0 1.254-.89.818-1.554l-.287-.438c-.43-.657-.531-1.429-.531-2.219v-3.788c-.04-3.292-2.95-5.99-6.294-5.998z"></path><path
+								d="M15 19a3 3 0 1 1-6 0"></path><path
+								d="M12 2a2 2 0 0 1 2 2v1h-4V4a2 2 0 0 1 2-2z"></path></svg>
+						<span class="hidden md:inline">{L_NOTIFICATIONS}</span>
+						<span class="px-1.5 py-0.5 bg-red-600 ml-1 text-white rounded-md border-transparent <!-- IF not NOTIFICATIONS_COUNT --> hidden<!-- ENDIF -->">{NOTIFICATIONS_COUNT}</span>
+						</a>
+								<!-- INCLUDE notification_dropdown.html -->
+					</span>
+							<!-- ENDIF -->
+							<!-- IF S_DISPLAY_PM -->
+							<a href="{U_PRIVATEMSGS}" title="{L_PRIVATE_MESSAGES}"
+							   class="font-medium text-gray-800 transition ease-in-out hover:text-gray-600 duration-400 hover:text-gray-900 hover:no-underline">
+								<svg class="inline w-5 h-5 md:h-4 md:w-4" xmlns="http://www.w3.org/2000/svg" width="24"
+									 height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"
+									 stroke-linecap="round" stroke-linejoin="round" display="block" id="Inbox">
+									<path d="M3.304 6.132A4 4 0 0 1 7.209 3h9.582a4 4 0 0 1 3.905 3.132l.147.662a23.997 23.997 0 0 1 0 10.412l-.147.662A4 4 0 0 1 16.791 21H7.21a4 4 0 0 1-3.905-3.132l-.147-.662a24 24 0 0 1 0-10.412l.147-.662z"/>
+									<path d="M2.5 13h6.338c0 1 .973 3 3.405 3 2.433 0 3.406-2 3.406-3H21.5"/>
+								</svg>
+								<span class="hidden md:inline">{L_PRIVATE_MESSAGES}</span>
+							</a>
+							<!-- ENDIF -->
+							<a href="{U_PROFILE}" title="{L_PROFILE}"
+							   class="font-medium text-gray-800 transition ease-in-out hover:text-gray-600 duration-400 hover:text-gray-900 hover:no-underline">
+								<svg class="inline w-5 h-5 md:h-4 md:w-4" xmlns="http://www.w3.org/2000/svg" width="24"
+									 height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"
+									 stroke-linecap="round" stroke-linejoin="round" display="block" id="Person">
+									<circle cx="12" cy="7" r="5"></circle>
+									<path d="M17 14h.352a3 3 0 0 1 2.976 2.628l.391 3.124A2 2 0 0 1 18.734 22H5.266a2 2 0 0 1-1.985-2.248l.39-3.124A3 3 0 0 1 6.649 14H7"></path>
+								</svg>
+								<span class="hidden md:inline">{L_PROFILE}</span>
+							</a>
+							<a href="{U_LOGIN_LOGOUT}" title="{L_LOGIN_LOGOUT}" accesskey="x"
+							   class="font-medium text-gray-800 transition ease-in-out hover:text-gray-600 duration-400 hover:text-gray-900 hover:no-underline">
+								<svg class="inline w-5 h-5 md:h-4 md:w-4" xmlns="http://www.w3.org/2000/svg" width="24"
+									 height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"
+									 stroke-linecap="round" stroke-linejoin="round" display="block" id="SignOut">
+									<path d="M13 12h9m0 0l-3.333-4M22 12l-3.333 4"></path>
+									<path d="M14 7V5.174a2 2 0 0 0-2.166-1.993l-8 .666A2 2 0 0 0 2 5.84v12.32a2 2 0 0 0 1.834 1.993l8 .667A2 2 0 0 0 14 18.826V17"></path>
+								</svg>
+								<span class="hidden md:inline">{L_LOGIN_LOGOUT}</span>
+							</a>
+						</div>
+						<!-- ENDIF -->
+						<!-- IF S_REGISTER_ENABLED and not (S_SHOW_COPPA or S_REGISTRATION or S_REGISTERED_USER) -->
+						<a href="{U_REGISTER}" title="{L_REGISTER}"
+						   class="font-medium text-gray-800 transition ease-in-out hover:text-gray-600 duration-400 hover:text-gray-900 hover:no-underline">
+							<svg class="inline w-5 h-5 md:h-4 md:w-4" xmlns="http://www.w3.org/2000/svg" width="24"
+								 height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"
+								 stroke-linecap="round" stroke-linejoin="round" display="block" id="Door">
+								<path d="M5 2h11a3 3 0 0 1 3 3v14a1 1 0 0 1-1 1h-3"></path>
+								<path d="M5 2l7.588 1.518A3 3 0 0 1 15 6.459V20.78a1 1 0 0 1-1.196.98l-7.196-1.438A2 2 0 0 1 5 18.36V2z"></path>
+								<path d="M12 12v2"></path>
+							</svg>
+							<span class="hidden md:inline">{L_REGISTER}</span>
+						</a>
+						<!-- ENDIF -->
+						<!-- IF not S_REGISTERED_USER -->
+						<a href="{U_LOGIN_LOGOUT}" title="{U_LOGIN_LOGOUT}"
+						   class="font-medium text-gray-800 transition ease-in-out hover:text-gray-600 duration-400 hover:text-gray-900 hover:no-underline">
+							<svg class="inline w-5 h-5 md:h-4 md:w-4" xmlns="http://www.w3.org/2000/svg" width="24"
+								 height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"
+								 stroke-linecap="round" stroke-linejoin="round" display="block" id="Door">
+								<path d="M5 2h11a3 3 0 0 1 3 3v14a1 1 0 0 1-1 1h-3"></path>
+								<path d="M5 2l7.588 1.518A3 3 0 0 1 15 6.459V20.78a1 1 0 0 1-1.196.98l-7.196-1.438A2 2 0 0 1 5 18.36V2z"></path>
+								<path d="M12 12v2"></path>
+							</svg>
+							<span class="hidden md:inline">{L_LOGIN_LOGOUT}</span>
+						</a>
+						<!-- ENDIF -->
+						<!-- IF S_REGISTERED_USER -->
+						<div class="text-gray-800 flex align-middle items-center ml-1 space-x-1.5 block"
+							 title="{USERNAME}">
+							<!-- IF CURRENT_USER_AVATAR -->
+							<a class="header-avatar" href="{U_USER_PROFILE}"
+							   title="{USERNAME}">{CURRENT_USER_AVATAR}</a>
+							<!-- ELSE -->
+							<a class="w-auto header-avatar" href="{U_USER_PROFILE}" title="{USERNAME}"><img
+									src="{T_THEME_PATH}/images/no_avatar.gif" alt="" class="avatar"/></a>
+							<!-- ENDIF -->
+							<a href="{U_USER_PROFILE}" class="block font-medium" title="{USERNAME}">
+								{CURRENT_USERNAME_SIMPLE}
+							</a>
+						</div>
+						<!-- ENDIF -->
+					</div>
+				</div>
+			</div>
+		</div>
+	</div>
+</div>
