@@ -1,42 +1,49 @@
 <!-- INCLUDE overall_header.html -->
 
-<!-- IF FORUM_NAME --><h2 class="forum-title"><a href="{U_VIEW_FORUM}">{FORUM_NAME}</a></h2><!-- ENDIF -->
+<h2 class="mb-1 text-2xl font-medium">
+	{L_LOGIN} <!-- IF FORUM_NAME --> - <a href="{U_VIEW_FORUM}">{FORUM_NAME}</a><!-- ENDIF -->
+</h2>
 
 <form id="login_forum" method="post" action="{S_LOGIN_ACTION}">
-{S_FORM_TOKEN}
-<div class="panel">
-	<div class="inner">
+	{S_FORM_TOKEN}
 
-	<div class="content">
-		<h2 class="login-title">{L_LOGIN}</h2>
-
-		<p>{L_LOGIN_FORUM}</p>
-
-		<fieldset class="fields1">
-			<!-- IF LOGIN_ERROR -->
-				<dl>
-					<dt>&nbsp;</dt>
-					<dd class="error">{LOGIN_ERROR}</dd>
-				</dl>
-			<!-- ENDIF -->
-
-			<dl>
-				<dt><label for="password">{L_PASSWORD}{L_COLON}</label></dt>
-				<dd><input type="password" tabindex="1" id="password" name="password" size="25" class="inputbox narrow" autocomplete="off" /></dd>
-			</dl>
-			{S_LOGIN_REDIRECT}
-			{S_FORM_TOKEN_LOGIN}
-			<dl>
-				<dt>&nbsp;</dt>
-				<dd>{S_HIDDEN_FIELDS}<input type="submit" name="login" id="login" class="button1" value="{L_LOGIN}" tabindex="2" /></dd>
-			</dl>
-		</fieldset>
+	<!-- IF LOGIN_ERROR -->
+	<div class="max-w-3xl mx-auto my-3">
+		<div class="rounded-lg bg-red-50 text-red-600 border border-red-100 font-medium py-2 px-3 text-center">
+			{LOGIN_ERROR}
+		</div>
 	</div>
+	<!-- ENDIF -->
 
-	</div>
-</div>
 
+	<p class="max-w-xl mx-auto my-6 text-gray-800 text-center">{L_LOGIN_FORUM}</p>
+
+	<fieldset>
+		<div class="grid-cols-6 gap-2 md:grid mt-4">
+			<div class="py-1 px-2 md:hidden">
+				<label for="password"
+					   class="text-base font-medium text-left text-gray-800">{L_PASSWORD}{L_COLON}</label>
+			</div>
+			<div class="hidden md:block col-span-2 text-right py-1.5">
+				<label for="password"
+					   class="text-base text-right text-gray-700 font-medium">{L_PASSWORD}{L_COLON}</label>
+			</div>
+			<div class="col-span-3 px-2 md:px-4">
+				<input type="password" tabindex="1" id="password" name="password" size="25" class="input"
+					   autocomplete="off"/>
+			</div>
+		</div>
+
+
+		<div class="mx-auto my-4 text-center">
+			<div class="space-x-1">
+				{S_LOGIN_REDIRECT}
+				{S_FORM_TOKEN_LOGIN}
+				{S_HIDDEN_FIELDS}
+				<input type="submit" name="login" id="login" class="button" value="{L_LOGIN}" tabindex="2"/>
+				{S_FORM_TOKEN}
+			</div>
+		</div>
+	</fieldset>
 </form>
-
-<!-- INCLUDE jumpbox.html -->
 <!-- INCLUDE overall_footer.html -->
