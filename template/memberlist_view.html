@@ -33,6 +33,7 @@
 							<!-- IF RANK_IMG -->
 							<div style="text-align: left;">{RANK_IMG}</div><!-- ENDIF -->
 							<!-- EVENT memberlist_view_rank_avatar_after -->
+							<!-- IF U_EDIT_SELF || U_USER_ADMIN || U_USER_BAN || U_SWITCH_PERMISSIONS -->
 							<div class="mt-3 space-x-2 text-sm text-gray-800">
 								<!-- IF U_EDIT_SELF --><a href="{U_EDIT_SELF}">{L_EDIT_PROFILE}</a><!-- ENDIF -->
 								<!-- IF U_USER_ADMIN --><a href="{U_USER_ADMIN}">{L_USER_ADMIN}</a><!-- ENDIF -->
@@ -40,6 +41,7 @@
 								<!-- IF U_SWITCH_PERMISSIONS --><a href="{U_SWITCH_PERMISSIONS}">{L_USE_PERMISSIONS}</a>
 								<!-- ENDIF -->
 							</div>
+							<!-- ENDIF -->
 						</div>
 
 						<div class="-mt-12">
@@ -64,7 +66,7 @@
 						</div>
 					</div>
 
-					<div class="overflow-hidden mt-4 text-base text-gray-800">
+					<div class="overflow-hidden mt-3 text-base text-gray-800">
 						<div class="w-full border-gray-200">
 							<!-- Tabs -->
 							<ul id="profile-tabs" class="inline-flex px-1 pt-2 w-full border-b">
