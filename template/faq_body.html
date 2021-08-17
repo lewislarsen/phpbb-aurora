@@ -1,49 +1,42 @@
 <!-- INCLUDE overall_header.html -->
 
-<h2 class="faq-title">{L_FAQ_TITLE}</h2>
+<h2 class="mb-1 text-2xl font-medium">{L_FAQ_TITLE}</h2>
 
-
-<div class="panel bg1" id="faqlinks">
-	<div class="inner">
-		<div class="column1">
-		<!-- BEGIN faq_block -->
-			<!-- IF faq_block.SWITCH_COLUMN or (SWITCH_COLUMN_MANUALLY and faq_block.S_ROW_COUNT == 4) -->
-				</div>
-
-				<div class="column2">
-			<!-- ENDIF -->
-
-			<dl class="faq">
-				<dt><strong>{faq_block.BLOCK_TITLE}</strong></dt>
-				<!-- BEGIN faq_row -->
-					<dd><a href="#f{faq_block.S_ROW_COUNT}r{faq_block.faq_row.S_ROW_COUNT}">{faq_block.faq_row.FAQ_QUESTION}</a></dd>
-				<!-- END faq_row -->
-			</dl>
-		<!-- END faq_block -->
+<div class="grid grid-cols-2 md:grid-cols-12 gap-6 my-3" id="faqlinks">
+	<!-- BEGIN faq_block -->
+	<div class="col-span-4 px-3 py-3 bg-gray-50 rounded border border-gray-200">
+		<p class="font-medium border-b-2 border-gray-200 mb-1 text-gray-800 font-medium text-lg">{faq_block.BLOCK_TITLE}</p>
+		<!-- BEGIN faq_row -->
+		<div class="my-1.5">
+			<a href="#f{faq_block.S_ROW_COUNT}r{faq_block.faq_row.S_ROW_COUNT}">
+				{faq_block.faq_row.FAQ_QUESTION}
+			</a>
 		</div>
+		<!-- END faq_row -->
 	</div>
+	<!-- END faq_block -->
 </div>
 
 <!-- BEGIN faq_block -->
-	<div class="panel <!-- IF faq_block.S_ROW_COUNT is odd -->bg1<!-- ELSE -->bg2<!-- ENDIF -->">
-		<div class="inner">
-
-		<div class="content">
-			<h2 class="faq-title">{faq_block.BLOCK_TITLE}</h2>
+		<div class="my-3 p-4">
+			<h4 class="my-1.5 text-lg font-medium text-gray-800">{faq_block.BLOCK_TITLE}</h4>
 			<!-- BEGIN faq_row -->
-				<dl class="faq">
-					<dt id="f{faq_block.S_ROW_COUNT}r{faq_block.faq_row.S_ROW_COUNT}"><strong>{faq_block.faq_row.FAQ_QUESTION}</strong></dt>
-					<dd>{faq_block.faq_row.FAQ_ANSWER}</dd>
+			<div class="bg-gray-50 border border-gray-200 rounded py-3 px-4 my-4">
+
+				<dl>
+					<dt id="f{faq_block.S_ROW_COUNT}r{faq_block.faq_row.S_ROW_COUNT}"><p class="font-medium text-lg text-gray-700">{faq_block.faq_row.FAQ_QUESTION}</p></dt>
+					<dd class="text-sm text-gray-800">{faq_block.faq_row.FAQ_ANSWER}</dd>
 				</dl>
 				<a href="#faqlinks" class="top">
-					<i class="icon fa-chevron-circle-up fa-fw icon-gray" aria-hidden="true"></i><span>{L_BACK_TO_TOP}</span>
+					<svg class="w-4 h-4 inline" xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M12 20V4"/><path d="M5 11l7-7 7 7"/></svg>
+					<span>{L_BACK_TO_TOP}</span>
 				</a>
-				<!-- IF not faq_block.faq_row.S_LAST_ROW --><hr class="dashed" /><!-- ENDIF -->
+				<!-- IF not faq_block.faq_row.S_LAST_ROW -->
+			<div class="border-b border-gray-100 my-2 max-w-xl mx-auto"></div>
+			<!-- ENDIF -->
+			</div>
 			<!-- END faq_row -->
 		</div>
-
-		</div>
-	</div>
 <!-- END faq_block -->
 
 <!-- INCLUDE jumpbox.html -->
