@@ -13,7 +13,7 @@
 	<!-- EVENT forumlist_body_category_header_after -->
 	<!-- IF not forumrow.S_IS_CAT -->
 	<!-- EVENT forumlist_body_forum_row_before -->
-	<div class="grid md:grid-cols-4 gap-4 py-2.5 text-sm text-gray-800 transition duration-400 rounded-lg ease-in-out hover:bg-gray-100">
+	<div class="grid md:grid-cols-4 gap-4 py-2.5 text-sm text-gray-800 transition duration-400 rounded-lg ease-in-out hover:bg-gray-100 my-1">
 		<div class="col-span-3">
 			<div class="flex justify-between items-center align-middle">
 				<div class="flex justify-center items-center items-stretch align-middle">
@@ -105,11 +105,28 @@
 						</div>
 					</div>
 				</div>
+				<div class="flex justify-end pr-2 hidden md:flex items-center">
+					<!-- IF forumrow.CLICKS -->
+					<dl class="mx-3">
+						<dt class="font-medium text-gray-600">{L_REDIRECTS}{L_COLON}</dt>
+						<dd class="text-center font-bold text-brand">{forumrow.CLICKS}</dd>
+					</dl>
+					<!-- ELSEIF not forumrow.S_IS_LINK -->
+					<dl class="mx-3">
+						<dt class="font-medium text-gray-600">{L_TOPICS}{L_COLON}</dt>
+						<dd class="text-center font-bold text-brand">{forumrow.TOPICS}</dd>
+					</dl>
+					<dl>
+						<dt class="font-medium text-gray-600">{L_POSTS}{L_COLON}</dt>
+						<dd class="text-center font-bold text-brand">{forumrow.POSTS}</dd>
+					</dl>
+					<!-- ENDIF -->
+				</div>
 			</div>
 		</div>
 		<div>
 			<div class="flex justify-between items-center align-middle hidden md:flex">
-				<div class="flex-none p-2 ml-2">
+				<div class="flex-none p-2">
 					<!-- IF forumrow.LAST_POST_TIME -->
 					<div class="forum_last_post_avatar">
 						{% if forumrow.LAST_POSTER_AVATAR_IMG %}
@@ -137,7 +154,6 @@
 					<!-- EVENT forumlist_body_last_post_title_prepend -->
 					<a href="{forumrow.U_LAST_POST}" title="{forumrow.LAST_POST_SUBJECT}"
 					   class="text-sm text-gray-800 hover:text-gray-600 font-bold">{forumrow.LAST_POST_SUBJECT_TRUNCATED}</a>
-					<br/>
 					<!-- ENDIF -->
 					<div class="text-sm">
 						<span class="text-gray-600 font-medium"><date datetime="{forumrow.LAST_POST_TIME_RFC3339}">{forumrow.LAST_POST_TIME}</date></span>
