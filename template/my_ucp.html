@@ -1,0 +1,121 @@
+{% include 'ucp_header.html' %}
+
+{% if S_IN_MY_UCP_FRIENDS %}
+<div class="flex-grow w-full md:w-4/5">
+	<div class="px-6 py-3 mb-3 ml-5 bg-white rounded-md border border-gray-200 shadow">
+		<h3 class="my-3 text-xl font-medium text-gray-800">{L_FRIEND_TITLE}</h3>
+		<p class="text-sm text-gray-700 max-w-3xl mx-auto text-left pb-2.5 border-b border-gray-100">
+			{L_FRIENDS_EXPLANATION}</p>
+		{% if friends %}
+		<div class="flex justify-between items-center my-2">
+			<div class="px-2 py-1 text-xs font-medium text-gray-800 uppercase bg-gray-50 rounded-md border border-gray-200 text-wide">
+				{FRIENDS_COUNT} {L_FRIENDS}
+			</div>
+			<div>
+				<a class="button" href="ucp.php?i=ucp_zebra&mode=friends" title="{L_MANAGE_FRIENDS}">
+					{L_MANAGE_FRIENDS}
+				</a>
+			</div>
+		</div>
+		<div class="grid grid-cols-4 md:grid-cols-12 gap-4">
+			{% for friend in friends %}
+			<div class="col-span-4 p-1">
+				<div class="flex justify-between items-center align-middle md:flex">
+					<div class="flex-none p-2">
+						{% if friend.FRIEND_AVATAR %}
+						<div class="h-16 w-16">{friend.FRIEND_AVATAR}</div>
+						{% else %}
+						<div class="h-16 w-16"><img src="{T_THEME_PATH}/images/no_avatar.gif" alt="" class="avatar"/>
+						</div>
+						{% endif %}
+					</div>
+					<div class="flex-1 text-left">
+						<div>
+							<p class="text-lg font-medium">{friend.FRIEND_USERNAME}</p>
+							{% if friend.FRIEND_USER_RANK_IMAGE %}
+							{friend.FRIEND_USER_RANK_IMAGE}
+							{% elseif friend.FRIEND_USER_RANK_TITLE %}
+							<p class="text-sm -mt-1 text-gray-700 font-medium">{friend.FRIEND_USER_RANK_TITLE}</p>
+							{% endif %}
+						</div>
+					</div>
+				</div>
+			</div>
+			{% endfor %}
+		</div>
+		{% else %}
+		<div class="text-center my-4 text-gray-600">
+			<svg class="h-14 w-14 inline" xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24"
+				 fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+				<circle cx="7" cy="5" r="3"/>
+				<path d="M10 12H5.898a3 3 0 0 0-2.976 2.628l-.641 5.124A2 2 0 0 0 4.266 22H9"/>
+				<path d="M21.719 19.752l-.64-5.124A3 3 0 0 0 18.101 12h-2.204a3 3 0 0 0-2.976 2.628l-.641 5.124A2 2 0 0 0 14.266 22h5.468a2 2 0 0 0 1.985-2.248z"/>
+				<circle cx="17" cy="5" r="3"/>
+			</svg>
+			<p class="my-2 font-bold text-center text-lg">{L_NO_FRIENDS}</p>
+		</div>
+		{% endif %}
+	</div>
+</div>
+{% endif %}
+
+{% if S_IN_MY_UCP_FOES %}
+<div class="flex-grow w-full md:w-4/5">
+	<div class="px-6 py-3 mb-3 ml-5 bg-white rounded-md border border-gray-200 shadow">
+		<h3 class="my-3 text-xl font-medium text-gray-800">{L_FOE_TITLE}</h3>
+		<p class="text-sm text-gray-700 max-w-3xl mx-auto text-left pb-2.5 border-b border-gray-100">
+			{L_FOES_EXPLANATION}</p>
+		{% if foes %}
+		<div class="flex justify-between items-center my-2">
+			<div class="px-2 py-1 text-xs font-medium text-gray-800 uppercase bg-gray-50 rounded-md border border-gray-200 text-wide">
+				{FOES_COUNT} {L_FOES}
+			</div>
+			<div>
+				<a class="button" href="ucp.php?i=ucp_zebra&mode=foes" title="{L_MANAGE_FOES}">
+					{L_MANAGE_FOES}
+				</a>
+			</div>
+		</div>
+		<div class="grid grid-cols-4 md:grid-cols-12 gap-4">
+			{% for foe in foes %}
+			<div class="col-span-4 p-1">
+				<div class="flex justify-between items-center align-middle md:flex">
+					<div class="flex-none p-2">
+						{% if foe.FOE_AVATAR %}
+						<div class="h-16 w-16">{foe.FOE_AVATAR}</div>
+						{% else %}
+						<div class="h-16 w-16"><img src="{T_THEME_PATH}/images/no_avatar.gif" alt="" class="avatar"/>
+						</div>
+						{% endif %}
+					</div>
+					<div class="flex-1 text-left">
+						<div>
+							<p class="text-lg font-medium">{foe.FOE_USERNAME}</p>
+							{% if foe.FOE_USER_RANK_IMAGE %}
+							{foe.FOE_USER_RANK_IMAGE}
+							{% elseif foe.FOE_USER_RANK_TITLE %}
+							<p class="text-sm -mt-1 text-gray-700 font-medium">{foe.FOE_USER_RANK_TITLE}</p>
+							{% endif %}
+						</div>
+					</div>
+				</div>
+			</div>
+			{% endfor %}
+		</div>
+		{% else %}
+		<div class="text-center my-4 text-gray-600">
+			<svg class="h-14 w-14 inline" xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24"
+				 fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+				<circle cx="7" cy="5" r="3"/>
+				<path d="M10 12H5.898a3 3 0 0 0-2.976 2.628l-.641 5.124A2 2 0 0 0 4.266 22H9"/>
+				<path d="M21.719 19.752l-.64-5.124A3 3 0 0 0 18.101 12h-2.204a3 3 0 0 0-2.976 2.628l-.641 5.124A2 2 0 0 0 14.266 22h5.468a2 2 0 0 0 1.985-2.248z"/>
+				<circle cx="17" cy="5" r="3"/>
+			</svg>
+			<p class="my-2 font-bold text-center text-lg">{L_NO_FOES}</p>
+		</div>
+		{% endif %}
+	</div>
+</div>
+{% endif %}
+
+{% include 'ucp_footer.html' %}
