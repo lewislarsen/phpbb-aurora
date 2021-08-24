@@ -1,0 +1,131 @@
+{% include 'overall_header.html' %}
+<div class="flex justify-between items-center">
+	<div>
+		<h2 class="mb-1 text-2xl font-medium">
+			{% if S_IN_CUST_AVATAR_UPLOAD %}
+			{L_UPLOAD_AVATAR}
+			{% else %}
+			{L_TITLE}
+			{% endif %}
+		</h2>
+	</div>
+	<div clas="space-x-1">
+		<a class="button button-secondary" title="{L_LG_AVATAR}" target="_blank" href="{LG_AVATAR_URL}">
+			{L_LG_AVATAR}
+		</a>
+		<a class="button button-secondary" title="{L_MD_AVATAR}" target="_blank" href="{MD_AVATAR_URL}">
+			{L_MD_AVATAR}
+		</a>
+		<a class="button button-secondary" title="{L_SM_AVATAR}" target="_blank" href="{SM_AVATAR_URL}">
+			{L_SM_AVATAR}
+		</a>
+		<p class="text-center mt-2 text-gray-600 text-sm">{L_AVATAR_SIZE_BUTTON_EXPLANATION}</p>
+	</div>
+</div>
+{% if S_IN_CUST_AVATAR_INDEX %}
+<div class="rounded bg-yellow-100 border border-yellow-200 px-3 py-3 text-yellow-700 font-medium text-sm my-3 max-w-3xl mx-auto">
+	<div class="flex justify-between items-center">
+		<div class="text-center">
+			This feature is in beta and may break unexpectedly. Please report any issues you find.
+		</div>
+		<div>
+			<svg class="h-5 w-5 inline text-yellow-700" xmlns="http://www.w3.org/2000/svg" width="24" height="24"
+				 viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round"
+				 stroke-linejoin="round">
+				<circle cx="12" cy="12" r="10"/>
+				<path d="M12 7h.01"/>
+				<path d="M10 11h2v5"/>
+				<path d="M10 16h4"/>
+			</svg>
+		</div>
+	</div>
+</div>
+<p class="max-w-xl mx-auto my-6 text-gray-800 text-center">{L_AVATAR_INDEX_EXPLANATION}</p>
+<div class="border-b border-gray-100 my-2 max-w-xl mx-auto"></div>
+<div class="flex space-x-1 mx-auto max-w-md items-center">
+	<div class="flex-auto">
+		<img src="{LG_AVATAR_URL}" class="w-auto h-auto avatar" id="largeAvatar"/>
+	</div>
+	<div class="flex-auto">
+		<img src="{MD_AVATAR_URL}" class="w-auto h-auto avatar" id="mediumAvatar"/>
+	</div>
+	<div class="flex-auto">
+		<img src="{SM_AVATAR_URL}" class="w-auto h-auto avatar" id="smallAvatar"/>
+	</div>
+</div>
+<div class="border-b border-gray-100 my-2 max-w-xl mx-auto"></div>
+<p class="max-w-xl mx-auto my-6 text-gray-800 text-center">{L_AVATAR_TYPE_EXPLANATION}</p>
+<div class="border-b border-gray-100 my-2 max-w-xl mx-auto"></div>
+<p class="text-sm text-gray-600 text-center">{L_LEGACY_AVATAR_DEPRECATION_NOTICE}</p>
+<div class="space-x-1 mx-auto text-center my-4">
+	<a href="{S_UPLOAD_ACTION}" title="{L_UPLOAD_AVATAR}" class="button">
+		{L_UPLOAD_AVATAR}
+	</a>
+	<a href="ucp.php?i=ucp_profile&mode=avatar" title="{L_VISIT_LEGACY_UPLOADER}" class="button button-secondary">
+		{L_VISIT_LEGACY_UPLOADER}
+	</a>
+</div>
+{% elseif S_IN_CUST_AVATAR_UPLOAD %}
+{% if ERROR %}
+<div class="max-w-3xl mx-auto my-3">
+	<div class="rounded-lg bg-red-50 text-red-600 border border-red-100 font-medium py-2 px-3 text-center">
+		{ERROR}
+	</div>
+</div>
+{% endif %}
+<div class="grid-cols-6 gap-2 md:grid mt-4">
+	<div class="py-1 px-2 md:hidden">
+		<label for="current_avatar"
+			   class="text-base font-medium text-left text-gray-800">{L_CURRENT_AVATAR}{L_COLON}</label>
+	</div>
+	<div class="hidden md:block col-span-2 text-right py-1.5">
+		<label for="current_avatar"
+			   class="text-base text-right text-gray-700 font-medium">{L_CURRENT_AVATAR}{L_COLON}</label>
+	</div>
+	<div class="col-span-3 px-2 md:px-4">
+		<img src="{MY_AVATAR}" class="w-32 h-32 avatar"/>
+		<div>
+			<p class="text-gray-600 my-1 text-sm">{L_CURRENT_AVATAR_EXPLAINED}</p>
+		</div>
+	</div>
+</div>
+<form id="avatar" method="post" action="{S_UPLOAD_ACTION}" {S_FORM_ENCTYPE}>
+	<div class="grid-cols-6 gap-2 md:grid mt-4">
+		<div class="py-1 px-2 md:hidden">
+			<label for="avatar"
+				   class="text-base font-medium text-left text-gray-800">{L_AVATAR}{L_COLON}</label>
+		</div>
+		<div class="hidden md:block col-span-2 text-right py-1.5">
+			<label for="avatar"
+				   class="text-base text-right text-gray-700 font-medium">{L_AVATAR}{L_COLON}</label>
+		</div>
+		<div class="col-span-3 px-2 md:px-4">
+			<input type="file" name="avatar" class="input" required/>
+			<div>
+				<p class="text-gray-600 my-1 text-sm">{L_AVATAR_ALLOWED_TYPES}</p>
+			</div>
+		</div>
+	</div>
+	<div class="mx-auto my-4 text-center">
+		<div class="space-x-1">
+			{S_HIDDEN_FIELDS}
+			<input type="submit" name="submit" value="{L_SUBMIT}" class="button"/>
+			{S_FORM_TOKEN}
+		</div>
+	</div>
+</form>
+{% endif %}
+<script src="https://unpkg.com/@popperjs/core@2"></script>
+<script src="https://unpkg.com/tippy.js@6"></script>
+<script>
+	tippy('#largeAvatar', {
+		content: '{L_AVATAR_LARGE_SIZE_EXPLANATION}',
+	});
+	tippy('#mediumAvatar', {
+		content: '{L_AVATAR_MEDIUM_SIZE_EXPLANATION}',
+	});
+	tippy('#smallAvatar', {
+		content: '{L_AVATAR_SMALL_SIZE_EXPLANATION}',
+	});
+</script>
+{% include 'overall_footer.html' %}
